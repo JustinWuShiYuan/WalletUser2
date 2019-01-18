@@ -246,29 +246,9 @@ public class PreferenceHelper {
 
     public class PreferenceKey {
 
-        public static final String KEY_USER_INFO = "KEY_USER_INFO";
+        public static final String KEY_N0_REMAIN_0AB = "KEY_N0_REMAIN_0AB"; //首次说明 dialog 不再提醒
+        public static final String KEY_N0_REMAIN = "KEY_N0_REMAIN";             //扫码转账 不再提醒
 
-        public static final String KEY_PARK_AREA = "KEY_PARK_AREA";
-
-        public static final String KEY_NEWS_SELECT_LIST = "KEY_NEWS_SELECT_LIST";
-
-        public static final String KEY_NEWS_HISTORY_LIST = "KEY_NEWS_HISTORY_LIST";
-
-        public static final String KEY_NEWS_TYPES = "KEY_NEWS_TYPES";
-
-        public static final String KEY_CURRENT_LOCATION = "KEY_CURRENT_LOCATION";
-
-        public static final String KEY_HAS_SHOW_GUIDE = "KEY_HAS_SHOW_GUIDE";
-
-        public static final String KEY_HAS_SHOW_REPORT_GUIDE = "KEY_HAS_SHOW_REPORT_GUIDE";
-
-        public static final String KEY_TOKEN_ID = "KEY_TOKEN_ID";
-
-        public static final String KEY_NEWS_FORUMS_BROWERS_HISTORY = "KEY_NEWS_FORUMS_BROWERS_HISTORY";
-
-        public static final String KEY_USER_USE_MESSAGE_PUSH = "KEY_USER_USE_MESSAGE_PUSH";
-
-        public static final String KEY_FORUM_DEFAULT_LIST = "KEY_FORUM_DEFAULT_LIST";
 
         public PreferenceKey() {
         }

@@ -11,6 +11,11 @@ public class MyConstant {
     public static final String queryFireCoinOk = "1";
 
 
+
+    public static final String transferAccount = "ug/acc/pbats.do";    //扫码转账
+
+
+
     public static final String login = "ug/usr/pblin.do";           //登录
     public static final String verify_google_code = "ug/usr/pbggc.do";           //校验谷歌验证码
 

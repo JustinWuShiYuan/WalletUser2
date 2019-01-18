@@ -49,7 +49,7 @@
     <string name="payPwdHint">请输入支付密码</string>
     <string name="googleCodeHint">请输入谷歌验证码</string>
     <string name="btnSure">确定</string>
-    <string name="publishSuccess">发布成功</string>
+    <string name="transferSuccess">转账成功</string>
     <string name="coinTypeText">币种:</string>
     <string name="coinTypeNum">数量:</string>
     <string name="coinTypePrice">单价:</string>

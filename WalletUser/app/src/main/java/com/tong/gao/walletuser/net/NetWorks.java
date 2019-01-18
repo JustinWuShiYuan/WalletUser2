@@ -1,6 +1,8 @@
 package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
+import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 
 import io.reactivex.Observable;
@@ -10,6 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 
 public class NetWorks extends RetrofitUtils {
 
@@ -51,6 +54,11 @@ public class NetWorks extends RetrofitUtils {
         Observable<QueryFireCoinInfoBean> queryFireCoinInfo();
 
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.transferAccount)
+        Observable<ReponseTransferAccountBean> transferAccounts(@Body RequestTransferAccountBean requestTransferAccountBean);
+
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -85,6 +93,13 @@ public class NetWorks extends RetrofitUtils {
     public static void queryFireCoinInfo(Observer<QueryFireCoinInfoBean> observer){
         setSubscribe(service.queryFireCoinInfo(),observer);
     }
+
+
+    public static void transferAccount(RequestTransferAccountBean  requestTransferAccountBean,Observer<ReponseTransferAccountBean> observer){
+        setSubscribe(service.transferAccounts(requestTransferAccountBean),observer);
+    }
+
+
 
 //
 //    public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<LoginResponseInfo> observer){

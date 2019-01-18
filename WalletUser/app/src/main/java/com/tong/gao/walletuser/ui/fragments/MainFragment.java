@@ -7,13 +7,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
+import com.tong.gao.walletuser.bean.event.MessageEvent;
 import com.tong.gao.walletuser.ui.view.NoScrollViewPager;
 import com.tong.gao.walletuser.utils.UIUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainFragment extends BaseFragment  implements  RadioGroup.OnCheckedChangeListener {
+public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     @BindView(R.id.rb_fragment_home)
     RadioButton rbFragmentHome;
@@ -40,28 +47,58 @@ public class MainFragment extends BaseFragment  implements  RadioGroup.OnChecked
     @BindView(R.id.vp_container)
     NoScrollViewPager vpContainer;
 
+    @BindView(R.id.rl_scan_guide)
+    RelativeLayout rlScanGuide;
+    @BindView(R.id.btn_next_scan)
+    ImageView btnNextScan;
 
-    private  View rootView;
+
+    @BindView(R.id.rl_buy_coin_guide)
+    RelativeLayout rlBuyCoinGuide;
+    @BindView(R.id.btn_next_buy_coin)
+    ImageView btnNextBuyCoin;
+
+
+    @BindView(R.id.rl_my_order_guide)
+    RelativeLayout rlMyOrderGuide;
+    @BindView(R.id.btn_i_know)
+    ImageView btnIKnow;
+
+
+    @BindView(R.id.rl_sale_coin_guide)
+    RelativeLayout rlSaleCoinGuide;
+    @BindView(R.id.btn_next_sell_coin)
+    ImageView btnNextSellCoin;
+
+
+    private View rootView;
 
     private List<Fragment> pagerList = null;
+
+
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
         fixBottomIcon();
+
+        btnNextScan.setOnClickListener(this);
+        btnNextBuyCoin.setOnClickListener(this);
+        btnIKnow.setOnClickListener(this);
+        btnNextSellCoin.setOnClickListener(this);
 
         return rootView;
     }
 
     @Override
     public void initData() {
-        if(null == pagerList){
+        if (null == pagerList) {
             pagerList = new ArrayList<>();
             pagerList.add(new HomeFragment());
-//            pagerList.add(new HomeFragment());
+            pagerList.add(new TradeFragment());
+            pagerList.add(new TradeFragment());
+            pagerList.add(new TradeFragment());
         }
 
-//        pagerList.add(new HomeFragment());
-//        pagerList.add(new HomeFragment());
 
         FragmentPagerAdapter fragmentPagerAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Override
@@ -118,6 +155,8 @@ public class MainFragment extends BaseFragment  implements  RadioGroup.OnChecked
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+        EventBus.getDefault().register(this);
+        initView(inflater,container);
         return rootView;
     }
 
@@ -132,7 +171,7 @@ public class MainFragment extends BaseFragment  implements  RadioGroup.OnChecked
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         int pageIndex = -1;
 
-        switch (checkedId){
+        switch (checkedId) {
 
             case R.id.rb_fragment_home:
                 pageIndex = 0;
@@ -152,5 +191,51 @@ public class MainFragment extends BaseFragment  implements  RadioGroup.OnChecked
 
         }
         vpContainer.setCurrentItem(pageIndex);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage(MessageEvent event) {
+        rgFragmentContainer.check(R.id.rb_fragment_message);
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+
+
+        switch (v.getId()){
+
+            case R.id.btn_next_scan:
+
+                rlScanGuide.setVisibility(View.GONE);
+                rlBuyCoinGuide.setVisibility(View.VISIBLE);
+
+                break;
+
+
+            case R.id.btn_next_buy_coin:
+
+                rlBuyCoinGuide.setVisibility(View.GONE);
+                rlMyOrderGuide.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.btn_i_know:
+
+                rlMyOrderGuide.setVisibility(View.GONE);
+                rlSaleCoinGuide.setVisibility(View.VISIBLE);
+
+                break;
+
+
+            case R.id.btn_next_sell_coin:
+
+                rlSaleCoinGuide.setVisibility(View.GONE);
+
+                break;
+
+        }
     }
 }

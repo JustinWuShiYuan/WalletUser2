@@ -11,10 +11,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,17 +24,23 @@ import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
 import com.tong.gao.walletuser.bean.FireCoinBean;
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.event.MessageEvent;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.interfaces.DialogCallBack;
 import com.tong.gao.walletuser.net.NetWorks;
+import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.ui.view.HomeADPageView;
 import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
+import com.tong.gao.walletuser.utils.PreferenceHelper;
+import com.tong.gao.walletuser.utils.ToastUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +57,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.iv_left_small_bell_icon)
     ImageView ivLeftSmallBellIcon;
+
+    @BindView(R.id.view_message_hint)
+    View hintMessageView;
 
     @BindView(R.id.iv_right_scan_icon)
     ImageView ivRightScanIcon;
@@ -159,6 +168,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_home_pager,container,false);
         unbinder = ButterKnife.bind(this, rootView);
         initView(inflater,container);
+        EventBus.getDefault().register(this);
         return rootView;
     }
 
@@ -212,6 +222,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             case R.id.iv_left_small_bell_icon:
 
+                LogUtils.d("000000000000000000000000");
+                EventBus.getDefault().post(new MessageEvent());
+
                 break;
 
             case R.id.iv_right_scan_icon:
@@ -219,64 +232,134 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 scanCode();
 
                 break;
+
+            case R.id.cb_no_longer_remind:  //首次转账 不再提醒说明的 cb
+
+                if(cbNoLongerRemind0AB.isChecked()){
+                    LogUtils.d("1111111111");
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB,true);
+                }else{
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB,false);
+                }
+
+                break;
+
+
+            case R.id.tv_cancel_transfer:      //0AB 使用帮助
+
+                ToastUtils.showNomalShortToast("0AB 使用帮助");
+
+                break;
+
+
+
+            case R.id.cb_no_longer_remind_transfer:   //扫码转账
+
+                if(cbScanQrCodeTransfer.isChecked()){
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN,true);
+                }else{
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN,false);
+                }
+
+
+                break;
         }
     }
 
+    CheckBox cbNoLongerRemind0AB, cbScanQrCodeTransfer;
     private void scanCode() {
 
-        if(firstExplain){
-            DialogUtils.createAlertDialog(mActivity, R.layout.dialog_first_show, R.id.iv_close, R.id.tv_buy_coin_ab, new DialogCallBack() {
-                @Override
-                public void cancel(Dialog dialog) {
-                    dialog.dismiss();
-                }
+        if(firstExplain){//当资产为 0AB
 
-                @Override
-                public void sure(Dialog dialog) {
-                    dialog.dismiss();
+            if(!PreferenceHelper.getInstance().getBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB,false)){
+                View firstScanView = DialogUtils.createAlertDialog(mActivity, R.layout.dialog_first_transfer_accounts, R.id.iv_close, R.id.tv_sure_transfer, new DialogCallBack() {
+                    @Override
+                    public void cancel(Dialog dialog) {
+                        dialog.dismiss();
+                    }
 
-                    final Intent intent = new Intent(mActivity, CaptureActivity.class);
-                    //申请权限
-                    AndPermission.with(mActivity)
-                            .runtime()
-                            .permission(permissions)
-                            .onGranted(new Action<List<String>>() {
-                                @Override
-                                public void onAction(List<String> data) {
+                    @Override
+                    public void sure(Dialog dialog) {
+                        dialog.dismiss();
 
-                                    ZxingConfig config = new ZxingConfig();
-                                    config.setPlayBeep(true);//是否播放扫描声音 默认为true
-                                    config.setShake(true);//是否震动  默认为true
-                                    config.setDecodeBarCode(true);//是否扫描条形码 默认为true
-//                                config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
-//                                config.setFrameLineColor(R.color.colorAccent);//设置扫描框边框颜色 默认无色
-//                                config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色
-                                    config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
-                                    intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
+                        startScanQrCode();
+
+                    }
+                });
+
+                View useHelp0AB = firstScanView.findViewById(R.id.tv_cancel_transfer);
+
+                cbNoLongerRemind0AB = firstScanView.findViewById(R.id.cb_no_longer_remind);
+                cbNoLongerRemind0AB.setOnClickListener(this);
+                useHelp0AB.setOnClickListener(this);
+            }
 
 
-                                    startActivityForResult(intent, REQUEST_CODE_SCAN);
+        }else{  //当资产不为0AB
 
-                                }
-                            })
-                            .onDenied(new Action<List<String>>() {
-                                @Override
-                                public void onAction(List<String> data) {
-                                    Toast.makeText(mActivity,"ed",Toast.LENGTH_LONG).show();
-                                }
-                            })
-                            .start();
 
-                }
-            });
+            if(!PreferenceHelper.getInstance().getBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN,false)){
 
-        }else{
+                View view = DialogUtils.createAlertDialog(mActivity, R.layout.dialog_transfer_accounts, R.id.iv_close, R.id.tv_sure, new DialogCallBack() {
+                    @Override
+                    public void cancel(Dialog dialog) {
+                        dialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void sure(Dialog dialog) {
+                        dialog.dismiss();
+
+                        startScanQrCode();
+                    }
+                });
+                cbScanQrCodeTransfer = view.findViewById(R.id.cb_no_longer_remind_transfer);
+                cbScanQrCodeTransfer.setOnClickListener(this);
+
+            }
+
+
 
         }
 
 
 
 
+    }
+
+    private void startScanQrCode() {
+        final Intent intent = new Intent(mActivity, CaptureActivity.class);
+        //申请权限
+        AndPermission.with(mActivity)
+                .runtime()
+                .permission(permissions)
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+
+                        ZxingConfig config = new ZxingConfig();
+                        config.setPlayBeep(true);//是否播放扫描声音 默认为true
+                        config.setShake(true);//是否震动  默认为true
+                        config.setDecodeBarCode(true);//是否扫描条形码 默认为true
+//                                config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
+//                                config.setFrameLineColor(R.color.colorAccent);//设置扫描框边框颜色 默认无色
+//                                config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色
+                        config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
+                        intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
+
+
+                        startActivityForResult(intent, REQUEST_CODE_SCAN);
+
+                    }
+                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        Toast.makeText(mActivity, "ed", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .start();
     }
 
 
@@ -374,6 +457,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
 
                 Toast.makeText(mActivity,content,Toast.LENGTH_LONG).show();
+
+                //TODO 扫码转账 Activity
+                startActivity(new Intent(mActivity,TransferAccountsActivity.class));
             }
         }
     }

@@ -26,9 +26,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.ButterKnife;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
-/**
- * Created by terry.c on 05/03/2018.
- */
 
 public abstract class ActivityBase extends AppCompatActivity {
 

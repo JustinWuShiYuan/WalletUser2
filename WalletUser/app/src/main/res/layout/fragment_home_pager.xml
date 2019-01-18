@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,27 +39,42 @@
                     <RelativeLayout
                         android:id="@+id/rl_head_container"
                         android:layout_width="match_parent"
-                        android:background="@drawable/home_top_img"
-                        android:layout_height="240dp">
+                        android:layout_height="240dp"
+                        android:background="@drawable/home_top_img">
 
                         <RelativeLayout
-                            android:layout_marginTop="40dp"
                             android:id="@+id/rl_nav"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/d_title_bar_height"
-                            >
+                            android:layout_marginTop="40dp">
 
-                            <ImageView
-                                android:scaleX="0.6"
-                                android:scaleY="0.6"
-                                android:id="@+id/iv_left_small_bell_icon"
+                            <FrameLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="left"
-                                android:paddingRight="10dp"
-                                android:src="@drawable/icon_remind_3"
-                                />
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/iv_left_small_bell_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="left"
+                                    android:paddingRight="10dp"
+                                    android:scaleX="0.6"
+                                    android:scaleY="0.6"
+                                    android:src="@drawable/icon_remind_3" />
+
+
+                                <View
+                                    android:id="@+id/view_message_hint"
+                                    android:layout_width="8dp"
+                                    android:layout_height="8dp"
+                                    android:layout_marginLeft="38dp"
+                                    android:layout_marginTop="12dp"
+                                    android:background="@drawable/shape_red_bg_4" />
+
+
+                            </FrameLayout>
+
 
                             <TextView
                                 android:id="@+id/toolbar_title"
@@ -72,8 +88,6 @@
 
 
                             <ImageView
-                                android:scaleX="0.6"
-                                android:scaleY="0.6"
                                 android:id="@+id/iv_right_scan_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -81,6 +95,8 @@
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="right"
                                 android:paddingLeft="15dp"
+                                android:scaleX="0.6"
+                                android:scaleY="0.6"
                                 android:src="@drawable/icon_scan_3"
                                 android:visibility="visible" />
 
@@ -108,18 +124,18 @@
                             android:textSize="30sp" />
 
                         <TextView
-                            android:layout_marginTop="6dp"
                             android:id="@+id/tv_assert_money"
+                            style="@style/text_style_10sp_white_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_assert_ug_num"
                             android:layout_centerHorizontal="true"
-                            android:text="折合人民币  100.00"
-                            style="@style/text_style_10sp_white_1"
-                            />
+                            android:layout_marginTop="6dp"
+                            android:text="折合人民币  100.00" />
 
                         <TextView
                             android:id="@+id/tv_transfer_record"
+                            style="@style/text_style_10sp_white_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_assert_ug_num"
@@ -128,19 +144,18 @@
                             android:layout_marginRight="21dp"
                             android:layout_toRightOf="@+id/tv_assert_money"
                             android:gravity="right"
-                            android:text="转账记录 >"
-                            style="@style/text_style_10sp_white_1"/>
+                            android:text="转账记录 >" />
 
 
                     </RelativeLayout>
 
                     <com.tong.gao.walletuser.ui.view.HomeADPageView
-                        android:layout_below="@id/rl_head_container"
-                        android:layout_marginTop="-55dp"
                         android:id="@+id/de_recycle_img"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/rl_head_container"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="-55dp"
                         android:layout_marginRight="15dp" />
 
                 </RelativeLayout>
@@ -161,6 +176,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
+
 
                         <RelativeLayout
                             android:id="@+id/rl_scan_and_transfer"
@@ -216,7 +232,6 @@
                                 android:text="兑换比特币" />
 
                         </RelativeLayout>
-
 
 
                     </LinearLayout>
@@ -286,7 +301,6 @@
                         </RelativeLayout>
 
 
-
                     </LinearLayout>
 
 
@@ -354,13 +368,11 @@
                         </RelativeLayout>
 
 
-
                     </LinearLayout>
 
 
                 </LinearLayout>
                 <!-- 中间部分 结束 -->
-
 
 
                 <View
@@ -386,8 +398,6 @@
     </android.support.design.widget.AppBarLayout>
 
 
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_recycle_view"
         android:layout_width="match_parent"
@@ -397,3 +407,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+
+
+
+
+
+<!--</FrameLayout>-->

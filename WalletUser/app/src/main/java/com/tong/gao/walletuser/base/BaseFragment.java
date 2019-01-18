@@ -7,6 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tong.gao.walletuser.R;
+import com.tong.gao.walletuser.bean.event.MessageEvent;
+import com.tong.gao.walletuser.utils.LogUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 
 public abstract class BaseFragment extends Fragment {
 
@@ -38,4 +45,9 @@ public abstract class BaseFragment extends Fragment {
 
 
     public abstract void initData();
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage (MessageEvent event){
+    }
 }

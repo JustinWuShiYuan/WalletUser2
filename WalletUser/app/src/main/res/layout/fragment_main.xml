@@ -1,65 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-
-    <com.tong.gao.walletuser.ui.view.NoScrollViewPager
-        android:id="@+id/vp_container"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="match_parent">
 
 
-    <View
-        android:id="@+id/empty_line_2"
+        <com.tong.gao.walletuser.ui.view.NoScrollViewPager
+            android:id="@+id/vp_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <View
+            android:id="@+id/empty_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#F6F5FA"
+            app:layout_constraintBottom_toTopOf="@id/rg_fragment_container" />
+
+        <RadioGroup
+            android:id="@+id/rg_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.09">
+
+
+            <RadioButton
+                android:id="@+id/rb_fragment_home"
+                style="@style/main_tab_style"
+                android:drawableTop="@drawable/tab_home_bg"
+                android:text="@string/home" />
+
+            <RadioButton
+                android:id="@+id/rb_fragment_trade"
+                style="@style/main_tab_style"
+                android:drawableTop="@drawable/tab_trade_bg"
+                android:text="@string/deal" />
+
+            <RadioButton
+                android:id="@+id/rb_fragment_message"
+                style="@style/main_tab_style"
+                android:drawableTop="@drawable/tab_message_bg"
+                android:text="@string/message" />
+
+            <RadioButton
+                android:id="@+id/rb_fragment_myInfo"
+                style="@style/main_tab_style"
+                android:drawableTop="@drawable/tab_myinfo_bg"
+                android:text="@string/myInfo" />
+
+        </RadioGroup>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!-- 扫码转账的引导 布局 开始 -->
+    <RelativeLayout
+        android:id="@+id/rl_scan_guide"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#F6F5FA"
-        app:layout_constraintBottom_toTopOf="@id/rg_fragment_container"/>
-
-    <RadioGroup
-        android:id="@+id/rg_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.09"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#ffffff"
+        android:layout_height="match_parent"
+        android:background="#80000000"
         >
 
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_marginTop="314dp"
+            android:layout_marginLeft="12dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/img_scan_transfer"/>
 
-        <RadioButton
-            android:id="@+id/rb_fragment_home"
-            style="@style/main_tab_style"
-            android:drawableTop="@drawable/tab_home_bg"
-            android:text="@string/home"
-            />
+        <ImageView
+            android:layout_below="@id/iv_scan"
+            android:id="@+id/iv_msg_des"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/msg_scan_des"/>
 
-        <RadioButton
-            android:id="@+id/rb_fragment_trade"
-            style="@style/main_tab_style"
-            android:drawableTop="@drawable/tab_trade_bg"
-            android:text="@string/deal"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_fragment_message"
-            style="@style/main_tab_style"
-            android:drawableTop="@drawable/tab_message_bg"
-            android:text="@string/message"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_fragment_myInfo"
-            style="@style/main_tab_style"
-            android:drawableTop="@drawable/tab_myinfo_bg"
-            android:text="@string/myInfo"
-            />
-
-    </RadioGroup>
+        <ImageView
+            android:layout_below="@id/iv_msg_des"
+            android:id="@+id/btn_next_scan"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="144dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_next"/>
 
 
-</android.support.constraint.ConstraintLayout>
+
+    </RelativeLayout>
+    <!-- 扫码转账的引导 布局 结束 -->
+
+
+    <!-- 买币的引导 布局 开始 -->
+    <RelativeLayout
+        android:id="@+id/rl_buy_coin_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/iv_buy_coin_icon"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="130dp"
+            android:layout_width="116dp"
+            android:layout_height="116dp"
+            android:src="@drawable/img_buy"/>
+
+        <ImageView
+            android:layout_below="@id/iv_buy_coin_icon"
+            android:id="@+id/iv_msg_buy_coin_des"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/msg_buy"/>
+
+        <ImageView
+            android:layout_below="@id/iv_msg_buy_coin_des"
+            android:id="@+id/btn_next_buy_coin"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="144dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_next"/>
+
+
+        <ImageView
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/btn_next_buy_coin"
+            android:layout_width="73dp"
+            android:layout_height="73dp"
+            android:src="@drawable/img_trade"/>
+
+
+
+    </RelativeLayout>
+    <!-- 买币的引导 布局 结束 -->
+
+
+
+    <!-- 我的订单引导 布局 开始 -->
+    <RelativeLayout
+        android:id="@+id/rl_my_order_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_my_order"
+            android:layout_marginTop="314dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/img_order"/>
+
+        <ImageView
+            android:layout_below="@id/iv_my_order"
+            android:id="@+id/iv_msg_order_des"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/msg_order"/>
+
+        <ImageView
+            android:layout_below="@id/iv_msg_order_des"
+            android:id="@+id/btn_i_know"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="144dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_know"/>
+
+
+
+    </RelativeLayout>
+    <!-- 我的订单的引导 布局 结束 -->
+
+
+
+    <!-- 卖币引导 布局 开始 -->
+    <RelativeLayout
+        android:id="@+id/rl_sale_coin_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        >
+
+        <ImageView
+
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_msg_sell"
+            android:layout_marginTop="310dp"
+            android:layout_marginLeft="54dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:src="@drawable/msg_sell"/>
+
+        <ImageView
+            android:layout_below="@id/iv_msg_sell"
+            android:id="@+id/iv_sell_coin"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_sell"/>
+
+        <ImageView
+            android:layout_below="@id/iv_sell_coin"
+            android:id="@+id/btn_next_sell_coin"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="144dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_next"/>
+
+
+
+    </RelativeLayout>
+    <!-- 卖币引导 布局 结束 -->
+</FrameLayout>
