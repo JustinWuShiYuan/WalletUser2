@@ -7,25 +7,39 @@
     tools:context=".ui.activity.LoginActivity"
     android:background="@color/colorWhite">
 
-
-    <TextView
-        android:id="@+id/tv_welcome_login"
-        android:paddingTop="60dp"
+    <RelativeLayout
+        android:id="@+id/rl_head_container"
         android:background="@drawable/icon_login_bg"
-        android:layout_width="wrap_content"
-        android:layout_height="220dp"
-        android:text="欢迎登录"
-        android:textSize="30sp"
-        android:gravity="center|top"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/colorWhite"/>
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <include layout="@layout/title_bar_no_background"/>
+
+
+        <TextView
+            android:layout_below="@id/cl_root_view"
+            android:id="@+id/tv_welcome_login"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
+            android:text="欢迎登录"
+            android:textSize="30sp"
+            android:gravity="center|top"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWhite"/>
+
+
+
+    </RelativeLayout>
+
+
 
 
     <TextView
         android:layout_marginLeft="35dp"
         android:layout_marginTop="-25dp"
         android:gravity="center_horizontal"
-        android:layout_below="@id/tv_welcome_login"
+        android:layout_below="@id/rl_head_container"
         android:id="@+id/tv_input_account_name"
         style="@style/text_style_17sp_black1"
         android:layout_width="wrap_content"

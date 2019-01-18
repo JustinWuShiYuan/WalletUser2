@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.tong.gao.walletuser.R;
@@ -33,8 +34,18 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     TextView tvLogin;
     @BindView(R.id.tv_goto_register)
     TextView tvGotoRegister;
+    @BindView(R.id.tv_title_bar_title)
+    TextView tvTitleBarTitle;
+    @BindView(R.id.fl_back)
+    FrameLayout flBack;
+    @BindView(R.id.tv_input_account_pwd)
+    TextView tvInputAccountPwd;
+    @BindView(R.id.tv_forget_pwd)
+    TextView tvForgetPwd;
+    @BindView(R.id.tv_have_no_account)
+    TextView tvHaveNoAccount;
 
-    private String loginName,loginPwd;
+    private String loginName, loginPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +62,31 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
     @Override
     protected void initView() {
+        tvTitleBarTitle.setVisibility(View.GONE);
+
         tvFindPwd.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
         tvGotoRegister.setOnClickListener(this);
+        tvFindPwd.setOnClickListener(this);
+        flBack.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
+
+            case R.id.fl_back:
+
+                finish();
+
+                break;
 
             case R.id.tv_find_pwd:
+
+
+                startActivity(new Intent(this,FindPwdActivity.class));
 
 
                 break;
@@ -72,11 +96,11 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                 loginName = etInputAccount.getText().toString();
                 loginPwd = etInputAccountPwd.getText().toString();
 
-                if(StringUtils.isEmpty(loginName) || StringUtils.isEmpty(loginPwd)){
+                if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(loginPwd)) {
                     ToastUtils.showNomalLongToast("账号和密码不能为空");
 
-                }else{
-                    goToLogin(new RequestLoginInfoBean(loginName,loginPwd));
+                } else {
+                    goToLogin(new RequestLoginInfoBean(loginName, loginPwd));
                 }
 
 
@@ -100,7 +124,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
             @Override
             public void onNext(ResponseLoginInfo responseLoginInfo) {
-                LogUtils.d("responseLoginInfo:"+responseLoginInfo.toString());
+                LogUtils.d("responseLoginInfo:" + responseLoginInfo.toString());
 
 
                 if (null != responseLoginInfo.getUserinfo() && responseLoginInfo.getUserinfo().getSafeverifyswitch()
@@ -120,7 +144,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
             @Override
             public void onError(Throwable e) {
-                LogUtils.d(""+e.toString());
+                LogUtils.d("" + e.toString());
             }
 
             @Override

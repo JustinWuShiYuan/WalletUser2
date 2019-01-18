@@ -40,6 +40,7 @@ import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.ToastUtils;
+import com.tong.gao.walletuser.utils.UIUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yzq.zxinglibrary.android.CaptureActivity;
@@ -264,7 +265,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             case R.id.iv_left_small_bell_icon:
 
-                LogUtils.d("000000000000000000000000");
                 EventBus.getDefault().post(new MessageEvent());
 
                 break;
@@ -278,7 +278,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.cb_no_longer_remind:  //首次转账 不再提醒说明的 cb
 
                 if (cbNoLongerRemind0AB.isChecked()) {
-                    LogUtils.d("1111111111");
                     PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, true);
                 } else {
                     PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, false);
@@ -520,6 +519,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onNext(ResponseMyAccountInfo responseMyAccountInfo) {
                 LogUtils.d("responseMyAccountInfo:"+responseMyAccountInfo.toString());
+
+                //TODO 更具数据来刷新UI
+                refreshTitleUI();
+
             }
 
             @Override
@@ -530,6 +533,22 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onComplete() {
                 LogUtils.d("e:onComplete()");
+            }
+        });
+
+    }
+
+    private void refreshTitleUI() {
+
+        UIUtils.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                rlUnLogin.setVisibility(View.GONE);
+                rlUserInfo.setVisibility(View.VISIBLE);
+
+                tvAssertUgNum.setText("20000.00");
+                tvAssertMoney.setText("折合人民币  200.00");
+
             }
         });
 
