@@ -103,48 +103,96 @@
 
                         </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/tv_wallet_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+
+                        <RelativeLayout
                             android:layout_below="@+id/rl_nav"
-                            android:layout_centerHorizontal="true"
-                            android:text="UG"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_assert_ug_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_wallet_name"
-                            android:layout_centerHorizontal="true"
-                            android:text="10000.00"
-                            android:textColor="@color/white"
-                            android:textSize="30sp" />
+                            android:id="@+id/rl_user_info"
+                            android:visibility="gone">
 
-                        <TextView
-                            android:id="@+id/tv_assert_money"
-                            style="@style/text_style_10sp_white_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_assert_ug_num"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="6dp"
-                            android:text="折合人民币  100.00" />
 
-                        <TextView
-                            android:id="@+id/tv_transfer_record"
-                            style="@style/text_style_10sp_white_1"
+                            <TextView
+                                android:id="@+id/tv_wallet_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:text="UG"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_assert_ug_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_wallet_name"
+                                android:layout_centerHorizontal="true"
+                                android:text="10000.00"
+                                android:textColor="@color/white"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/tv_assert_money"
+                                style="@style/text_style_10sp_white_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_assert_ug_num"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="6dp"
+                                android:text="折合人民币  100.00" />
+
+                            <TextView
+                                android:id="@+id/tv_transfer_record"
+                                style="@style/text_style_10sp_white_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_assert_ug_num"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginRight="21dp"
+                                android:layout_toRightOf="@+id/tv_assert_money"
+                                android:gravity="right"
+                                android:text="转账记录 >" />
+
+
+                        </RelativeLayout>
+
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_un_login"
+                            android:layout_below="@+id/rl_nav"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tv_assert_ug_num"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginRight="21dp"
-                            android:layout_toRightOf="@+id/tv_assert_money"
-                            android:gravity="right"
-                            android:text="转账记录 >" />
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_account_remain"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:text="AB 账户余额："
+                                android:gravity="center_horizontal"
+                                android:layout_centerHorizontal="true"
+                                style="@style/text_style_14sp_gray_8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_login"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/colorBlue"
+                                android:layout_marginTop="16dp"
+                                android:layout_below="@id/tv_account_remain"
+                                android:text="请先登录"
+                                style="@style/text_style_15sp_blue3"
+                                android:layout_width="100dp"
+                                android:layout_height="28dp"
+                                android:background="@drawable/shape_white_bg_round10"/>
+
+
+                        </RelativeLayout>
+
+
 
 
                     </RelativeLayout>

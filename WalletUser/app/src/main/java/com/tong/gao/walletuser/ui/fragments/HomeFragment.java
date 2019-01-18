@@ -9,13 +9,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +29,11 @@ import com.tong.gao.walletuser.base.BaseFragment;
 import com.tong.gao.walletuser.bean.FireCoinBean;
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.event.MessageEvent;
+import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.interfaces.DialogCallBack;
 import com.tong.gao.walletuser.net.NetWorks;
+import com.tong.gao.walletuser.ui.activity.LoginActivity;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.ui.view.HomeADPageView;
 import com.tong.gao.walletuser.utils.DialogUtils;
@@ -95,13 +101,43 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.rv_recycle_view)
     RecyclerView recyclerView;
+    @BindView(R.id.rl_user_info)
+    RelativeLayout rlUserInfo;
+    @BindView(R.id.tv_login)
+    TextView tvLogin;
+    @BindView(R.id.rl_un_login)
+    RelativeLayout rlUnLogin;
+    @BindView(R.id.iv_scan_coin)
+    ImageView ivScanCoin;
+    @BindView(R.id.iv_exchange_coin1)
+    ImageView ivExchangeCoin1;
+    @BindView(R.id.rl_sale_and_exchange_coin_container)
+    LinearLayout rlSaleAndExchangeCoinContainer;
+    @BindView(R.id.iv_buy_coin)
+    ImageView ivBuyCoin;
+    @BindView(R.id.iv_sale_coin)
+    ImageView ivSaleCoin;
+    @BindView(R.id.rl_buy_and_sale_coin_container)
+    LinearLayout rlBuyAndSaleCoinContainer;
+    @BindView(R.id.iv_order)
+    ImageView ivOrder;
+    @BindView(R.id.iv_helper)
+    ImageView ivHelper;
+    @BindView(R.id.rl_order_and_helper_container)
+    LinearLayout rlOrderAndHelperContainer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.main_collapsing)
+    CollapsingToolbarLayout mainCollapsing;
+    @BindView(R.id.main_appbar)
+    AppBarLayout mainAppbar;
 
-    private   List<FireCoinBean>  fireCoinBeanList = new ArrayList<>();
-    private   View rootView;
-    private   MyFireCoinInfoAdapter myFireCoinInfoAdapter;
+    private List<FireCoinBean> fireCoinBeanList = new ArrayList<>();
+    private View rootView;
+    private MyFireCoinInfoAdapter myFireCoinInfoAdapter;
 
     private static final int REQUEST_CODE_SCAN = 10;
-    private String[] permissions ={Manifest.permission.CAMERA,
+    private String[] permissions = {Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE};
 
 
@@ -123,6 +159,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         ivLeftSmallBellIcon.setOnClickListener(this);
         ivRightScanIcon.setOnClickListener(this);
         tvTransferRecord.setOnClickListener(this);
+        tvLogin.setOnClickListener(this);
 
 
         return rootView;
@@ -139,10 +176,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onNext(QueryFireCoinInfoBean queryFireCoinInfoBean) {
-                LogUtils.d(""+queryFireCoinInfoBean.toString()+"  erro:"+queryFireCoinInfoBean.getErr_code());
+                LogUtils.d("" + queryFireCoinInfoBean.toString() + "  erro:" + queryFireCoinInfoBean.getErr_code());
 
 //                if(null != queryFireCoinInfoBean && queryFireCoinInfoBean.getErr_code() .equals(MyConstant.queryFireCoinOk)){
-                if(null != queryFireCoinInfoBean ){
+                if (null != queryFireCoinInfoBean) {
                     fireCoinBeanList = queryFireCoinInfoBean.getMarketList();
 
                     myFireCoinInfoAdapter = new MyFireCoinInfoAdapter();
@@ -153,7 +190,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onError(Throwable e) {
-                LogUtils.d("onError"+e.toString());
+                LogUtils.d("onError" + e.toString());
             }
 
             @Override
@@ -165,9 +202,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_home_pager,container,false);
+        rootView = inflater.inflate(R.layout.fragment_home_pager, container, false);
         unbinder = ButterKnife.bind(this, rootView);
-        initView(inflater,container);
+        initView(inflater, container);
         EventBus.getDefault().register(this);
         return rootView;
     }
@@ -177,7 +214,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         super.onDestroyView();
         unbinder.unbind();
     }
-
 
 
     Handler mHandler = new Handler() {
@@ -218,7 +254,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
+
+            case R.id.tv_login:
+                //TODO 登录
+                startActivity(new Intent(mActivity,LoginActivity.class));
+
+                break;
 
             case R.id.iv_left_small_bell_icon:
 
@@ -235,11 +277,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             case R.id.cb_no_longer_remind:  //首次转账 不再提醒说明的 cb
 
-                if(cbNoLongerRemind0AB.isChecked()){
+                if (cbNoLongerRemind0AB.isChecked()) {
                     LogUtils.d("1111111111");
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB,true);
-                }else{
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB,false);
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, true);
+                } else {
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, false);
                 }
 
                 break;
@@ -252,13 +294,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
 
 
-
             case R.id.cb_no_longer_remind_transfer:   //扫码转账
 
-                if(cbScanQrCodeTransfer.isChecked()){
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN,true);
-                }else{
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN,false);
+                if (cbScanQrCodeTransfer.isChecked()) {
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, true);
+                } else {
+                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, false);
                 }
 
 
@@ -267,11 +308,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     CheckBox cbNoLongerRemind0AB, cbScanQrCodeTransfer;
+
     private void scanCode() {
 
-        if(firstExplain){//当资产为 0AB
+        if (firstExplain) {//当资产为 0AB
 
-            if(!PreferenceHelper.getInstance().getBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB,false)){
+            if (!PreferenceHelper.getInstance().getBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, false)) {
                 View firstScanView = DialogUtils.createAlertDialog(mActivity, R.layout.dialog_first_transfer_accounts, R.id.iv_close, R.id.tv_sure_transfer, new DialogCallBack() {
                     @Override
                     public void cancel(Dialog dialog) {
@@ -295,10 +337,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
 
 
-        }else{  //当资产不为0AB
+        } else {  //当资产不为0AB
 
 
-            if(!PreferenceHelper.getInstance().getBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN,false)){
+            if (!PreferenceHelper.getInstance().getBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, false)) {
 
                 View view = DialogUtils.createAlertDialog(mActivity, R.layout.dialog_transfer_accounts, R.id.iv_close, R.id.tv_sure, new DialogCallBack() {
                     @Override
@@ -320,10 +362,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
 
 
-
         }
-
-
 
 
     }
@@ -363,7 +402,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
 
-    private class MyFireCoinInfoAdapter extends RecyclerView.Adapter<MyViewHolder>{
+    private class MyFireCoinInfoAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         @NonNull
         @Override
@@ -381,7 +420,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             return fireCoinBeanList.size();
         }
     }
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -408,7 +446,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         public void refreshUI(FireCoinBean fireCoinBean) {
 
             //更新火币icon
-            switch (fireCoinBean.getCoinId()){
+            switch (fireCoinBean.getCoinId()) {
 
                 case MyConstant.coinBTC:
                     ivCoinIcon.setImageResource(R.drawable.icon_vip);
@@ -428,22 +466,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             tvCoinPrice.setText(fireCoinBean.getPrice());
             tvChinesePrice.setText(fireCoinBean.getRmbPrice());
 
-            LogUtils.d("fireCoinBean.getUpAndDown().contains(\"-\"):"+(fireCoinBean.getUpAndDown().contains("-")));
+            LogUtils.d("fireCoinBean.getUpAndDown().contains(\"-\"):" + (fireCoinBean.getUpAndDown().contains("-")));
 
             tvIncreasePercent.setText(fireCoinBean.getUpAndDown());
-            if(fireCoinBean.getUpAndDown().contains("-")){
+            if (fireCoinBean.getUpAndDown().contains("-")) {
 
                 tvIncreasePercent.setTextColor(Color.parseColor("#006151"));
                 tvIncreasePercent.setBackground(mActivity.getDrawable(R.drawable.shape_green_round6));
 
-            }else{
+            } else {
                 tvIncreasePercent.setTextColor(Color.parseColor("#d02a2a"));
                 tvIncreasePercent.setBackground(mActivity.getDrawable(R.drawable.shape_red_round6));
             }
 
         }
     }
-
 
 
     @Override
@@ -456,11 +493,45 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
 
-                Toast.makeText(mActivity,content,Toast.LENGTH_LONG).show();
+                Toast.makeText(mActivity, content, Toast.LENGTH_LONG).show();
 
                 //TODO 扫码转账 Activity
-                startActivity(new Intent(mActivity,TransferAccountsActivity.class));
+                startActivity(new Intent(mActivity, TransferAccountsActivity.class));
             }
         }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadMyAccountInfo();
+    }
+
+
+    private void loadMyAccountInfo() {
+
+        NetWorks.queryMyAccountInfo(new Observer<ResponseMyAccountInfo>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogUtils.d("查询我的账号");
+            }
+
+            @Override
+            public void onNext(ResponseMyAccountInfo responseMyAccountInfo) {
+                LogUtils.d("responseMyAccountInfo:"+responseMyAccountInfo.toString());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("e:"+e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("e:onComplete()");
+            }
+        });
+
     }
 }

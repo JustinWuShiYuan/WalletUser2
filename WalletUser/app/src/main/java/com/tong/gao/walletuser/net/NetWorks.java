@@ -1,8 +1,13 @@
 package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
+import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
+import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
+import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
+import com.tong.gao.walletuser.bean.response.ResponseVerifyGoogleBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 
 import io.reactivex.Observable;
@@ -48,6 +53,10 @@ public class NetWorks extends RetrofitUtils {
 //        @GET(MyConstant.isHaveTheAccount)
 //        Observable<String> checkAccountIsExist(@Query("account") String account);
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.login)
+        Observable<ResponseLoginInfo> login(@Body RequestLoginInfoBean loginInfoBean);
+
 
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @GET(MyConstant.queryFireCoinInfo)
@@ -57,6 +66,15 @@ public class NetWorks extends RetrofitUtils {
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @POST(MyConstant.transferAccount)
         Observable<ReponseTransferAccountBean> transferAccounts(@Body RequestTransferAccountBean requestTransferAccountBean);
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.verify_google_code)
+        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @GET(MyConstant.queryAssert)
+        Observable<ResponseMyAccountInfo> queryMyAccountInfo();
 
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
@@ -90,6 +108,10 @@ public class NetWorks extends RetrofitUtils {
 //    }
 
 
+    public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<ResponseLoginInfo> observer){
+        setSubscribe(service.login(requestLoginInfoBean),observer);
+    }
+
     public static void queryFireCoinInfo(Observer<QueryFireCoinInfoBean> observer){
         setSubscribe(service.queryFireCoinInfo(),observer);
     }
@@ -100,9 +122,19 @@ public class NetWorks extends RetrofitUtils {
     }
 
 
+    public static void verifyGoogleCode(RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean, Observer<ResponseVerifyGoogleBean> observer){
+        setSubscribe(service.verifyGoogleCode(requestVerifyGoogleCodeBean),observer);
+    }
+
+
+    public static void queryMyAccountInfo(Observer<ResponseMyAccountInfo> observer){
+        setSubscribe(service.queryMyAccountInfo(),observer);
+    }
+
+
 
 //
-//    public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<LoginResponseInfo> observer){
+//    public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<ResponseLoginInfo> observer){
 //        setSubscribe(service.login(requestLoginInfoBean),observer);
 //    }
 //

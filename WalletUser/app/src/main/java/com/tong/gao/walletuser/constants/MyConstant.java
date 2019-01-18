@@ -6,13 +6,13 @@ public class MyConstant {
 
 
 
-
     public static final String queryFireCoinInfo = "ug/mar/pbmts.do";           //查看火币行情信息 (首页)
     public static final String queryFireCoinOk = "1";
 
 
 
     public static final String transferAccount = "ug/acc/pbats.do";    //扫码转账
+    public static final String queryAssert = "/ug/acc/pbads.do";        //资产查询
 
 
 
