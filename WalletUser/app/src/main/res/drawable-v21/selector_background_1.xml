@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <!-- 灰色阴影 -->
+            <item
+                android:left="2dp"
+                android:top="4dp" android:width="88dp" android:gravity="center">
+                <shape>
+                    <solid android:color="#4C7FFF" />
+                     />
+                </shape>
+            </item>
+            <!-- 白色前景 -->
+            <item
+                android:bottom="4dp">
+                <shape>
+                    <solid android:color="#FFFFFF" />
+                     />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_checked="false">
+        <shape>
+            <solid android:color="@color/transparent" />
+        </shape>
+    </item>
+
+</selector>

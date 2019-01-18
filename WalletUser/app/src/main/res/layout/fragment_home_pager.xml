@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/main_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white1">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main_collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
+
+                <!-- 头部分 开始 -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_head_container"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/home_top_img"
+                        android:layout_height="240dp">
+
+                        <RelativeLayout
+                            android:layout_marginTop="40dp"
+                            android:id="@+id/rl_nav"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/d_title_bar_height"
+                            >
+
+                            <ImageView
+                                android:scaleX="0.6"
+                                android:scaleY="0.6"
+                                android:id="@+id/iv_left_small_bell_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="left"
+                                android:paddingRight="10dp"
+                                android:src="@drawable/icon_remind_3"
+                                />
+
+                            <TextView
+                                android:id="@+id/toolbar_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:text="UG钱包"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+
+
+                            <ImageView
+                                android:scaleX="0.6"
+                                android:scaleY="0.6"
+                                android:id="@+id/iv_right_scan_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="right"
+                                android:paddingLeft="15dp"
+                                android:src="@drawable/icon_scan_3"
+                                android:visibility="visible" />
+
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tv_wallet_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rl_nav"
+                            android:layout_centerHorizontal="true"
+                            android:text="UG"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_assert_ug_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_wallet_name"
+                            android:layout_centerHorizontal="true"
+                            android:text="10000.00"
+                            android:textColor="@color/white"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:layout_marginTop="6dp"
+                            android:id="@+id/tv_assert_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_assert_ug_num"
+                            android:layout_centerHorizontal="true"
+                            android:text="折合人民币  100.00"
+                            style="@style/text_style_10sp_white_1"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_transfer_record"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_assert_ug_num"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginRight="21dp"
+                            android:layout_toRightOf="@+id/tv_assert_money"
+                            android:gravity="right"
+                            android:text="转账记录 >"
+                            style="@style/text_style_10sp_white_1"/>
+
+
+                    </RelativeLayout>
+
+                    <com.tong.gao.walletuser.ui.view.HomeADPageView
+                        android:layout_below="@id/rl_head_container"
+                        android:layout_marginTop="-55dp"
+                        android:id="@+id/de_recycle_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp" />
+
+                </RelativeLayout>
+
+                <!-- 头部分 结束 -->
+
+
+                <!-- 中间部分 开始 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/rl_sale_and_exchange_coin_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_scan_and_transfer"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/iv_scan_coin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/icon_qr_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/iv_scan_coin"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_horizontal"
+                                android:text="扫码转账" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_exchange_coin_root"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/iv_exchange_coin1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/icon_conversion_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/iv_exchange_coin1"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_horizontal"
+                                android:text="兑换比特币" />
+
+                        </RelativeLayout>
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/rl_buy_and_sale_coin_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_buy_coin"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/iv_buy_coin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/icon_buy_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/iv_buy_coin"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_horizontal"
+                                android:text="买币" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_sale_coin_root"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/iv_sale_coin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/icon_sell_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/iv_sale_coin"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_horizontal"
+                                android:text="卖币" />
+
+                        </RelativeLayout>
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/rl_order_and_helper_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_order_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/iv_order"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/icon_order_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/iv_order"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_horizontal"
+                                android:text="我的订单" />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_helper_root"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/iv_helper"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:scaleX="0.7"
+                                android:scaleY="0.7"
+                                android:src="@drawable/icon_help_3" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/iv_helper"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_horizontal"
+                                android:text="帮助中心" />
+
+                        </RelativeLayout>
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <!-- 中间部分 结束 -->
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#F6F5FA" />
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:visibility="gone"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="6dp"
+        android:paddingBottom="1dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>
