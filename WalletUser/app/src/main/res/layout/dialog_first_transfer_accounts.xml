@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlue">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:layout_margin="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_style_17sp_black1"
+                android:text="首次说明"/>
+
+            <ImageView
+               android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:id="@+id/iv_close"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_close"
+                />
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineColor"/>
+
+
+        <TextView
+            android:id="@+id/tv_current_balance"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#c94c7fff"
+            android:text="当前资产余额为 0 AB"
+            style="@style/text_style_16sp_blue"
+            />
+
+
+        <TextView
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            style="@style/text_style_15sp_gray_3"
+            android:gravity="left"
+            android:text="如需转出 AB 币，需要先通过交易购买 AB 币"
+            android:lineSpacingExtra="5dp"/>
+
+
+        <FrameLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/guide_home"
+                    android:scaleType="fitXY"/>
+
+
+                <ImageView
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/guide_trade"
+                    android:scaleType="fitXY"/>
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:layout_width="20dp"
+                android:layout_height="16dp"
+                android:src="@drawable/arrow_right2"/>
+
+
+        </FrameLayout>
+
+
+        <CheckBox
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="下次不再提醒"
+            android:paddingLeft="10dp"
+            android:id="@+id/cb_no_longer_remind"
+            style="@style/MyCheck_Box"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlue2"
+            />
+
+
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_cancel_transfer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_blue1_bg"
+                android:textColor="#4c7fff"
+                android:gravity="center"
+                android:text="使用帮助"/>
+
+
+
+            <TextView
+                android:id="@+id/tv_sure_transfer"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_blue_bg"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:text="购买AB"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_marginTop="195dp"
+            android:id="@+id/iv_left_index"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/guide_home_tab"/>
+
+
+        <ImageView
+            android:layout_marginTop="-40dp"
+            android:layout_below="@id/iv_left_index"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_right_index"
+            android:layout_centerVertical="true"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/guide_trade_tab"/>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>
+

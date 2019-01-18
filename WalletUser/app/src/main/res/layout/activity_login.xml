@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LoginActivity"
+    android:background="@color/colorWhite">
+
+
+    <TextView
+        android:id="@+id/tv_welcome_login"
+        android:paddingTop="60dp"
+        android:background="@drawable/icon_login_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:text="欢迎登录"
+        android:textSize="30sp"
+        android:gravity="center|top"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"/>
+
+
+    <TextView
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="-25dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/tv_welcome_login"
+        android:id="@+id/tv_input_account_name"
+        style="@style/text_style_17sp_black1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入账户名" />
+
+
+    <EditText
+        android:id="@+id/et_input_account"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="35dp"
+        style="@style/text_style_13sp_black1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/tv_input_account_name"
+        android:gravity="left|center_vertical"
+        android:text="Justin1"/>
+
+
+
+
+    <TextView
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/et_input_account"
+        android:id="@+id/tv_input_account_pwd"
+        style="@style/text_style_17sp_black1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请输入账户密码" />
+
+
+    <EditText
+        android:id="@+id/et_input_account_pwd"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="35dp"
+        style="@style/text_style_13sp_black1"
+        android:layout_width="match_parent"
+        android:gravity="left|center_vertical"
+        android:layout_height="60dp"
+        android:layout_below="@id/tv_input_account_pwd"
+        android:text="Justin123456"
+        android:inputType="textPassword"/>
+
+
+    <RelativeLayout
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/et_input_account_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="忘记密码 ？"
+            style="@style/text_style_15sp_gray_6"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_forget_pwd"
+            android:id="@+id/tv_find_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/text_style_15sp_blue3"
+            android:textColor="@color/colorBlue"
+            android:text="点此找回"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_blue_bg_round10"
+        android:textColor="@color/colorWhite"
+        android:text="确认登录"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+
+    <RelativeLayout
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_have_no_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="还没有 UG pay 账号？"
+            style="@style/text_style_15sp_gray_6"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_have_no_account"
+            android:id="@+id/tv_goto_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/text_style_15sp_blue3"
+            android:textColor="@color/colorBlue"
+            android:text="去注册"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

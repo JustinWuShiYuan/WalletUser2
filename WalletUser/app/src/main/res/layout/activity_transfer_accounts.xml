@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/title_bar" />
+
+        <View
+            android:layout_below="@id/cl_root_view"
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@color/lineColor"
+            app:layout_constraintTop_toBottomOf="@id/cl_root_view" />
+
+
+
+            <ScrollView
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_transfer_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        >
+
+                        <TextView
+
+                            android:id="@+id/tv_transfer_account_address"
+                            style="@style/text_style_17sp_black1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="转账地址" />
+
+
+                        <EditText
+                            android:id="@+id/et_input_coin_address"
+                            style="@style/text_style_15sp_gray_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_transfer_account_address"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:hint="收币钱包地址"
+                            android:inputType="text" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@id/et_input_coin_address"
+                            android:layout_marginTop="2dp"
+                            android:background="#E8E9ED" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_transfer_account_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        app:layout_constraintTop_toBottomOf="@id/rl_transfer_account">
+
+                        <TextView
+                            android:id="@+id/tv_transfer_coin_num"
+                            style="@style/text_style_17sp_black1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="数量" />
+
+
+                        <EditText
+                            android:id="@+id/et_input_coin_num"
+                            style="@style/text_style_15sp_gray_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_transfer_coin_num"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:hint="点击输入数量"
+                            android:inputType="number" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@id/et_input_coin_num"
+                            android:layout_marginTop="2dp"
+                            android:background="#E8E9ED" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="25dp"
+                        app:layout_constraintTop_toBottomOf="@id/rl_transfer_account_num">
+
+                        <TextView
+                            android:id="@+id/tv_transfer_remark"
+                            style="@style/text_style_17sp_black1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="备注" />
+
+
+                        <EditText
+                            android:id="@+id/et_input_transfer_remark"
+                            style="@style/text_style_15sp_gray_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_below="@id/tv_transfer_remark"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/shape_gray_bg"
+                            android:gravity="left"
+                            android:hint="200字以内"
+                            android:paddingStart="20dp"
+                            android:inputType="text"/>
+
+
+                    </RelativeLayout>
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </ScrollView>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/tv_cancel_transfer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_blue1_bg"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#4c7fff" />
+
+
+            <TextView
+                android:id="@+id/tv_sure_transfer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_blue_bg"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/colorWhite" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_safe_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88888888"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:id="@+id/ll_safe_root_view"
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginLeft="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/safeVerifier"
+                    android:textColor="#232630"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_cancel_verify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/cancelVerifier"
+                    android:textColor="#666666"
+                    android:textSize="17sp" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E8E9ED" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <TextView
+                    android:id="@+id/tv_payment_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/payPwd"
+                    android:textColor="#232630"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/et_payment_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_payment_pwd"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/payPwdHint"
+                    android:textColor="#666666"
+                    android:textSize="17sp"
+                    android:inputType="number"/>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E8E9ED" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <TextView
+                    android:id="@+id/tv_google_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/googleVerifierCode"
+                    android:textColor="#232630"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/et_google_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_google_pwd"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/googleCodeHint"
+                    android:textColor="#666666"
+                    android:textSize="17sp"
+                    android:inputType="number"/>
+
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btn_sure_transfer"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/shape_blue_bg"
+                android:text="@string/btnSure"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>
