@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;

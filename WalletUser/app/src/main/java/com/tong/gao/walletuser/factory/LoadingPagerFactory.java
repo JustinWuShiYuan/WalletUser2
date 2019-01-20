@@ -21,7 +21,6 @@ public class LoadingPagerFactory {
 		// 判断缓存中是否有
 		if (fragment != null) {
 			LogUtils.d("读取缓存 : " + position);
-			fragment.loadData();
 			return fragment;
 		}
 

@@ -94,4 +94,6 @@ dependencies {
 //    api 'com.sonnyjack.widget:DragView:0.1.0'
     implementation 'com.yanzhenjie:recyclerview-swipe:1.2.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }

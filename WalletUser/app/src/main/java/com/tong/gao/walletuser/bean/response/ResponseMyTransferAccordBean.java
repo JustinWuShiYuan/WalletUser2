@@ -17,6 +17,16 @@ public class ResponseMyTransferAccordBean implements Serializable {
         this.page = page;
     }
 
+    @Override
+    public String toString() {
+        return "ResponseMyTransferAccordBean{" +
+                "errcode='" + errcode + '\'' +
+                ", msg='" + msg + '\'' +
+                ", transferRecord=" + transferRecord +
+                ", page=" + page +
+                '}';
+    }
+
     public TransferAccordPageInfo getPage() {
         return page;
     }
@@ -49,23 +59,14 @@ public class ResponseMyTransferAccordBean implements Serializable {
         return transferRecord;
     }
 
-    @Override
-    public String toString() {
-        return "ResponseMyTransferAccordBean{" +
-                "errcode='" + errcode + '\'' +
-                ", msg='" + msg + '\'' +
-                ", transferRecord=" + transferRecord +
-                '}';
-    }
+    public class TransferInfoBean implements Serializable {
 
-    public class TransferInfoBean implements Serializable{
-
-            private String transferRecordId;
-            private String fromAddress;
-            private String toAddress;
-            private String transferTime;
-            private String number;
-            private String remark;
+        private String transferRecordId;
+        private String fromAddress;
+        private String toAddress;
+        private String transferTime;
+        private String number;
+        private String remark;
 
 
         public TransferInfoBean(String transferRecordId, String fromAddress, String toAddress, String transferTime, String number, String remark) {
@@ -78,99 +79,110 @@ public class ResponseMyTransferAccordBean implements Serializable {
         }
 
         public String getTransferRecordId() {
-                return transferRecordId;
-            }
-
-            public void setTransferRecordId(String transferRecordId) {
-                this.transferRecordId = transferRecordId;
-            }
-
-            public String getFromAddress() {
-                return fromAddress;
-            }
-
-            public void setFromAddress(String fromAddress) {
-                this.fromAddress = fromAddress;
-            }
-
-            public String getToAddress() {
-                return toAddress;
-            }
-
-            public void setToAddress(String toAddress) {
-                this.toAddress = toAddress;
-            }
-
-            public String getTransferTime() {
-                return transferTime;
-            }
-
-            public void setTransferTime(String transferTime) {
-                this.transferTime = transferTime;
-            }
-
-            public String getNumber() {
-                return number;
-            }
-
-            public void setNumber(String number) {
-                this.number = number;
-            }
-
-            public String getRemark() {
-                return remark;
-            }
-
-            public void setRemark(String remark) {
-                this.remark = remark;
-            }
-
+            return transferRecordId;
         }
 
-
-    public class TransferAccordPageInfo implements Serializable{
-
-            private String pageno;
-            private String pagesize;
-            private String sum;
-
-            public String getPageno() {
-                return pageno;
-            }
-
-            @Override
-            public String toString() {
-                return "TransferAccordPageInfo{" +
-                        "pageno='" + pageno + '\'' +
-                        ", pagesize='" + pagesize + '\'' +
-                        ", sum='" + sum + '\'' +
-                        '}';
-            }
-
-            public void setPageno(String pageno) {
-                this.pageno = pageno;
-            }
-
-            public String getPagesize() {
-                return pagesize;
-            }
-
-            public void setPagesize(String pagesize) {
-                this.pagesize = pagesize;
-            }
-
-            public String getSum() {
-                return sum;
-            }
-
-            public void setSum(String sum) {
-                this.sum = sum;
-            }
-
-            public TransferAccordPageInfo(String pageno, String pagesize, String sum) {
-                this.pageno = pageno;
-                this.pagesize = pagesize;
-                this.sum = sum;
-            }
+        public void setTransferRecordId(String transferRecordId) {
+            this.transferRecordId = transferRecordId;
         }
+
+        public String getFromAddress() {
+            return fromAddress;
+        }
+
+        public void setFromAddress(String fromAddress) {
+            this.fromAddress = fromAddress;
+        }
+
+        public String getToAddress() {
+            return toAddress;
+        }
+
+        public void setToAddress(String toAddress) {
+            this.toAddress = toAddress;
+        }
+
+        public String getTransferTime() {
+            return transferTime;
+        }
+
+        public void setTransferTime(String transferTime) {
+            this.transferTime = transferTime;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        @Override
+        public String toString() {
+            return "TransferInfoBean{" +
+                    "transferRecordId='" + transferRecordId + '\'' +
+                    ", fromAddress='" + fromAddress + '\'' +
+                    ", toAddress='" + toAddress + '\'' +
+                    ", transferTime='" + transferTime + '\'' +
+                    ", number='" + number + '\'' +
+                    ", remark='" + remark + '\'' +
+                    '}';
+        }
+    }
+
+
+    public class TransferAccordPageInfo implements Serializable {
+
+        private String pageno;
+        private String pagesize;
+        private String sum;
+
+        public String getPageno() {
+            return pageno;
+        }
+
+        @Override
+        public String toString() {
+            return "TransferAccordPageInfo{" +
+                    "pageno='" + pageno + '\'' +
+                    ", pagesize='" + pagesize + '\'' +
+                    ", sum='" + sum + '\'' +
+                    '}';
+        }
+
+        public void setPageno(String pageno) {
+            this.pageno = pageno;
+        }
+
+        public String getPagesize() {
+            return pagesize;
+        }
+
+        public void setPagesize(String pagesize) {
+            this.pagesize = pagesize;
+        }
+
+        public String getSum() {
+            return sum;
+        }
+
+        public void setSum(String sum) {
+            this.sum = sum;
+        }
+
+        public TransferAccordPageInfo(String pageno, String pagesize, String sum) {
+            this.pageno = pageno;
+            this.pagesize = pagesize;
+            this.sum = sum;
+        }
+    }
 }

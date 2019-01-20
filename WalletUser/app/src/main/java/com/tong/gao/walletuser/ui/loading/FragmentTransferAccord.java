@@ -2,16 +2,17 @@ package com.tong.gao.walletuser.ui.loading;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.bean.event.TransferAccordEvent;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
@@ -32,17 +33,37 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+
 public class FragmentTransferAccord extends BaseFragment {
 
     private int myTransferType = 0;
     private List<ResponseMyTransferAccordBean.TransferInfoBean> dataList = new ArrayList<>();
+    boolean[] isLoadMoreSuccess  = {false,false,false};
+    int[] mCurrentCounter = {0,0,0};
+    private int[] TOTAL_COUNTER = {1,0,0};
+    private int pageSize = 7;
+    private int[] pageNum = {1,1,1};
+
+    private boolean isFirstToType1 = true;
+
+     MyTransferAccordAdapter2 myTradeListAdapter;
 
     @Override
     protected View onSuccessView() {
-        MyTransferAccordAdapter myTradeListAdapter = new MyTransferAccordAdapter();
-        View view = View.inflate(UIUtils.getContext(),R.layout.my_transfer_recycleview,null);
+        LogUtils.d("onSuccessView():"+(dataList.size())+" isLoadMoreSuccess:"+isLoadMoreSuccess[myTransferType]);
+//        final MyTransferAccordAdapter2 myTradeListAdapter = new MyTransferAccordAdapter2(R.layout.item_transfer_accord, dataList);
+        myTradeListAdapter = new MyTransferAccordAdapter2(R.layout.item_transfer_accord, dataList);
+
+        myTradeListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(getActivity(), "onItemClick" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        View view = View.inflate(UIUtils.getContext(), R.layout.my_transfer_recycleview, null);
         final SwipeRefreshLayout refreshLayout = view.findViewById(R.id.srl_refresh_my_order);
-        RecyclerView myOrderRecycleView = view.findViewById(R.id.rv_my_transfer);
+        final RecyclerView myOrderRecycleView = view.findViewById(R.id.rv_my_transfer);
 
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(UIUtils.getContext());
         myOrderRecycleView.setLayoutManager(mLinearLayoutManager);
@@ -60,8 +81,108 @@ public class FragmentTransferAccord extends BaseFragment {
             }
         });
 
+
+        //加载更多
+        myTradeListAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                myOrderRecycleView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(myTransferType == 1 && isFirstToType1){
+                            isLoadMoreSuccess[myTransferType] = false;
+                            isFirstToType1 = false;
+                        }else{
+                            isLoadMoreSuccess[myTransferType] = true;
+                        }
+
+                        if (mCurrentCounter[myTransferType] >= TOTAL_COUNTER[myTransferType]) {
+                            //数据全部加载完毕
+                            myTradeListAdapter.loadMoreEnd();
+                        } else {
+                            if (isLoadMoreSuccess[myTransferType]) {
+                                //成功获取更多数据
+//                                pageNum[myTransferType]++;
+//                                onLoadData();
+                                loadMore(pageNum[myTransferType]);
+                                LogUtils.d("22222222222dataList.size():"+dataList.size());
+
+
+
+                            } else {
+                                //获取更多数据失败
+                                isLoadMoreSuccess[myTransferType] = false;
+                                Toast.makeText(getActivity(), "加载更多失败", Toast.LENGTH_LONG).show();
+                                myTradeListAdapter.loadMoreFail();
+
+                            }
+                        }
+                    }
+
+                }, 1000);
+            }
+        }, myOrderRecycleView);
+
+
         return view;
     }
+
+
+
+    public void loadMore(int pageIndex){
+        pageIndex++;
+        LogUtils.d("pageIndex:"+ pageIndex);
+
+        NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"",pageIndex+"",pageSize+""),new Observer<ResponseMyTransferAccordBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(ResponseMyTransferAccordBean responseMyTransferAccordBean) {
+                if (null != responseMyTransferAccordBean && MyConstant.resultCodeIsOK .equals(responseMyTransferAccordBean.getErrcode())) {
+
+//                    LogUtils.d("PageNum:"+responseMyTransferAccordBean.getPage().getSum());
+
+                    TOTAL_COUNTER[myTransferType] =Integer.parseInt(responseMyTransferAccordBean.getPage().getSum()) ;
+
+                    dataList = responseMyTransferAccordBean.getTransferRecord();
+
+                    LogUtils.d("pageIndexPageNum:"+responseMyTransferAccordBean.getPage().getSum()+" pageIndex dataList.size():"+dataList.size());
+
+                    if(null !=dataList && dataList.size() > 0 ){
+//                        isLoadMoreSuccess[myTransferType] = true;
+
+                        UIUtils.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                myTradeListAdapter.addData(dataList);
+                                mCurrentCounter[myTransferType] = myTradeListAdapter.getData().size();
+                                myTradeListAdapter.loadMoreComplete();
+                            }
+                        });
+
+                    }else{
+//                        isLoadMoreSuccess[myTransferType] = false;
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("onError:");
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d(" onComplete()");
+            }
+        });
+
+    }
+
 
 
 
@@ -74,20 +195,37 @@ public class FragmentTransferAccord extends BaseFragment {
         }
 
 
-        LogUtils.d("myTransferType:"+myTransferType);
 
-        NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"","1","15"),new Observer<ResponseMyTransferAccordBean>() {
+
+
+
+        NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"",pageNum[myTransferType]+"",pageSize+""),new Observer<ResponseMyTransferAccordBean>() {
             @Override
             public void onSubscribe(Disposable d) {
+                LogUtils.d("myTransferType:"+myTransferType+" pageNum:"+pageNum);
             }
 
             @Override
             public void onNext(ResponseMyTransferAccordBean responseMyTransferAccordBean) {
-                if (null != responseMyTransferAccordBean) {
+                if (null != responseMyTransferAccordBean && MyConstant.resultCodeIsOK .equals(responseMyTransferAccordBean.getErrcode())) {
+
+                    LogUtils.d("PageNum:"+responseMyTransferAccordBean.getPage().getSum());
+
+                    TOTAL_COUNTER[myTransferType] =Integer.parseInt(responseMyTransferAccordBean.getPage().getSum()) ;
 
                     dataList = responseMyTransferAccordBean.getTransferRecord();
 
-                    EventBus.getDefault().post(new TransferAccordEvent());
+                    LogUtils.d("PageNum:"+responseMyTransferAccordBean.getPage().getSum()+" dataList.size():"+dataList.size());
+
+                    if(null !=dataList && dataList.size() > 0 ){
+                        isLoadMoreSuccess[myTransferType] = true;
+                        EventBus.getDefault().post(new TransferAccordEvent());
+
+                    }else{
+                        isLoadMoreSuccess[myTransferType] = false;
+                    }
+
+
                 }
             }
 
@@ -147,5 +285,26 @@ public class FragmentTransferAccord extends BaseFragment {
             return dataList.size();
         }
     }
+
+
+    class MyTransferAccordAdapter2 extends BaseQuickAdapter<ResponseMyTransferAccordBean.TransferInfoBean,BaseViewHolder> {
+
+        public MyTransferAccordAdapter2(int layoutResId, @Nullable List<ResponseMyTransferAccordBean.TransferInfoBean> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, ResponseMyTransferAccordBean.TransferInfoBean item) {
+
+            helper.setImageResource(R.id.iv_transfer_icon, R.drawable.icon_transfer_in);
+            helper.setText(R.id.tv_payment_user_id, item.getTransferRecordId());
+            helper.setText(R.id.tv_payment_time, item.getTransferTime());
+            helper.setText(R.id.tv_transfer_num, item.getNumber());
+
+        }
+    }
+
+
+
 
 }
