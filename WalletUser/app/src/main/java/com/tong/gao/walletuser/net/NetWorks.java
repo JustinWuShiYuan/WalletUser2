@@ -2,13 +2,17 @@ package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
+import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
+import com.tong.gao.walletuser.bean.response.ResponseRegisterBean;
 import com.tong.gao.walletuser.bean.response.ResponseVerifyGoogleBean;
 import com.tong.gao.walletuser.constants.MyConstant;
+import com.tong.gao.walletuser.ui.loading.LoadingPager;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -59,6 +63,11 @@ public class NetWorks extends RetrofitUtils {
 
 
         @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.register)
+        Observable<ResponseRegisterBean> register(@Body RequestRegisterBean registerBean);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
         @GET(MyConstant.queryFireCoinInfo)
         Observable<QueryFireCoinInfoBean> queryFireCoinInfo();
 
@@ -75,6 +84,11 @@ public class NetWorks extends RetrofitUtils {
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @GET(MyConstant.queryAssert)
         Observable<ResponseMyAccountInfo> queryMyAccountInfo();
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @GET(MyConstant.transfer_accord)
+        Observable<ResponseMyTransferAccordBean> queryTransferAccord();
 
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
@@ -112,6 +126,10 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(service.login(requestLoginInfoBean),observer);
     }
 
+    public static void register(RequestRegisterBean requestRegisterBean, Observer<ResponseRegisterBean> observer){
+        setSubscribe(service.register(requestRegisterBean),observer);
+    }
+
     public static void queryFireCoinInfo(Observer<QueryFireCoinInfoBean> observer){
         setSubscribe(service.queryFireCoinInfo(),observer);
     }
@@ -129,6 +147,10 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryMyAccountInfo(Observer<ResponseMyAccountInfo> observer){
         setSubscribe(service.queryMyAccountInfo(),observer);
+    }
+
+    public static void queryTransferAccord(Observer<ResponseMyTransferAccordBean> observer){
+        setSubscribe(service.queryTransferAccord(),observer);
     }
 
 

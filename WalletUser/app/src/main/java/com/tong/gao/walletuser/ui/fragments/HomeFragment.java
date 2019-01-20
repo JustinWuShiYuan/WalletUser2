@@ -11,12 +11,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,11 +34,14 @@ import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.event.MessageEvent;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.constants.MyConstant;
+import com.tong.gao.walletuser.factory.ThreadPoolFactory;
 import com.tong.gao.walletuser.interfaces.DialogCallBack;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.ui.activity.LoginActivity;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
+import com.tong.gao.walletuser.ui.activity.TransferRecordActivity;
 import com.tong.gao.walletuser.ui.view.HomeADPageView;
+import com.tong.gao.walletuser.ui.view.MyLinearLayoutManager;
 import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
@@ -49,8 +55,10 @@ import com.yzq.zxinglibrary.common.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +68,7 @@ import io.reactivex.disposables.Disposable;
 
 import static android.app.Activity.RESULT_OK;
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.iv_left_small_bell_icon)
     ImageView ivLeftSmallBellIcon;
@@ -104,7 +112,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     RecyclerView recyclerView;
     @BindView(R.id.rl_user_info)
     RelativeLayout rlUserInfo;
-    @BindView(R.id.tv_login)
+    @BindView(R.id.tv_skip_not_download)
     TextView tvLogin;
     @BindView(R.id.rl_un_login)
     RelativeLayout rlUnLogin;
@@ -126,12 +134,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     ImageView ivHelper;
     @BindView(R.id.rl_order_and_helper_container)
     LinearLayout rlOrderAndHelperContainer;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.main_collapsing)
-    CollapsingToolbarLayout mainCollapsing;
-    @BindView(R.id.main_appbar)
-    AppBarLayout mainAppbar;
+
+
+    @BindView(R.id.srl_refresh_root_view)
+    SwipeRefreshLayout refreshLayout;
 
     private List<FireCoinBean> fireCoinBeanList = new ArrayList<>();
     private View rootView;
@@ -147,23 +153,45 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
-        LogUtils.d(" initView");
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mLinearLayoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-
         deRecycleImg.startAutoPlay();//开启自动播放功能
-
 
         ivLeftSmallBellIcon.setOnClickListener(this);
         ivRightScanIcon.setOnClickListener(this);
         tvTransferRecord.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
 
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+                android.R.color.holo_red_light, android.R.color.holo_orange_light);
+
+        refreshLayout.setOnRefreshListener(this);
 
         return rootView;
+    }
+
+    private void changeDistance() {
+
+        ViewTreeObserver vto = refreshLayout.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            public void onGlobalLayout() {
+                Float mDistanceToTriggerSync = 2000.f;
+
+                try {
+                    Field field = SwipeRefreshLayout.class.getDeclaredField("mDistanceToTriggerSync");
+                    field.setAccessible(true);
+                    field.setFloat(refreshLayout, mDistanceToTriggerSync);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                ViewTreeObserver obs = refreshLayout.getViewTreeObserver();
+                obs.removeOnGlobalLayoutListener(this);
+            }
+        });
     }
 
     @Override
@@ -206,6 +234,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_home_pager, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         initView(inflater, container);
+        changeDistance();
         EventBus.getDefault().register(this);
         return rootView;
     }
@@ -257,7 +286,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.tv_login:
+            case R.id.tv_skip_not_download:
                 //TODO 登录
                 startActivity(new Intent(mActivity,LoginActivity.class));
 
@@ -274,6 +303,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 scanCode();
 
                 break;
+
+            case R.id.tv_transfer_record:   //转账记录
+
+                startActivity(new Intent(getActivity(),TransferRecordActivity.class));
+
+                break;
+
 
             case R.id.cb_no_longer_remind:  //首次转账 不再提醒说明的 cb
 
@@ -400,13 +436,28 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .start();
     }
 
+    @Override
+    public void onRefresh() {
+
+        //TODO 重新加载 接口 刷新数据
+
+        ThreadPoolFactory.getScheduledExecutor().scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(false);
+            }
+        },1,4,TimeUnit.SECONDS);
+    }
+
 
     private class MyFireCoinInfoAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
             return new MyViewHolder(LayoutInflater.from(mActivity).inflate(R.layout.item_home_pager, viewGroup, false));
+
         }
 
         @Override

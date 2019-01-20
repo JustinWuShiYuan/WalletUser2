@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.tong.gao.walletuser.R;
+import com.tong.gao.walletuser.factory.LoadingPagerFactory;
 import com.tong.gao.walletuser.manager.AppActivityManager;
 import com.tong.gao.walletuser.utils.Density;
 import com.tong.gao.walletuser.utils.StatusBarUtil;
@@ -129,6 +133,40 @@ public abstract class ActivityBase extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void hello ( String event){
         Toast.makeText( this , event , Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+    protected String[] tabTitles;
+
+    public void setTabTitles(String[] tabTitles) {
+        this.tabTitles = tabTitles;
+    }
+
+    public class MyTabAdapter extends FragmentPagerAdapter {
+
+        public MyTabAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            return LoadingPagerFactory.getFragment(position);
+        }
+
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (tabTitles != null) { return tabTitles[position]; }
+            return super.getPageTitle(position);
+        }
     }
 
 

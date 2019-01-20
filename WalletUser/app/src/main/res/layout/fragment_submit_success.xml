@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.FindPwdActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_head_container"
+        android:background="@drawable/icon_login_bg"
+        android:layout_width="match_parent"
+        android:layout_height="270dp">
+
+        <include layout="@layout/title_bar_no_background"/>
+
+
+        <ImageView
+            android:paddingTop="30dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/icon_submit_success"
+            android:layout_centerHorizontal="true"
+           />
+
+
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/rl_head_container"
+        style="@style/text_style_17sp_black1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="审核将在 7 个工作日内完成请留意邮件通知"
+        />
+
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

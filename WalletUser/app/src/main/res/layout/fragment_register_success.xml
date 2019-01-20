@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LoginActivity"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_head_container"
+        android:background="@drawable/icon_login_bg"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <include layout="@layout/title_bar_no_background"/>
+
+
+        <TextView
+            android:layout_below="@id/cl_title_root_view"
+            android:id="@+id/tv_register_success"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
+            android:text="注册成功！"
+            android:textSize="30sp"
+            android:gravity="center|top"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWhite"/>
+
+
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_style_16sp_gray_3"
+        android:text="您的 UG ID 为 2222"
+        android:id="@+id/tv_ug_id"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_style_16sp_gray_3"
+        android:text="您的 UG ID 为 7328179请妥善保存，此 ID 将作为您在 UG 平台的重要身份凭证"
+        android:lines="2"
+        android:lineSpacingExtra="2dp"
+        />
+
+
+    <RelativeLayout
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="您也可以 "/>
+
+        <TextView
+            android:id="@+id/tv_download_google_code"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="下载谷歌验证码"
+            android:background="@drawable/shape_blue_bg"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_download_google_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="让交易更安全"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/tv_skip_not_download"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_blue_bg_round10"
+        android:textColor="@color/colorWhite"
+        android:text="跳过，暂不下载"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+
+
+
+
+</LinearLayout>

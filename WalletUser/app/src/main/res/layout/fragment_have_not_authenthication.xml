@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.FindPwdActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_head_container"
+        android:background="@drawable/icon_login_bg"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <include layout="@layout/title_bar_no_background"/>
+
+
+        <TextView
+            android:layout_below="@id/cl_title_root_view"
+            android:id="@+id/tv_welcome_login"
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
+            android:text="密码找回"
+            android:textSize="30sp"
+            android:gravity="center|top"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWhite"/>
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/rl_head_container"
+        android:layout_marginLeft="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_customer_online"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在线客服"
+                android:textColor="#232630"
+                android:textSize="17sp"/>
+
+
+            <ImageView
+                android:clickable="false"
+                android:layout_alignParentRight="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/right_arrow_gray"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineColor"/>
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl_other_contact"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他联系方式"
+                android:textColor="#232630"
+                android:textSize="17sp"/>
+
+
+            <ImageView
+                android:clickable="false"
+                android:layout_alignParentRight="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/right_arrow_gray"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineColor"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

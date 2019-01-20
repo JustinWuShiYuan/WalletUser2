@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_register"
+    app:startDestination="@id/fragmentRegister">
+
+    <fragment
+        android:id="@+id/fragmentRegister"
+        android:name="com.tong.gao.walletuser.ui.fragments.FragmentRegister"
+        android:label="FragmentRegister" ><action android:id="@+id/action_fragmentRegister_to_fragmentRegisterSuccess" app:destination="@id/fragmentRegisterSuccess"/></fragment>
+    <fragment
+        android:id="@+id/fragmentRegisterSuccess"
+        android:name="com.tong.gao.walletuser.ui.fragments.FragmentRegisterSuccess"
+        android:label="FragmentRegisterSuccess" />
+</navigation>

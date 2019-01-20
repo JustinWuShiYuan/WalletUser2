@@ -47,9 +47,13 @@
             android:launchMode="singleTask" />
         <activity android:name=".ui.activity.TransferAccountsActivity" />
         <activity android:name=".ui.activity.TransferAccountSuccessActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.activity.SecondVerifyActivity" />
-        <activity android:name=".ui.activity.FindPwdActivity"></activity>
+        <activity android:name=".ui.activity.FindPwdActivity" />
+        <activity android:name=".ui.activity.RegistActivity" />
+        <activity android:name=".ui.activity.TransferRecordActivity"></activity>
     </application>
 
 </manifest>

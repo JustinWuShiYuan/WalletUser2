@@ -30,7 +30,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     EditText etInputAccountPwd;
     @BindView(R.id.tv_find_pwd)
     TextView tvFindPwd;
-    @BindView(R.id.tv_login)
+    @BindView(R.id.tv_skip_not_download)
     TextView tvLogin;
     @BindView(R.id.tv_goto_register)
     TextView tvGotoRegister;
@@ -91,7 +91,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
                 break;
 
-            case R.id.tv_login:
+            case R.id.tv_skip_not_download:
 
                 loginName = etInputAccount.getText().toString();
                 loginPwd = etInputAccountPwd.getText().toString();
@@ -107,6 +107,9 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                 break;
 
             case R.id.tv_goto_register:
+
+                startActivity(new Intent(this,RegistActivity.class));
+                finish();
 
 
                 break;

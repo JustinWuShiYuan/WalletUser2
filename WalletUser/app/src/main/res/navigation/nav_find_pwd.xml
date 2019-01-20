@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_find_pwd"
+    app:startDestination="@id/findPwdIsAuthFragment">
+
+    <fragment
+        android:id="@+id/findPwdIsAuthFragment"
+        android:name="com.tong.gao.walletuser.ui.fragments.FragmentFindPwdIsAuth"
+        android:label="FindPwdIsAuthFragment">
+        <action
+            android:id="@+id/action_findPwdIsAuthFragment_to_realNameAuthentication"
+            app:destination="@id/realNameAuthentication" />
+        <action
+            android:id="@+id/action_findPwdIsAuthFragment_to_fragmentHaveNotAuthentication"
+            app:destination="@id/fragmentHaveNotAuthentication" />
+    </fragment>
+    <fragment
+        android:id="@+id/realNameAuthentication"
+        android:name="com.tong.gao.walletuser.ui.fragments.FragmentRealNameAuthentication"
+        android:label="RealNameAuthentication">
+        <action
+            android:id="@+id/action_realNameAuthentication_to_findPwdIsAuthFragment"
+            app:destination="@id/findPwdIsAuthFragment" /><action android:id="@+id/action_realNameAuthentication_to_fragmentSubmitSuccess" app:destination="@id/fragmentSubmitSuccess"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHaveNotAuthentication"
+        android:name="com.tong.gao.walletuser.ui.fragments.FragmentHaveNotAuthentication"
+        android:label="FragmentHaveNotAuthentication">
+        <action
+            android:id="@+id/action_fragmentHaveNotAuthentication_to_findPwdIsAuthFragment"
+            app:destination="@id/findPwdIsAuthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSubmitSuccess"
+        android:name="com.tong.gao.walletuser.ui.fragments.FragmentSubmitSuccess"
+        android:label="FragmentSubmitSuccess" />
+</navigation>
