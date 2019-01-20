@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ReponseTransferAccountBean implements Serializable {
 
-    private String err_code;
+    private String errcode;
     private String msg;
     private String accountTransferId;
     private String address;
@@ -14,8 +14,8 @@ public class ReponseTransferAccountBean implements Serializable {
     private String txhash;
 
 
-    public ReponseTransferAccountBean(String err_code, String msg, String accountTransferId, String address, String number, String remark, String transferTime, String txhash) {
-        this.err_code = err_code;
+    public ReponseTransferAccountBean(String errcode, String msg, String accountTransferId, String address, String number, String remark, String transferTime, String txhash) {
+        this.errcode = errcode;
         this.msg = msg;
         this.accountTransferId = accountTransferId;
         this.address = address;
@@ -25,12 +25,12 @@ public class ReponseTransferAccountBean implements Serializable {
         this.txhash = txhash;
     }
 
-    public String getErr_code() {
-        return err_code;
+    public String getErrcode() {
+        return errcode;
     }
 
-    public void setErr_code(String err_code) {
-        this.err_code = err_code;
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
     }
 
     public String getMsg() {
@@ -92,7 +92,7 @@ public class ReponseTransferAccountBean implements Serializable {
     @Override
     public String toString() {
         return "ReponseTransferAccountBean{" +
-                "err_code='" + err_code + '\'' +
+                "errcode='" + errcode + '\'' +
                 ", msg='" + msg + '\'' +
                 ", accountTransferId='" + accountTransferId + '\'' +
                 ", address='" + address + '\'' +

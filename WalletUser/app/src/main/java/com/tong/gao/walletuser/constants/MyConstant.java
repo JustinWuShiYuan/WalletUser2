@@ -12,16 +12,17 @@ public class MyConstant {
     public static final String login = "ug/usr/pblin.do";           //登录
     public static final String register = "ug/usr/pbrus.do";           //注册
     public static final String verify_google_code = "ug/usr/pbggc.do";           //校验谷歌验证码
-    public static final String transfer_accord = "ug/acc/pbaas.do";           //用户转账记录
+    public static final String transfer_accord = "ug/acc/pbtrs.do";           //用户转账记录
 
     public static final String googleVerifyIsClosed = "0";  //谷歌验证 关闭
     public static final String googleVerifyIsOpened = "1";  //谷歌验证 打开
     public static final String coinBTC = "BTC";  //BTC
     public static final String coinETH = "ETH";  //ETH
     public static final String coinEOS = "EOS";  //EOS
-    public static final String queryFireCoinOk = "1";
+    public static final String resultCodeIsOK = "1";
     public static final String userId = "userId";
     public static final String transferAccordType = "transferAccordType";
+    public static final String transferAccountAddressKey = "transferAccountAddressKey";
 
 
 

@@ -5,23 +5,23 @@ import java.util.List;
 
 public class QueryFireCoinInfoBean implements Serializable {
 
-    private String err_code;
+    private String errcode;
     private String msg;
     private List<FireCoinBean>  marketList;
 
 
-    public QueryFireCoinInfoBean(String err_code, String msg, List<FireCoinBean> marketList) {
-        this.err_code = err_code;
+    public QueryFireCoinInfoBean(String errcode, String msg, List<FireCoinBean> marketList) {
+        this.errcode = errcode;
         this.msg = msg;
         this.marketList = marketList;
     }
 
-    public String getErr_code() {
-        return err_code;
+    public String getErrcode() {
+        return errcode;
     }
 
-    public void setErr_code(String err_code) {
-        this.err_code = err_code;
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
     }
 
     public String getMsg() {
@@ -43,7 +43,7 @@ public class QueryFireCoinInfoBean implements Serializable {
     @Override
     public String toString() {
         return "QueryFireCoinInfoBean{" +
-                "err_code='" + err_code + '\'' +
+                "errcode='" + errcode + '\'' +
                 ", msg='" + msg + '\'' +
                 ", marketList=" + marketList +
                 '}';

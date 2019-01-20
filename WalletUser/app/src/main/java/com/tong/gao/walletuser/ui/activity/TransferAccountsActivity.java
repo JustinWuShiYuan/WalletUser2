@@ -16,6 +16,7 @@ import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
+import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.StringUtils;
@@ -60,12 +61,19 @@ public class TransferAccountsActivity extends ActivityBase implements View.OnCli
     private String transferAccountAddress, transferAccountNum, transferRemark;
     private String paymentPwd,googleCode;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer_accounts);
         ButterKnife.bind(this);
         initView();
+        Intent intent = getIntent();
+
+        if(null != intent){
+            transferAccountAddress  = intent.getStringExtra(MyConstant.transferAccountAddressKey);
+            etInputCoinAddress.setText(transferAccountAddress);
+        }
     }
 
     @Override
@@ -172,14 +180,12 @@ public class TransferAccountsActivity extends ActivityBase implements View.OnCli
 
             @Override
             public void onNext(ReponseTransferAccountBean reponseTransferAccountBean) {
-                LogUtils.d("reponseTransferAccountBean:"+reponseTransferAccountBean.toString());
-                //TODO 根据成功结果 来显示 成功界面
 
-                if(null !=reponseTransferAccountBean && null != reponseTransferAccountBean.getErr_code()){
-
-                }else{
+                if(null !=reponseTransferAccountBean && MyConstant.resultCodeIsOK .equals(reponseTransferAccountBean.getErrcode())){
                     startActivity(new Intent(TransferAccountsActivity.this,TransferAccountSuccessActivity.class));
                     finish();
+                }else{
+                    LogUtils.d("转账失败");
                 }
 
             }

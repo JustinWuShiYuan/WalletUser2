@@ -3,6 +3,7 @@ package com.tong.gao.walletuser.net;
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
+import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
@@ -87,8 +88,8 @@ public class NetWorks extends RetrofitUtils {
 
 
         @Headers({"Content-type:application/json;charset=UTF-8"})
-        @GET(MyConstant.transfer_accord)
-        Observable<ResponseMyTransferAccordBean> queryTransferAccord();
+        @POST(MyConstant.transfer_accord)
+        Observable<ResponseMyTransferAccordBean> queryTransferAccord(@Body RequestTransferAccordBean requestTransferAccordBean);
 
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
@@ -149,8 +150,8 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(service.queryMyAccountInfo(),observer);
     }
 
-    public static void queryTransferAccord(Observer<ResponseMyTransferAccordBean> observer){
-        setSubscribe(service.queryTransferAccord(),observer);
+    public static void queryTransferAccord(RequestTransferAccordBean requestTransferAccordBean,Observer<ResponseMyTransferAccordBean> observer){
+        setSubscribe(service.queryTransferAccord(requestTransferAccordBean),observer);
     }
 
 

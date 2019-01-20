@@ -14,6 +14,7 @@ import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
 import com.tong.gao.walletuser.factory.LoadingPagerFactory;
 import com.tong.gao.walletuser.ui.loading.BaseFragment;
+import com.tong.gao.walletuser.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

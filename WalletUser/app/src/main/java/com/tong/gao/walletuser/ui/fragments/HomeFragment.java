@@ -9,13 +9,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +37,6 @@ import com.tong.gao.walletuser.ui.activity.LoginActivity;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.ui.activity.TransferRecordActivity;
 import com.tong.gao.walletuser.ui.view.HomeADPageView;
-import com.tong.gao.walletuser.ui.view.MyLinearLayoutManager;
 import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
@@ -205,9 +200,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             @Override
             public void onNext(QueryFireCoinInfoBean queryFireCoinInfoBean) {
-                LogUtils.d("" + queryFireCoinInfoBean.toString() + "  erro:" + queryFireCoinInfoBean.getErr_code());
+                LogUtils.d("" + queryFireCoinInfoBean.toString() + "  erro:" + queryFireCoinInfoBean.getErrcode());
 
-//                if(null != queryFireCoinInfoBean && queryFireCoinInfoBean.getErr_code() .equals(MyConstant.queryFireCoinOk)){
+//                if(null != queryFireCoinInfoBean && queryFireCoinInfoBean.getErrcode() .equals(MyConstant.resultCodeIsOK)){
                 if (null != queryFireCoinInfoBean) {
                     fireCoinBeanList = queryFireCoinInfoBean.getMarketList();
 
@@ -540,22 +535,24 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         // 扫描二维码/条码回传
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
-
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
-
-                Toast.makeText(mActivity, content, Toast.LENGTH_LONG).show();
-
-                //TODO 扫码转账 Activity
-                startActivity(new Intent(mActivity, TransferAccountsActivity.class));
+                Intent intent = new Intent();
+                intent.putExtra(MyConstant.transferAccountAddressKey,content);
+                intent.setClass(mActivity,TransferAccountsActivity.class);
+                startActivity(intent);
             }
         }
     }
 
 
+    private boolean isFirstIn = true;
     @Override
     public void onResume() {
         super.onResume();
-        loadMyAccountInfo();
+        if(!isFirstIn){
+            loadMyAccountInfo();
+        }
+        isFirstIn = !isFirstIn;
     }
 
 
@@ -571,8 +568,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             public void onNext(ResponseMyAccountInfo responseMyAccountInfo) {
                 LogUtils.d("responseMyAccountInfo:"+responseMyAccountInfo.toString());
 
-                //TODO 更具数据来刷新UI
-                refreshTitleUI();
+                if(null != responseMyAccountInfo && MyConstant.resultCodeIsOK.equals(responseMyAccountInfo.getErrcode()) ){
+                    refreshTitleUI(responseMyAccountInfo);
+                }
 
             }
 
@@ -589,7 +587,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     }
 
-    private void refreshTitleUI() {
+    private void refreshTitleUI(final ResponseMyAccountInfo responseMyAccountInfo) {
 
         UIUtils.runOnUiThread(new Runnable() {
             @Override
@@ -597,8 +595,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 rlUnLogin.setVisibility(View.GONE);
                 rlUserInfo.setVisibility(View.VISIBLE);
 
-                tvAssertUgNum.setText("20000.00");
-                tvAssertMoney.setText("折合人民币  200.00");
+                tvAssertUgNum.setText(responseMyAccountInfo.getUsableFund());
+                tvAssertMoney.setText("折合人民币  "+responseMyAccountInfo.getConvertRmb());
 
             }
         });

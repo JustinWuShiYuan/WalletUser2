@@ -1,5 +1,6 @@
 package com.tong.gao.walletuser.ui.loading;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,22 +13,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tong.gao.walletuser.R;
+import com.tong.gao.walletuser.bean.event.TransferAccordEvent;
+import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
+import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.ui.holder.MyTransferAccodHolder;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 public class FragmentTransferAccord extends BaseFragment {
 
     private int myTransferType = 0;
-    private List<ResponseMyTransferAccordBean.TransferInfoBean> dataList;
+    private List<ResponseMyTransferAccordBean.TransferInfoBean> dataList = new ArrayList<>();
 
     @Override
     protected View onSuccessView() {
@@ -46,9 +54,9 @@ public class FragmentTransferAccord extends BaseFragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(UIUtils.getContext(),"刷新数据完成",Toast.LENGTH_LONG).show();
                 refreshLayout.setRefreshing(false);
                 //TODO 刷新数据
+
             }
         });
 
@@ -56,41 +64,62 @@ public class FragmentTransferAccord extends BaseFragment {
     }
 
 
-    LoadingPager.LoadedResult loadedResult;
 
     @Override
     protected LoadingPager.LoadedResult onLoadData() {
 
-//        NetWorks.queryTransferAccord(new Observer<ResponseMyTransferAccordBean>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//                LogUtils.d("queryTransferAccord11111111111");
-//            }
-//
-//            @Override
-//            public void onNext(ResponseMyTransferAccordBean responseMyTransferAccordBean) {
-//                LogUtils.d("responseMyTransferAccordBean:" + responseMyTransferAccordBean.toString());
-//                if (null != responseMyTransferAccordBean) {
-//                    loadedResult = LoadingPager.LoadedResult.SUCCESS;
-//
-//                    dataList = responseMyTransferAccordBean.getTransferRecord();
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                LogUtils.d("onError:");
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                LogUtils.d(" onComplete()");
-//            }
-//        });
+        Bundle arguments = getArguments();
+        if( null != arguments){
+            myTransferType = arguments.getInt(MyConstant.transferAccordType);
+        }
 
 
-        return LoadingPager.LoadedResult.SUCCESS;
+        LogUtils.d("myTransferType:"+myTransferType);
+
+        NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"","1","15"),new Observer<ResponseMyTransferAccordBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(ResponseMyTransferAccordBean responseMyTransferAccordBean) {
+                if (null != responseMyTransferAccordBean) {
+
+                    dataList = responseMyTransferAccordBean.getTransferRecord();
+
+                    EventBus.getDefault().post(new TransferAccordEvent());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("onError:");
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d(" onComplete()");
+            }
+        });
+
+
+        return LoadingPager.LoadedResult.LOADING;
     }
+
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventTransferAccord (TransferAccordEvent event){
+
+        if(null != dataList && dataList.size() == 0){
+            getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
+        }else if(null != dataList && dataList.size() > 0){
+            getmPager().setmCurrentState(LoadingPager.LoadedResult.SUCCESS.getState());
+        }else{
+            getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
+        }
+    }
+
 
     @Override
     protected void executeEmptyTask() {

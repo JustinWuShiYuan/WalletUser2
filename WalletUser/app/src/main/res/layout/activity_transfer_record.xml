@@ -20,8 +20,8 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         android:layout_margin="10dp"
-        app:tabPaddingStart="70dp"
-        app:tabPaddingEnd="70dp"
+        app:tabPaddingStart="40dp"
+        app:tabPaddingEnd="40dp"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         />
 

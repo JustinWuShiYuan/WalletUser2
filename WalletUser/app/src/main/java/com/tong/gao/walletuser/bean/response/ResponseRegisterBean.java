@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class ResponseRegisterBean implements Serializable {
 
-    private String err_code;
+    private String errcode;
     private String msg;
     private String userid;
 
 
-    public ResponseRegisterBean(String err_code, String msg, String userid) {
-        this.err_code = err_code;
+    public ResponseRegisterBean(String errcode, String msg, String userid) {
+        this.errcode = errcode;
         this.msg = msg;
         this.userid = userid;
     }
 
-    public String getErr_code() {
-        return err_code;
+    public String getErrcode() {
+        return errcode;
     }
 
-    public void setErr_code(String err_code) {
-        this.err_code = err_code;
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
     }
 
     public String getMsg() {
@@ -42,7 +42,7 @@ public class ResponseRegisterBean implements Serializable {
     @Override
     public String toString() {
         return "ResponseRegisterBean{" +
-                "err_code='" + err_code + '\'' +
+                "errcode='" + errcode + '\'' +
                 ", msg='" + msg + '\'' +
                 ", userid='" + userid + '\'' +
                 '}';

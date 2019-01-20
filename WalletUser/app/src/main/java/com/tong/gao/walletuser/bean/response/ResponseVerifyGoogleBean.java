@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class ResponseVerifyGoogleBean implements Serializable {
 
-    private String err_code;
+    private String errcode;
     private String msg;
 
 
-    public ResponseVerifyGoogleBean(String err_code, String msg) {
-        this.err_code = err_code;
+    public ResponseVerifyGoogleBean(String errcode, String msg) {
+        this.errcode = errcode;
         this.msg = msg;
     }
 
 
-    public String getErr_code() {
-        return err_code;
+    public String getErrcode() {
+        return errcode;
     }
 
-    public void setErr_code(String err_code) {
-        this.err_code = err_code;
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
     }
 
     public String getMsg() {
@@ -33,7 +33,7 @@ public class ResponseVerifyGoogleBean implements Serializable {
     @Override
     public String toString() {
         return "ResponseVerifyGoogleBean{" +
-                "err_code='" + err_code + '\'' +
+                "errcode='" + errcode + '\'' +
                 ", msg='" + msg + '\'' +
                 '}';
     }

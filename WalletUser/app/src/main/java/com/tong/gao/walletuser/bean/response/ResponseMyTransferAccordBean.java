@@ -5,26 +5,36 @@ import java.util.List;
 
 public class ResponseMyTransferAccordBean implements Serializable {
 
-        private String err_code;
-        private String msg;
-        private List<TransferInfoBean> TransferRecord;
+    private String errcode;
+    private String msg;
+    private List<TransferInfoBean> transferRecord;
+    private TransferAccordPageInfo page;
 
-    public ResponseMyTransferAccordBean(String err_code, String msg, List<TransferInfoBean> transferRecord) {
-        this.err_code = err_code;
+    public ResponseMyTransferAccordBean(String errcode, String msg, List<TransferInfoBean> transferRecord, TransferAccordPageInfo page) {
+        this.errcode = errcode;
         this.msg = msg;
-        TransferRecord = transferRecord;
+        this.transferRecord = transferRecord;
+        this.page = page;
+    }
+
+    public TransferAccordPageInfo getPage() {
+        return page;
+    }
+
+    public void setPage(TransferAccordPageInfo page) {
+        this.page = page;
     }
 
     public void setTransferRecord(List<TransferInfoBean> transferRecord) {
-        TransferRecord = transferRecord;
+        this.transferRecord = transferRecord;
     }
 
-    public String getErr_code() {
-        return err_code;
+    public String getErrcode() {
+        return errcode;
     }
 
-    public void setErr_code(String err_code) {
-        this.err_code = err_code;
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
     }
 
     public String getMsg() {
@@ -36,7 +46,16 @@ public class ResponseMyTransferAccordBean implements Serializable {
     }
 
     public List<TransferInfoBean> getTransferRecord() {
-        return TransferRecord;
+        return transferRecord;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseMyTransferAccordBean{" +
+                "errcode='" + errcode + '\'' +
+                ", msg='" + msg + '\'' +
+                ", transferRecord=" + transferRecord +
+                '}';
     }
 
     public class TransferInfoBean implements Serializable{
@@ -47,32 +66,18 @@ public class ResponseMyTransferAccordBean implements Serializable {
             private String transferTime;
             private String number;
             private String remark;
-            private PageOut PageOut;
 
-            public TransferInfoBean(String transferRecordId, String fromAddress, String toAddress, String transferTime, String number, String remark, ResponseMyTransferAccordBean.PageOut pageOut) {
-                this.transferRecordId = transferRecordId;
-                this.fromAddress = fromAddress;
-                this.toAddress = toAddress;
-                this.transferTime = transferTime;
-                this.number = number;
-                this.remark = remark;
-                PageOut = pageOut;
-            }
 
-            @Override
-            public String toString() {
-                return "TransferInfoBean{" +
-                        "transferRecordId='" + transferRecordId + '\'' +
-                        ", fromAddress='" + fromAddress + '\'' +
-                        ", toAddress='" + toAddress + '\'' +
-                        ", transferTime='" + transferTime + '\'' +
-                        ", number='" + number + '\'' +
-                        ", remark='" + remark + '\'' +
-                        ", PageOut=" + PageOut +
-                        '}';
-            }
+        public TransferInfoBean(String transferRecordId, String fromAddress, String toAddress, String transferTime, String number, String remark) {
+            this.transferRecordId = transferRecordId;
+            this.fromAddress = fromAddress;
+            this.toAddress = toAddress;
+            this.transferTime = transferTime;
+            this.number = number;
+            this.remark = remark;
+        }
 
-            public String getTransferRecordId() {
+        public String getTransferRecordId() {
                 return transferRecordId;
             }
 
@@ -120,17 +125,10 @@ public class ResponseMyTransferAccordBean implements Serializable {
                 this.remark = remark;
             }
 
-            public ResponseMyTransferAccordBean.PageOut getPageOut() {
-                return PageOut;
-            }
-
-            public void setPageOut(ResponseMyTransferAccordBean.PageOut pageOut) {
-                PageOut = pageOut;
-            }
         }
 
 
-    public class PageOut implements Serializable{
+    public class TransferAccordPageInfo implements Serializable{
 
             private String pageno;
             private String pagesize;
@@ -142,7 +140,7 @@ public class ResponseMyTransferAccordBean implements Serializable {
 
             @Override
             public String toString() {
-                return "PageOut{" +
+                return "TransferAccordPageInfo{" +
                         "pageno='" + pageno + '\'' +
                         ", pagesize='" + pagesize + '\'' +
                         ", sum='" + sum + '\'' +
@@ -169,7 +167,7 @@ public class ResponseMyTransferAccordBean implements Serializable {
                 this.sum = sum;
             }
 
-            public PageOut(String pageno, String pagesize, String sum) {
+            public TransferAccordPageInfo(String pageno, String pagesize, String sum) {
                 this.pageno = pageno;
                 this.pagesize = pagesize;
                 this.sum = sum;

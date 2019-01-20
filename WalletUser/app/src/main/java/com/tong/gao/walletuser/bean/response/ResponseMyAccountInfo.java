@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class ResponseMyAccountInfo implements Serializable {
 
-    private String err_code;
+    private String errcode;
     private String usableFund;//可用资产
     private String frozenFund;//冻结资产
     private String amount;//冻结资产
     private String convertRmb;//折合人民币
     private String msg;//返回信息
 
-    public ResponseMyAccountInfo(String err_code, String usableFund, String frozenFund, String amount, String convertRmb, String msg) {
-        this.err_code = err_code;
+    public ResponseMyAccountInfo(String errcode, String usableFund, String frozenFund, String amount, String convertRmb, String msg) {
+        this.errcode = errcode;
         this.usableFund = usableFund;
         this.frozenFund = frozenFund;
         this.amount = amount;
@@ -20,12 +20,12 @@ public class ResponseMyAccountInfo implements Serializable {
         this.msg = msg;
     }
 
-    public String getErr_code() {
-        return err_code;
+    public String getErrcode() {
+        return errcode;
     }
 
-    public void setErr_code(String err_code) {
-        this.err_code = err_code;
+    public void setErrcode(String errcode) {
+        this.errcode = errcode;
     }
 
     public String getUsableFund() {
@@ -71,7 +71,7 @@ public class ResponseMyAccountInfo implements Serializable {
     @Override
     public String toString() {
         return "ResponseMyAccountInfo{" +
-                "err_code='" + err_code + '\'' +
+                "errcode='" + errcode + '\'' +
                 ", usableFund='" + usableFund + '\'' +
                 ", frozenFund='" + frozenFund + '\'' +
                 ", amount='" + amount + '\'' +
