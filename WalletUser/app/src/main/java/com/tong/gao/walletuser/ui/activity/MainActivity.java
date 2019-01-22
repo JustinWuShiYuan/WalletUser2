@@ -10,7 +10,7 @@ import com.tong.gao.walletuser.AppApplication;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
 import com.tong.gao.walletuser.constants.MyConstant;
-import com.tong.gao.walletuser.ui.fragments.MainFragment;
+import com.tong.gao.walletuser.ui.fragments.homeTab.MainFragment;
 import com.tong.gao.walletuser.utils.AppUtils;
 import com.tong.gao.walletuser.utils.Density;
 import com.tong.gao.walletuser.utils.LogUtils;
