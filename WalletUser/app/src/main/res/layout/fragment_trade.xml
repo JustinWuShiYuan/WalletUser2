@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <include layout="@layout/title_bar_no_background"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_all"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="36dp">
+
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="全部"
+            style="@style/text_style_18sp_blue2"
+            android:id="@+id/tv_all_buy_coin_type"
+            android:gravity="center"
+            />
+
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:clickable="false"
+            android:layout_toRightOf="@id/tv_all_buy_coin_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:src="@drawable/ic_arrow_up_blue"/>
+
+
+    </RelativeLayout>
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--交易list 模块开始  -->
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/srl_refresh_my_trade"
+           >
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rv_my_trade"/>
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <!--交易list 模块结束  -->
+
+
+
+
+        <!--全部 展示的类容 开始 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#88888888"
+            android:id="@+id/rl_select_type_container"
+            android:visibility="gone"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/ll_select_type_view"
+                android:layout_width="match_parent"
+                android:layout_height="390dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/lineColor"/>
+
+                <!--支付方式 开始 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_payment_type"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/text_style_16sp_gray_3"
+                        android:text="支付方式"
+                        android:textStyle="bold"/>
+
+
+
+                    <RadioGroup
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/tv_payment_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:id="@+id/rg_pay_type"
+                        >
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:background="@drawable/selector_radio_1"
+                            android:text="全部"
+                            android:textColor="@color/selector_color_2"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:gravity="center"
+                            android:checked="true"
+                            android:id="@+id/rb_all"
+                            />
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:background="@drawable/selector_radio_1"
+                            android:text="银联"
+                            android:textColor="@color/selector_color_2"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:gravity="center"
+                            android:layout_marginLeft="9dp"
+                            android:id="@+id/rb_bank"
+                            />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:background="@drawable/selector_radio_1"
+                            android:text="支付宝"
+                            android:textColor="@color/selector_color_2"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:gravity="center"
+                            android:layout_marginLeft="9dp"
+                            android:id="@+id/rb_zhifubao"
+                            />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:background="@drawable/selector_radio_1"
+                            android:text="微信支付"
+                            android:textColor="@color/selector_color_2"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp"
+                            android:gravity="center"
+                            android:layout_marginLeft="9dp"
+                            android:id="@+id/rb_wechat"
+                            />
+                    </RadioGroup>
+
+
+
+
+                </RelativeLayout>
+
+                <!--支付方式 结束 -->
+
+
+
+
+                <!--金额选择 方式 开始 -->
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="15dp"
+                    android:paddingBottom="15dp"
+                    android:id="@+id/rg_selected_cash_container"
+                    >
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="金额快选"
+                        android:textSize="15sp"
+                        android:textColor="@color/selector_color_1"
+                        android:background="@drawable/selector_background_1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:id="@+id/rb_cash_fast_selected"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="自选金额范围"
+                        android:textSize="15sp"
+                        android:textColor="@color/selector_color_1"
+                        android:background="@drawable/selector_background_1"
+                        android:button="@null"
+                        android:checked="false"
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:visibility="visible"
+                        android:id="@+id/rb_set_selected_cash_round"
+                        />
+
+                </RadioGroup>
+
+                <!--金额选择 方式 结束 -->
+
+
+                <!--根据 选择的是金额快选 还是自选金额范围 来加载不同的fragment-->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:id="@+id/fl_cash_fragment"
+                    />
+
+
+
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_gray_cornor12"
+                    android:text="确定"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:id="@+id/btn_confirm"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+        <!--全部 展示的类容 结束 -->
+
+    </FrameLayout>
+
+
+
+</LinearLayout>
+
+

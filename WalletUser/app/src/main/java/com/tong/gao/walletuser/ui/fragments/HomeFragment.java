@@ -159,6 +159,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         ivRightScanIcon.setOnClickListener(this);
         tvTransferRecord.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
+        rlScanAndTransfer.setOnClickListener(this);
 
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light, android.R.color.holo_orange_light);
@@ -200,9 +201,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             @Override
             public void onNext(QueryFireCoinInfoBean queryFireCoinInfoBean) {
-                LogUtils.d("" + queryFireCoinInfoBean.toString() + "  erro:" + queryFireCoinInfoBean.getErrcode());
+//                LogUtils.d("" + queryFireCoinInfoBean.toString() + "  erro:" + queryFireCoinInfoBean.getErrcode());
 
-//                if(null != queryFireCoinInfoBean && queryFireCoinInfoBean.getErrcode() .equals(MyConstant.resultCodeIsOK)){
                 if (null != queryFireCoinInfoBean) {
                     fireCoinBeanList = queryFireCoinInfoBean.getMarketList();
 
@@ -282,7 +282,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         switch (v.getId()) {
 
             case R.id.tv_skip_not_download:
-                //TODO 登录
+
                 startActivity(new Intent(mActivity,LoginActivity.class));
 
                 break;
@@ -293,7 +293,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                 break;
 
-            case R.id.iv_right_scan_icon:
+            case R.id.rl_scan_and_transfer:
 
                 scanCode();
 

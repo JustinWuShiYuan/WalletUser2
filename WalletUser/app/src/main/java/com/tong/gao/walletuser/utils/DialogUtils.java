@@ -3,6 +3,8 @@ package com.tong.gao.walletuser.utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,11 @@ import android.view.WindowManager;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.interfaces.DialogCallBack;
+import com.tong.gao.walletuser.ui.view.WheelDialog;
 
 
 public class DialogUtils {
+    private static WheelDialog mWheelDialog;
 
 
     public static View createAlertDialog(Activity mActivity, int resource,int cancelId,int sureId, final DialogCallBack dialogCallBack) {
@@ -82,6 +86,28 @@ public class DialogUtils {
         return v;
     }
 
+
+
+    public static void showProgressDialog(Context context,String message) {
+        if (mWheelDialog == null) {
+            mWheelDialog = new WheelDialog(context, R.style.WheelDialog);
+        }
+        if (mWheelDialog.isShowing()) {
+            return;
+        }
+        if (TextUtils.isEmpty(message)) {
+            mWheelDialog.setMessage("请稍后..");
+        } else {
+            mWheelDialog.setMessage(message);
+        }
+        mWheelDialog.show();
+    }
+
+    public static  void hideProgressDialog() {
+        if (mWheelDialog != null && mWheelDialog.isShowing()) {
+            mWheelDialog.dismiss();
+        }
+    }
 
 
 

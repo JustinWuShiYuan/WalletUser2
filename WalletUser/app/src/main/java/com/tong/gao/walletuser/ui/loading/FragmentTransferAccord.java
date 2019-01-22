@@ -50,8 +50,6 @@ public class FragmentTransferAccord extends BaseFragment {
 
     @Override
     protected View onSuccessView() {
-        LogUtils.d("onSuccessView():"+(dataList.size())+" isLoadMoreSuccess:"+isLoadMoreSuccess[myTransferType]);
-//        final MyTransferAccordAdapter2 myTradeListAdapter = new MyTransferAccordAdapter2(R.layout.item_transfer_accord, dataList);
         myTradeListAdapter = new MyTransferAccordAdapter2(R.layout.item_transfer_accord, dataList);
 
         myTradeListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -119,7 +117,7 @@ public class FragmentTransferAccord extends BaseFragment {
                         }
                     }
 
-                }, 1000);
+                }, 500);
             }
         }, myOrderRecycleView);
 
@@ -131,7 +129,6 @@ public class FragmentTransferAccord extends BaseFragment {
 
     public void loadMore(int pageIndex){
         pageIndex++;
-        LogUtils.d("pageIndex:"+ pageIndex);
 
         NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"",pageIndex+"",pageSize+""),new Observer<ResponseMyTransferAccordBean>() {
             @Override
@@ -142,16 +139,14 @@ public class FragmentTransferAccord extends BaseFragment {
             public void onNext(ResponseMyTransferAccordBean responseMyTransferAccordBean) {
                 if (null != responseMyTransferAccordBean && MyConstant.resultCodeIsOK .equals(responseMyTransferAccordBean.getErrcode())) {
 
-//                    LogUtils.d("PageNum:"+responseMyTransferAccordBean.getPage().getSum());
 
                     TOTAL_COUNTER[myTransferType] =Integer.parseInt(responseMyTransferAccordBean.getPage().getSum()) ;
 
                     dataList = responseMyTransferAccordBean.getTransferRecord();
 
-                    LogUtils.d("pageIndexPageNum:"+responseMyTransferAccordBean.getPage().getSum()+" pageIndex dataList.size():"+dataList.size());
+//                    LogUtils.d("pageIndexPageNum:"+responseMyTransferAccordBean.getPageOut().getSum()+" pageIndex dataList.size():"+dataList.size());
 
                     if(null !=dataList && dataList.size() > 0 ){
-//                        isLoadMoreSuccess[myTransferType] = true;
 
                         UIUtils.runOnUiThread(new Runnable() {
                             @Override
@@ -161,9 +156,6 @@ public class FragmentTransferAccord extends BaseFragment {
                                 myTradeListAdapter.loadMoreComplete();
                             }
                         });
-
-                    }else{
-//                        isLoadMoreSuccess[myTransferType] = false;
                     }
 
 
@@ -193,11 +185,6 @@ public class FragmentTransferAccord extends BaseFragment {
         if( null != arguments){
             myTransferType = arguments.getInt(MyConstant.transferAccordType);
         }
-
-
-
-
-
 
         NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"",pageNum[myTransferType]+"",pageSize+""),new Observer<ResponseMyTransferAccordBean>() {
             @Override

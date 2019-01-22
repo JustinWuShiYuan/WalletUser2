@@ -95,8 +95,8 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
             pagerList = new ArrayList<>();
             pagerList.add(new HomeFragment());
             pagerList.add(new TradeFragment());
-            pagerList.add(new TradeFragment());
-            pagerList.add(new TradeFragment());
+//            pagerList.add(new HomeFragment());
+//            pagerList.add(new HomeFragment());
         }
 
 
@@ -179,6 +179,7 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
             case R.id.rb_fragment_trade:
                 pageIndex = 1;
+
                 break;
 
             case R.id.rb_fragment_message:
@@ -191,6 +192,11 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
         }
         vpContainer.setCurrentItem(pageIndex);
+
+        if(pageIndex == 1){
+            ((TradeFragment)pagerList.get(pageIndex)).initData();
+        }
+
     }
 
 

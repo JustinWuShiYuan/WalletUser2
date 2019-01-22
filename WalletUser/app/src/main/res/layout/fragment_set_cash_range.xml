@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥0"
+            android:textColor="#4C7FFF"
+            android:textSize="16sp"
+            android:id="@+id/tv_min"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥1000"
+            android:textColor="#4C7FFF"
+            android:textSize="16sp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_max"
+            />
+
+    </RelativeLayout>
+
+
+    <com.tong.gao.walletuser.ui.view.RangeSeekBar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:min="0"
+        app:max="1000"
+        app:cells="20"
+        app:reserve="1"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginRight="50dp"
+        android:id="@+id/range_seek_bar"
+        app:lineColorSelected="#4C7FFF"
+        />
+
+</RelativeLayout>

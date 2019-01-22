@@ -2,6 +2,7 @@ package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
@@ -10,6 +11,7 @@ import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
+import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.response.ResponseRegisterBean;
 import com.tong.gao.walletuser.bean.response.ResponseVerifyGoogleBean;
 import com.tong.gao.walletuser.constants.MyConstant;
@@ -92,6 +94,11 @@ public class NetWorks extends RetrofitUtils {
         Observable<ResponseMyTransferAccordBean> queryTransferAccord(@Body RequestTransferAccordBean requestTransferAccordBean);
 
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryBuyCoinList)
+        Observable<ResponseQueryBuyCoinBean> queryBuyCoinList(@Body RequestQueryBuyCoinBean requestQueryBuyCoinBean);
+
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -152,6 +159,10 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryTransferAccord(RequestTransferAccordBean requestTransferAccordBean,Observer<ResponseMyTransferAccordBean> observer){
         setSubscribe(service.queryTransferAccord(requestTransferAccordBean),observer);
+    }
+
+    public static void queryBuyCoins(RequestQueryBuyCoinBean requestQueryBuyCoinBean,Observer<ResponseQueryBuyCoinBean> observer){
+        setSubscribe(service.queryBuyCoinList(requestQueryBuyCoinBean),observer);
     }
 
 

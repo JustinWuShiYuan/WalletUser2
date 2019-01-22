@@ -96,4 +96,6 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
 
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    api 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.alibaba:fastjson:1.1.70.android'
 }

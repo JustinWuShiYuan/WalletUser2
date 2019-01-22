@@ -4,7 +4,7 @@
 
     <string name="welcome_des">欢迎使用</string>
     <string name="home">首页</string>
-    <string name="deal">广告</string>
+    <string name="deal">买币</string>
     <string name="message">消息</string>
     <string name="myInfo">我的</string>
 
@@ -77,4 +77,7 @@
     <string name="system_inform">系统通知</string>
     <string name="delete_des">如果删除当前支付方式，所有启用该支付方式的广告也将被下架。</string>
     <string name="title_activity_commit_complain">CommitComplainActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

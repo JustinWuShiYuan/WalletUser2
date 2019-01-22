@@ -13,6 +13,10 @@ public class MyConstant {
     public static final String register = "ug/usr/pbrus.do";           //注册
     public static final String verify_google_code = "ug/usr/pbggc.do";           //校验谷歌验证码
     public static final String transfer_accord = "ug/acc/pbtrs.do";           //用户转账记录
+    public static final String queryBuyCoinList = "ug/mer/pbadv.do";           //广告列表 买币列表
+
+
+
 
     public static final String googleVerifyIsClosed = "0";  //谷歌验证 关闭
     public static final String googleVerifyIsOpened = "1";  //谷歌验证 打开

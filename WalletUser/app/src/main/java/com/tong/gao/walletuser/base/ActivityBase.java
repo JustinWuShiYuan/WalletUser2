@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.factory.LoadingPagerFactory;
 import com.tong.gao.walletuser.manager.AppActivityManager;
+import com.tong.gao.walletuser.ui.view.WheelDialog;
 import com.tong.gao.walletuser.utils.Density;
 import com.tong.gao.walletuser.utils.StatusBarUtil;
 
@@ -34,6 +36,8 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 public abstract class ActivityBase extends AppCompatActivity {
 
     protected Activity mActivity;
+
+    private WheelDialog mWheelDialog;
 
 
     @Override
@@ -166,6 +170,27 @@ public abstract class ActivityBase extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             if (tabTitles != null) { return tabTitles[position]; }
             return super.getPageTitle(position);
+        }
+    }
+
+    public void showProgressDialog(String message) {
+        if (mWheelDialog == null) {
+            mWheelDialog = new WheelDialog(this, R.style.WheelDialog);
+        }
+        if (mWheelDialog.isShowing()) {
+            return;
+        }
+        if (TextUtils.isEmpty(message)) {
+            mWheelDialog.setMessage("请稍后..");
+        } else {
+            mWheelDialog.setMessage(message);
+        }
+        mWheelDialog.show();
+    }
+
+    protected void hideProgressDialog() {
+        if (mWheelDialog != null && mWheelDialog.isShowing()) {
+            mWheelDialog.dismiss();
         }
     }
 

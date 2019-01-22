@@ -119,6 +119,8 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
     private void goToLogin(RequestLoginInfoBean requestLoginInfoBean) {
 
+        showProgressDialog("");
+
         NetWorks.login(requestLoginInfoBean, new Observer<ResponseLoginInfo>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -147,12 +149,14 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
             @Override
             public void onError(Throwable e) {
-                LogUtils.d("" + e.toString());
+                hideProgressDialog();
+                ToastUtils.showNomalLongToast("登录失败");
             }
 
             @Override
             public void onComplete() {
                 LogUtils.d("onComplete()");
+                hideProgressDialog();
             }
         });
     }
