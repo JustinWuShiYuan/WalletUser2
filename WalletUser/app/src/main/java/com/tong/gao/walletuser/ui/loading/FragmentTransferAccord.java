@@ -46,11 +46,11 @@ public class FragmentTransferAccord extends BaseFragment {
 
     private boolean isFirstToType1 = true;
 
-     MyTransferAccordAdapter2 myTradeListAdapter;
+     MyTransferAccordAdapter myTradeListAdapter;
 
     @Override
     protected View onSuccessView() {
-        myTradeListAdapter = new MyTransferAccordAdapter2(R.layout.item_transfer_accord, dataList);
+        myTradeListAdapter = new MyTransferAccordAdapter(R.layout.item_transfer_accord, dataList);
 
         myTradeListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -139,12 +139,9 @@ public class FragmentTransferAccord extends BaseFragment {
             public void onNext(ResponseMyTransferAccordBean responseMyTransferAccordBean) {
                 if (null != responseMyTransferAccordBean && MyConstant.resultCodeIsOK .equals(responseMyTransferAccordBean.getErrcode())) {
 
-
                     TOTAL_COUNTER[myTransferType] =Integer.parseInt(responseMyTransferAccordBean.getPage().getSum()) ;
 
                     dataList = responseMyTransferAccordBean.getTransferRecord();
-
-//                    LogUtils.d("pageIndexPageNum:"+responseMyTransferAccordBean.getPageOut().getSum()+" pageIndex dataList.size():"+dataList.size());
 
                     if(null !=dataList && dataList.size() > 0 ){
 
@@ -157,7 +154,6 @@ public class FragmentTransferAccord extends BaseFragment {
                             }
                         });
                     }
-
 
                 }
             }
@@ -252,31 +248,31 @@ public class FragmentTransferAccord extends BaseFragment {
     }
 
 
-    class MyTransferAccordAdapter extends RecyclerView.Adapter<MyTransferAccodHolder> {
+//    class MyTransferAccordAdapter extends RecyclerView.Adapter<MyTransferAccodHolder> {
+//
+//
+//        @NonNull
+//        @Override
+//        public MyTransferAccodHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+//            return new MyTransferAccodHolder(
+//                    LayoutInflater.from(getActivity()).inflate(R.layout.item_transfer_accord, viewGroup, false));
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull MyTransferAccodHolder myTransferAccodHolder, int index) {
+//            myTransferAccodHolder.refreshUI(getActivity(),dataList.get(index));
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return dataList.size();
+//        }
+//    }
 
 
-        @NonNull
-        @Override
-        public MyTransferAccodHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            return new MyTransferAccodHolder(
-                    LayoutInflater.from(getActivity()).inflate(R.layout.item_transfer_accord, viewGroup, false));
-        }
+    class MyTransferAccordAdapter extends BaseQuickAdapter<ResponseMyTransferAccordBean.TransferInfoBean,BaseViewHolder> {
 
-        @Override
-        public void onBindViewHolder(@NonNull MyTransferAccodHolder myTransferAccodHolder, int index) {
-            myTransferAccodHolder.refreshUI(getActivity(),dataList.get(index));
-        }
-
-        @Override
-        public int getItemCount() {
-            return dataList.size();
-        }
-    }
-
-
-    class MyTransferAccordAdapter2 extends BaseQuickAdapter<ResponseMyTransferAccordBean.TransferInfoBean,BaseViewHolder> {
-
-        public MyTransferAccordAdapter2(int layoutResId, @Nullable List<ResponseMyTransferAccordBean.TransferInfoBean> data) {
+        public MyTransferAccordAdapter(int layoutResId, @Nullable List<ResponseMyTransferAccordBean.TransferInfoBean> data) {
             super(layoutResId, data);
         }
 

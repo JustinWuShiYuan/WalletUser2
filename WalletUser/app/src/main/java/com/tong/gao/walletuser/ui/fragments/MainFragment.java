@@ -95,7 +95,7 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
             pagerList = new ArrayList<>();
             pagerList.add(new HomeFragment());
             pagerList.add(new TradeFragment());
-//            pagerList.add(new HomeFragment());
+            pagerList.add(new MessageFragment());
 //            pagerList.add(new HomeFragment());
         }
 

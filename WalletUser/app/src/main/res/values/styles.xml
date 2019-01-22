@@ -156,6 +156,11 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/gray_6</item>
     </style>
+    <style name="text_style_14sp_gray_3">
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/gray_3</item>
+    </style>
 
 
     <style name="text_style_15sp_gray_3">
@@ -193,6 +198,12 @@
         <item name="android:textSize">12sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/gray_6</item>
+    </style>
+
+    <style name="text_style_12sp_gray_999999">
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/gray_999999</item>
     </style>
 
     <style name="text_style_15sp_gray_7">
@@ -242,6 +253,11 @@
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/yellow</item>
+    </style>
+    <style name="text_style_14sp_yellow_ff9238">
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/yellow_ff9238</item>
     </style>
 
 

@@ -1,8 +1,9 @@
 package com.tong.gao.walletuser.constants;
 
 public class MyConstant {
-    public static final String mySecretKeyGoogle = "THKRP5JCTPIU5CEE";  //谷歌验证 关闭
+
     public static String baseUrl = "http://47.52.45.85:8010/";//测试地址
+//    public static String baseUrl = "http://192.168.23.201:8000/";//测试地址
 
 
 
@@ -14,10 +15,11 @@ public class MyConstant {
     public static final String verify_google_code = "ug/usr/pbggc.do";           //校验谷歌验证码
     public static final String transfer_accord = "ug/acc/pbtrs.do";           //用户转账记录
     public static final String queryBuyCoinList = "ug/mer/pbadv.do";           //广告列表 买币列表
+    public static final String queryMessageInform = "/ug/ord/pbmls.do";           //消息模块下 相关通知接口
 
 
 
-
+    public static final String mySecretKeyGoogle = "THKRP5JCTPIU5CEE";  //谷歌验证 关闭
     public static final String googleVerifyIsClosed = "0";  //谷歌验证 关闭
     public static final String googleVerifyIsOpened = "1";  //谷歌验证 打开
     public static final String coinBTC = "BTC";  //BTC
@@ -30,7 +32,9 @@ public class MyConstant {
 
 
 
-    //-----------------------------------------------------
-    public static String token="K5nLqSUVNzmq4SR4/GniW9uhn6eH2xtUN/0uspaHfZQATePz6cbap1iaRy5s5OVAvDyWYExVbcsUuY3m7TEfqA==";
-//    public static String token="VjyD12Jpq8JXjUB0lp2Fr6jzxfYvq48n+4ELzl8nCxitIvpBQFJWPQhZo/mn0PAyuA06macF/ZEYv2fgY8zu2T0uquKvKN6l";
+    //融云相关变量---------------------------------------------
+    public static String AppKey = "25wehl3u2gq4w";  //
+    public static String AppSecret = "Pmy22oXFVtadI3";  //
+    public static String tokenRongCloud ="cUsy5OLX7D9Pe6s0LNL/WrHvXxomzE45U9p/IHrQnICeMap1CaftA/sOi5/RNlqrLm1LSbULXCPaC7A8X1D0fv/x/uMf3v1W";//Justin1
+//    public static String tokenRongCloud="oR6+G+drtptcC5CiuHIUk5435OHQjFqnb+q/H09tIVcAgHSdMTrjSNGkY/yqg7/8PZRmpbY80Z1J6lVImKYMzA==";//Justin2
 }

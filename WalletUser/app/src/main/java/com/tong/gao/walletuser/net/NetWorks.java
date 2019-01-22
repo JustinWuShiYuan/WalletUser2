@@ -2,6 +2,7 @@ package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
@@ -9,6 +10,7 @@ import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
+import com.tong.gao.walletuser.bean.response.ResponseMessageInformBean;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
@@ -44,12 +46,12 @@ public class NetWorks extends RetrofitUtils {
         //POST请求
 //        @FormUrlEncoded
 //        @POST(MyConstant.uploadQrData)
-//        Observable<ResultBean> uploadJsonToServer(@Field("qrData") String qrData, @Field("token") String token);
+//        Observable<ResultBean> uploadJsonToServer(@Field("qrData") String qrData, @Field("tokenRongCloud") String tokenRongCloud);
 //
 //        //POST请求
 //        @FormUrlEncoded
 //        @POST(MyConstant.uploadQrDataAgain)
-//        Observable<ResultBean> uploadJsonToServerAgain(@Field("qrData") String qrData, @Field("token") String token);
+//        Observable<ResultBean> uploadJsonToServerAgain(@Field("qrData") String qrData, @Field("tokenRongCloud") String tokenRongCloud);
 
 //        //POST请求
 //        @FormUrlEncoded
@@ -98,6 +100,10 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.queryBuyCoinList)
         Observable<ResponseQueryBuyCoinBean> queryBuyCoinList(@Body RequestQueryBuyCoinBean requestQueryBuyCoinBean);
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryMessageInform)
+        Observable<ResponseMessageInformBean> queryMessageInformList(@Body RequestMessageInformBean requestMessageInformBean);
+
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
@@ -115,19 +121,6 @@ public class NetWorks extends RetrofitUtils {
 
     }
 
-//    //POST请求
-//    public static void uploadJson(String qrData, String token, Observer<ResultBean> observer){
-//        setSubscribe(service.uploadJsonToServer(qrData, token),observer);
-//    }
-//    //POST请求
-//    public static void uploadErrorJson(String qrData, String token, Observer<ResultBean> observer){
-//        setSubscribe(service.uploadJsonToServerAgain(qrData, token),observer);
-//    }
-//
-//
-//    public static void checkAccount(String account, Observer<String> observer){
-//        setSubscribe(service.checkAccountIsExist(account),observer);
-//    }
 
 
     public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<ResponseLoginInfo> observer){
@@ -163,6 +156,10 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryBuyCoins(RequestQueryBuyCoinBean requestQueryBuyCoinBean,Observer<ResponseQueryBuyCoinBean> observer){
         setSubscribe(service.queryBuyCoinList(requestQueryBuyCoinBean),observer);
+    }
+
+    public static void queryMessageInformList(RequestMessageInformBean requestMessageInformBean,Observer<ResponseMessageInformBean> observer){
+        setSubscribe(service.queryMessageInformList(requestMessageInformBean),observer);
     }
 
 

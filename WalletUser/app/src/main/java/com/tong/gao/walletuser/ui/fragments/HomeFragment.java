@@ -545,14 +545,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
-    private boolean isFirstIn = true;
+    private boolean isQueryMyAccountSuccess = false;
     @Override
     public void onResume() {
         super.onResume();
-        if(!isFirstIn){
+        if(!isQueryMyAccountSuccess){
             loadMyAccountInfo();
         }
-        isFirstIn = !isFirstIn;
     }
 
 
@@ -570,6 +569,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                 if(null != responseMyAccountInfo && MyConstant.resultCodeIsOK.equals(responseMyAccountInfo.getErrcode()) ){
                     refreshTitleUI(responseMyAccountInfo);
+                    isQueryMyAccountSuccess = true;
                 }
 
             }
@@ -577,6 +577,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void onError(Throwable e) {
                 LogUtils.d("e:"+e.toString());
+                isQueryMyAccountSuccess = false;
             }
 
             @Override

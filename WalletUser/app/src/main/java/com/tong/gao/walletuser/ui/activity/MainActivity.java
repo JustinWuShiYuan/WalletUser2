@@ -6,11 +6,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.tong.gao.walletuser.AppApplication;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
+import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.ui.fragments.MainFragment;
 import com.tong.gao.walletuser.utils.AppUtils;
 import com.tong.gao.walletuser.utils.Density;
+import com.tong.gao.walletuser.utils.LogUtils;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 
 public class MainActivity extends ActivityBase {
     // 主界面fragment的tag
@@ -26,6 +33,7 @@ public class MainActivity extends ActivityBase {
     @Override
     protected void initView() {
         initFragment();
+        connect(MyConstant.tokenRongCloud);
     }
 
 
@@ -43,9 +51,44 @@ public class MainActivity extends ActivityBase {
         ft.replace(R.id.fl_main_content, new MainFragment(), MAIN_CONTENT_FRAGMENT_TAG);
         // 提交
         ft.commit();
+    }
 
-//        connect(MyConstant.token);
+    private void connect(String token) {
+        if (getApplicationInfo().packageName.equals(AppApplication.getCurProcessName(getApplicationContext()))) {
 
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+                /**
+                 * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
+                 *                  2.  tokenRongCloud 对应的 appKey 和工程里设置的 appKey 是否一致
+                 */
+                @Override
+                public void onTokenIncorrect() {
+                    LogUtils.d("LoginActivity", "--onTokenIncorrect()" );
+                }
+
+                /**
+                 * 连接融云成功
+                 * @param userid 当前 tokenRongCloud 对应的用户 id
+                 */
+                @Override
+                public void onSuccess(String userid) {
+                    LogUtils.d("LoginActivity", "--onSuccess" + userid);
+                    RongIM.getInstance().startConversation(MainActivity.this,Conversation.ConversationType.PRIVATE,"Justin2", "聊天中");
+//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                    finish();
+                }
+
+                /**
+                 * 连接融云失败
+                 * @param errorCode 错误码，可到官网 查看错误码对应的注释
+                 */
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    LogUtils.d("LoginActivity", "--onError()"+ errorCode.toString());
+                }
+            });
+        }
     }
 
 

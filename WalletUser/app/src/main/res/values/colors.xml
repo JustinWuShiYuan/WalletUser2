@@ -11,6 +11,7 @@
 
     <color name="black">#000000</color>
     <color name="yellow">#ffff00</color>
+    <color name="yellow_ff9238">#ff9238</color>
     <color name="none">#00000000</color>
     <color name="list_divider">#cccbcc</color>
     <color name="tab_bar_app_bg">#ffffffff</color>
@@ -78,7 +79,7 @@
     <color name="gray_3">#333333</color>
     <color name="gray_31">#313131</color>
     <color name="gray_2">#9B9B9B</color>
-    <color name="gray_4">#666666</color>
+    <color name="gray_4">#444444</color>
     <color name="gray_5">#E9E8F0</color>
     <color name="gray_6">#666666</color>
     <color name="gray_7">#394368</color>
@@ -87,6 +88,7 @@
     <color name="gray_10">#F2F1F6</color>
     <color name="gray_11">#999999</color>
     <color name="gray_12">#C6C6C6</color>
+    <color name="gray_999999">#999999</color>
     <color name="white1">#ffffff</color>
     <color name="lineColor">#E8E9ED</color>
     <color name="transparent">#00000000</color>

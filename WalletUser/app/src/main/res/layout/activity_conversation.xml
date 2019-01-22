@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/title_bar"/>
+
+    <LinearLayout
+        android:layout_marginTop="13dp"
+        android:background="@color/colorWhite"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/text_style_14sp_gray_6"
+            android:text="交易币种"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/text_style_14sp_gray_6"
+            android:text="交易金额"/>
+
+        <TextView
+            android:id="@+id/tv_order_state_chat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/text_style_14sp_yellow_ff9238"
+            android:text="未付款"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineColor"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"/>
+
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_order_trade_coin_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/text_style_14sp_gray_3"
+            android:text="AB"/>
+
+        <TextView
+            android:id="@+id/tv_trade_money"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/text_style_14sp_gray_3"
+            android:text="1000"/>
+
+        <TextView
+            android:id="@+id/tv_order_remain_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/text_style_14sp_gray_3"
+            android:text="14:38:02"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_order_time"
+        style="@style/text_style_12sp_gray_999999"
+        android:text="2018-10-12 13:08:02"/>
+
+
+    <TextView
+        android:id="@+id/tv_order_status_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_style_13sp_blue2"
+        android:text="您已成功下单，请及时支付"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="5dp"/>
+
+
+    <fragment
+        android:id="@+id/conversation"
+        android:name="io.rong.imkit.fragment.ConversationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

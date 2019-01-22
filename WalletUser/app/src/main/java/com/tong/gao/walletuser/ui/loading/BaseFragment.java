@@ -7,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.Toast;
 
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 public abstract class BaseFragment extends Fragment{
@@ -89,6 +92,11 @@ public abstract class BaseFragment extends Fragment{
 
 	protected abstract void executeEmptyTask();
 
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void hello ( String event){
+		Toast.makeText( getActivity() , event , Toast.LENGTH_SHORT).show();
+	}
 
 
 }

@@ -72,7 +72,7 @@ public class TransferRecordActivity extends ActivityBase implements View.OnClick
             }
             @Override
             public void onPageSelected(int index) {
-                LogUtils.d("onPageSelected" + index );
+//                LogUtils.d("onPageSelected" + index );
                 BaseFragment fragment = LoadingPagerFactory.getFragment(index);
                 fragment.loadData();
             }

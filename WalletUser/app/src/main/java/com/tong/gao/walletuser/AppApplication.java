@@ -8,6 +8,8 @@ import android.os.Looper;
 
 import com.tong.gao.walletuser.utils.Density;
 
+import io.rong.imkit.RongIM;
+
 public class AppApplication extends Application {
     private  static Context mContext;
     private static Thread	mMainThread;
@@ -39,7 +41,7 @@ public class AppApplication extends Application {
 
         //
         mMainThreadLooper = getMainLooper();
-//        RongIM.init(this);
+        RongIM.init(this);
 
     }
 
