@@ -15,6 +15,9 @@ public class UserInfo implements Serializable {
     private String nickname;
     private String username;
 
+    public UserInfo() {
+    }
+
     public UserInfo(String userid, String realname, String istrpwd, String vailidnumber, String status, String googlesecret, String valigooglesecret, String safeverifyswitch, String userType, String nickname, String username) {
         this.userid = userid;
         this.realname = realname;

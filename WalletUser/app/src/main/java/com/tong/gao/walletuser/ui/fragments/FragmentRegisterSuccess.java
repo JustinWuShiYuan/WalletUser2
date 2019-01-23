@@ -26,7 +26,7 @@ public class FragmentRegisterSuccess extends Fragment implements View.OnClickLis
     TextView tvUgId;
     @BindView(R.id.tv_download_google_code)
     TextView tvDownloadGoogleCode;
-    @BindView(R.id.tv_skip_not_download)
+    @BindView(R.id.tv_login)
     TextView tvSkipNotDownload;
     Unbinder unbinder;
 
@@ -63,7 +63,7 @@ public class FragmentRegisterSuccess extends Fragment implements View.OnClickLis
                 break;
 
 
-            case R.id.tv_skip_not_download:
+            case R.id.tv_login:
 
 
                 getActivity().finish();

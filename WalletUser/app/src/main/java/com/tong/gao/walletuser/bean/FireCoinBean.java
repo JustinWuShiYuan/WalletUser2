@@ -10,6 +10,9 @@ public class FireCoinBean implements Serializable {
     private String upAndDown;
     private int sort;
 
+    public FireCoinBean() {
+    }
+
     public FireCoinBean(String coinId, String tradeId, String price, String rmbPrice, String upAndDown, int sort) {
         this.coinId = coinId;
         this.tradeId = tradeId;

@@ -7,6 +7,7 @@ public class CoinBean implements Serializable {
     private String ugOtcAdvertId;
     private String userId;
     private String nickName;
+    private String isVip;
     private String orderAllNumber;
     private String orderTotle;
     private String successRate;
@@ -19,10 +20,28 @@ public class CoinBean implements Serializable {
     private String createdtime;
     private String paymentway;
 
-    public CoinBean(String ugOtcAdvertId, String userId, String nickName, String orderAllNumber, String orderTotle, String successRate, String number, String amountType, String limitMaxAmount, String limitMinAmount, String fixedAmount, String price, String createdtime, String paymentway) {
+
+    public CoinBean(String ugOtcAdvertId, String userId, String nickName, String isVip, String orderAllNumber, String orderTotle, String successRate, String number, String amountType, String fixedAmount, String price, String createdtime, String paymentway) {
         this.ugOtcAdvertId = ugOtcAdvertId;
         this.userId = userId;
         this.nickName = nickName;
+        this.isVip = isVip;
+        this.orderAllNumber = orderAllNumber;
+        this.orderTotle = orderTotle;
+        this.successRate = successRate;
+        this.number = number;
+        this.amountType = amountType;
+        this.fixedAmount = fixedAmount;
+        this.price = price;
+        this.createdtime = createdtime;
+        this.paymentway = paymentway;
+    }
+
+    public CoinBean(String ugOtcAdvertId, String userId, String nickName, String isVip, String orderAllNumber, String orderTotle, String successRate, String number, String amountType, String limitMaxAmount, String limitMinAmount, String fixedAmount, String price, String createdtime, String paymentway) {
+        this.ugOtcAdvertId = ugOtcAdvertId;
+        this.userId = userId;
+        this.nickName = nickName;
+        this.isVip = isVip;
         this.orderAllNumber = orderAllNumber;
         this.orderTotle = orderTotle;
         this.successRate = successRate;
@@ -34,6 +53,14 @@ public class CoinBean implements Serializable {
         this.price = price;
         this.createdtime = createdtime;
         this.paymentway = paymentway;
+    }
+
+    public String getIsVip() {
+        return isVip;
+    }
+
+    public void setIsVip(String isVip) {
+        this.isVip = isVip;
     }
 
     public String getLimitMaxAmount() {
@@ -146,5 +173,26 @@ public class CoinBean implements Serializable {
 
     public void setPaymentway(String paymentway) {
         this.paymentway = paymentway;
+    }
+
+    @Override
+    public String toString() {
+        return "CoinBean{" +
+                "ugOtcAdvertId='" + ugOtcAdvertId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", isVip='" + isVip + '\'' +
+                ", orderAllNumber='" + orderAllNumber + '\'' +
+                ", orderTotle='" + orderTotle + '\'' +
+                ", successRate='" + successRate + '\'' +
+                ", number='" + number + '\'' +
+                ", amountType='" + amountType + '\'' +
+                ", limitMaxAmount='" + limitMaxAmount + '\'' +
+                ", limitMinAmount='" + limitMinAmount + '\'' +
+                ", fixedAmount='" + fixedAmount + '\'' +
+                ", price='" + price + '\'' +
+                ", createdtime='" + createdtime + '\'' +
+                ", paymentway='" + paymentway + '\'' +
+                '}';
     }
 }

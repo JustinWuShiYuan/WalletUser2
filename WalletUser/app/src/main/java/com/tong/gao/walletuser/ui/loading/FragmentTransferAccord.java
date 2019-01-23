@@ -185,7 +185,7 @@ public class FragmentTransferAccord extends BaseFragment {
         NetWorks.queryTransferAccord(new RequestTransferAccordBean(myTransferType+"",pageNum[myTransferType]+"",pageSize+""),new Observer<ResponseMyTransferAccordBean>() {
             @Override
             public void onSubscribe(Disposable d) {
-                LogUtils.d("myTransferType:"+myTransferType+" pageNum:"+pageNum);
+                LogUtils.d("myTransferType:"+myTransferType+" pageNum:"+pageNum[myTransferType]);
             }
 
             @Override
@@ -214,7 +214,7 @@ public class FragmentTransferAccord extends BaseFragment {
 
             @Override
             public void onError(Throwable e) {
-                LogUtils.d("onError:");
+                LogUtils.d("onError:"+e.toString());
             }
 
             @Override

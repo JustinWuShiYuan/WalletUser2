@@ -2,19 +2,17 @@ package com.tong.gao.walletuser.bean.response;
 
 import java.io.Serializable;
 
-public class ResponseRegisterBean implements Serializable {
+public class ResponseNormalBean implements Serializable {
 
     private String errcode;
     private String msg;
-    private String userid;
 
-    public ResponseRegisterBean() {
+    public ResponseNormalBean() {
     }
 
-    public ResponseRegisterBean(String errcode, String msg, String userid) {
+    public ResponseNormalBean(String errcode, String msg) {
         this.errcode = errcode;
         this.msg = msg;
-        this.userid = userid;
     }
 
     public String getErrcode() {
@@ -33,20 +31,11 @@ public class ResponseRegisterBean implements Serializable {
         this.msg = msg;
     }
 
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
     @Override
     public String toString() {
-        return "ResponseRegisterBean{" +
+        return "ResponseChangeNickNameBean{" +
                 "errcode='" + errcode + '\'' +
                 ", msg='" + msg + '\'' +
-                ", userid='" + userid + '\'' +
                 '}';
     }
 }

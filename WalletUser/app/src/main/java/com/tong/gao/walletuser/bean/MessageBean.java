@@ -9,6 +9,9 @@ public class MessageBean implements Serializable {
     private String type;
     private String createdTime;
 
+    public MessageBean() {
+    }
+
     public MessageBean(String messageId, String content, String type, String createdTime) {
         this.messageId = messageId;
         this.content = content;

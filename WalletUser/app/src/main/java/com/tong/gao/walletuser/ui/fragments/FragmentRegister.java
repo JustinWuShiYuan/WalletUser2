@@ -22,9 +22,7 @@ import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.StringUtils;
 import com.tong.gao.walletuser.utils.ToastUtils;
 
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -45,7 +43,7 @@ public class FragmentRegister extends Fragment implements View.OnClickListener {
     @BindView(R.id.et_input_account_pwd_again)
     EditText etInputAccountPwdAgain;
 
-    @BindView(R.id.tv_skip_not_download)
+    @BindView(R.id.tv_login)
     TextView tvRegister;
     @BindView(R.id.tv_goto_login)
     TextView tvGotoLogin;
@@ -91,7 +89,7 @@ public class FragmentRegister extends Fragment implements View.OnClickListener {
 //                accountName,accountPwd,accountPwdAgain;
                 break;
 
-            case R.id.tv_skip_not_download:
+            case R.id.tv_login:
 
                 accountName = etInputAccount.getText().toString();
                 accountPwd = etInputAccountPwd.getText().toString();

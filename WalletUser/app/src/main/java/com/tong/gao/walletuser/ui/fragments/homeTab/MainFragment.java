@@ -14,8 +14,11 @@ import android.widget.RelativeLayout;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
+import com.tong.gao.walletuser.bean.event.ExitLoginEvent;
 import com.tong.gao.walletuser.bean.event.MessageEvent;
+import com.tong.gao.walletuser.ui.fragments.personTab.FragmentMyPersonal;
 import com.tong.gao.walletuser.ui.view.NoScrollViewPager;
+import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -70,13 +73,8 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
     @BindView(R.id.btn_next_sell_coin)
     ImageView btnNextSellCoin;
 
-
     private View rootView;
-
     private List<Fragment> pagerList = null;
-
-
-
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
         fixBottomIcon();
@@ -96,7 +94,7 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
             pagerList.add(new HomeFragment());
             pagerList.add(new TradeFragment());
             pagerList.add(new MessageFragment());
-            pagerList.add(new MyInfoFragment());
+            pagerList.add(new FragmentMyPersonal());
         }
 
 
@@ -116,7 +114,6 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         vpContainer.setOffscreenPageLimit(4);
 
         rgFragmentContainer.check(R.id.rb_fragment_home); // 设置默认选中的是home页签
-//        ((HomeFragment)pagerList.get(0)).initData();
         rgFragmentContainer.setOnCheckedChangeListener(this);
 
     }
@@ -169,7 +166,7 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        int pageIndex = -1;
+        int pageIndex = 0;
 
         switch (checkedId) {
 
@@ -191,11 +188,15 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
                 break;
 
         }
+
+
         vpContainer.setCurrentItem(pageIndex);
 
+        //第三个模块 是融云消息模块 没有集成baseFragment
         if(pageIndex != 2){
             ((BaseFragment)pagerList.get(pageIndex)).initData();
         }
+
 
     }
 

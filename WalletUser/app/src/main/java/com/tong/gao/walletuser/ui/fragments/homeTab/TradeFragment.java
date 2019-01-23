@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
+import com.tong.gao.walletuser.bean.event.MessageEvent;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
 import com.tong.gao.walletuser.net.NetWorks;
@@ -31,6 +32,9 @@ import com.tong.gao.walletuser.ui.fragments.FragmentCashFastSelect;
 import com.tong.gao.walletuser.ui.fragments.FragmentSetCashRange;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.ToastUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -98,11 +102,11 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 
     private String pageNum = "1";
     private String pageSize = "12";
-    private String pageWay = "1,2,3";
+    private String pageWay = "1";
     private String type = "1";
     private String price ="100";
-    private String limitMaxPrice ="100" ;
-    private String limitMinPrice ="10";
+    private String limitMaxPrice ="10000" ;
+    private String limitMinPrice ="1";
 
 
     private View rootView;
@@ -320,5 +324,10 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
         ObjectAnimator translation = ObjectAnimator.ofFloat(ivArrow, "rotation", startAngle, endAngle);
         translation.setDuration(500);
         translation.start();
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage (MessageEvent event){
     }
 }

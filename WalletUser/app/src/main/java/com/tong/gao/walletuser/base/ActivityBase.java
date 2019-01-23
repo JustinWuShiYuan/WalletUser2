@@ -19,10 +19,12 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.tong.gao.walletuser.R;
+import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.factory.LoadingPagerFactory;
 import com.tong.gao.walletuser.manager.AppActivityManager;
 import com.tong.gao.walletuser.ui.view.WheelDialog;
 import com.tong.gao.walletuser.utils.Density;
+import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -104,6 +106,7 @@ public abstract class ActivityBase extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        PreferenceHelper.getInstance().putBooleanValue(MyConstant.loginStatues,false);
     }
 
 

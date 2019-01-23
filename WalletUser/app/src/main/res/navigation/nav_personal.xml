@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_personal"
+    app:startDestination="@id/myInfoFragment">
+
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="com.tong.gao.walletuser.ui.fragments.homeTab.MyInfoFragment"
+        android:label="fragment_my_info"
+        tools:layout="@layout/fragment_my_info" ><action android:id="@+id/action_myInfoFragment_to_fragmentChangePersonalInfo" app:destination="@id/fragmentChangePersonalInfo" app:enterAnim="@anim/fragment_slide_left_enter" app:exitAnim="@anim/fragment_slide_right_exit"/><action android:id="@+id/action_myInfoFragment_to_fragmentMyAssert" app:destination="@id/fragmentMyAssert"/></fragment>
+    <fragment
+        android:id="@+id/fragmentChangePersonalInfo"
+        android:name="com.tong.gao.walletuser.ui.fragments.personTab.FragmentChangePersonalInfo"
+        android:label="fragment_change_person_info"
+        tools:layout="@layout/fragment_change_person_info" ><action android:id="@+id/action_fragmentChangePersonalInfo_to_fragmentChangeNickName" app:destination="@id/fragmentChangeNickName"/><action android:id="@+id/action_fragmentChangePersonalInfo_to_myInfoFragment" app:destination="@id/myInfoFragment"/></fragment>
+    <fragment
+        android:id="@+id/fragmentChangeNickName"
+        android:name="com.tong.gao.walletuser.ui.fragments.personTab.FragmentChangeNickName"
+        android:label="fragment_change_nick_name"
+        tools:layout="@layout/fragment_change_nick_name" ><action android:id="@+id/action_fragmentChangeNickName_to_fragmentChangePersonalInfo" app:destination="@id/fragmentChangePersonalInfo"/></fragment>
+    <fragment
+        android:id="@+id/fragmentMyAssert"
+        android:name="com.tong.gao.walletuser.ui.fragments.personTab.FragmentMyAssert"
+        android:label="fragment_my_assert"
+        tools:layout="@layout/fragment_my_assert" ><action android:id="@+id/action_fragmentMyAssert_to_myInfoFragment" app:destination="@id/myInfoFragment"/></fragment>
+</navigation>

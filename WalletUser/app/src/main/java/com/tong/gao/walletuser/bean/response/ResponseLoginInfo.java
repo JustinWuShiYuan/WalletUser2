@@ -12,6 +12,8 @@ public class ResponseLoginInfo implements Serializable {
 
     private UserInfo userinfo;
 
+    public ResponseLoginInfo() {
+    }
 
     public ResponseLoginInfo(String errcode, String msg, UserInfo userinfo) {
         this.errcode = errcode;

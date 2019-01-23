@@ -74,7 +74,7 @@ public class MainActivity extends ActivityBase {
                 @Override
                 public void onSuccess(String userid) {
                     LogUtils.d("LoginActivity", "--onSuccess" + userid);
-                    RongIM.getInstance().startConversation(MainActivity.this,Conversation.ConversationType.PRIVATE,"Justin2", "聊天中");
+//                    RongIM.getInstance().startConversation(MainActivity.this,Conversation.ConversationType.PRIVATE,"Justin2", "聊天中");
 //                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                    finish();
                 }

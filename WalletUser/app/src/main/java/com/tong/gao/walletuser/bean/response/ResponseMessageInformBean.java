@@ -13,6 +13,8 @@ public class ResponseMessageInformBean implements Serializable {
     private List<MessageBean> allMessage;
     private PageBean page;
 
+    public ResponseMessageInformBean() {
+    }
 
     public ResponseMessageInformBean(String errcode, String msg, List<MessageBean> allMessage, PageBean page) {
         this.errcode = errcode;

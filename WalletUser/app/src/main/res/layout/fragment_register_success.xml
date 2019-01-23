@@ -107,7 +107,7 @@
 
 
     <TextView
-        android:id="@+id/tv_skip_not_download"
+        android:id="@+id/tv_login"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="80dp"
         android:layout_marginLeft="80dp"

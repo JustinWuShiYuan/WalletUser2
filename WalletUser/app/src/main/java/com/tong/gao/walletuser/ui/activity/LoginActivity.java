@@ -14,6 +14,7 @@ import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.utils.LogUtils;
+import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.StringUtils;
 import com.tong.gao.walletuser.utils.ToastUtils;
 
@@ -30,7 +31,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     EditText etInputAccountPwd;
     @BindView(R.id.tv_find_pwd)
     TextView tvFindPwd;
-    @BindView(R.id.tv_skip_not_download)
+    @BindView(R.id.tv_login)
     TextView tvLogin;
     @BindView(R.id.tv_goto_register)
     TextView tvGotoRegister;
@@ -91,7 +92,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
 
                 break;
 
-            case R.id.tv_skip_not_download:
+            case R.id.tv_login:
 
                 loginName = etInputAccount.getText().toString();
                 loginPwd = etInputAccountPwd.getText().toString();
@@ -132,24 +133,28 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                 LogUtils.d("responseLoginInfo:" + responseLoginInfo.toString());
 
 
-                if (null != responseLoginInfo.getUserinfo() && responseLoginInfo.getUserinfo().getSafeverifyswitch()
-                        .equals(MyConstant.googleVerifyIsOpened)) {//开了谷歌验证
+                if(null != responseLoginInfo.getUserinfo() && MyConstant.resultCodeIsOK .equals(responseLoginInfo.getErrcode()) ){
+
+                    PreferenceHelper.getInstance().putStringValue(MyConstant.loginStatuesFlag,"true");
+
+                    if (responseLoginInfo.getUserinfo().getSafeverifyswitch().equals(MyConstant.googleVerifyIsOpened)) {//开了谷歌验证
 //                        .equals(MyConstant.googleVerifyIsClosed)) {//开了谷歌验证
+                        Intent intent = new Intent(LoginActivity.this, SecondVerifyActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        finish();
+                    }
 
-                    Intent intent = new Intent(LoginActivity.this, SecondVerifyActivity.class);
-                    startActivity(intent);
-                    finish();
-
-
-                } else {
-
-                    finish();
                 }
+
+
             }
 
             @Override
             public void onError(Throwable e) {
                 hideProgressDialog();
+                PreferenceHelper.getInstance().putBooleanValue(MyConstant.loginStatues,false);
                 ToastUtils.showNomalLongToast("登录失败");
             }
 

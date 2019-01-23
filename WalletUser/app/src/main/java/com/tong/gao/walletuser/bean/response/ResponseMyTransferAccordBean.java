@@ -10,6 +10,9 @@ public class ResponseMyTransferAccordBean implements Serializable {
     private List<TransferInfoBean> transferRecord;
     private TransferAccordPageInfo page;
 
+    public ResponseMyTransferAccordBean() {
+    }
+
     public ResponseMyTransferAccordBean(String errcode, String msg, List<TransferInfoBean> transferRecord, TransferAccordPageInfo page) {
         this.errcode = errcode;
         this.msg = msg;

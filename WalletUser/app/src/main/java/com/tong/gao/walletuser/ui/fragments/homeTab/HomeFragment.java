@@ -27,6 +27,7 @@ import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
 import com.tong.gao.walletuser.bean.FireCoinBean;
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.event.ExitLoginEvent;
 import com.tong.gao.walletuser.bean.event.MessageEvent;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.constants.MyConstant;
@@ -49,6 +50,8 @@ import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -107,7 +110,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     RecyclerView recyclerView;
     @BindView(R.id.rl_user_info)
     RelativeLayout rlUserInfo;
-    @BindView(R.id.tv_skip_not_download)
+    @BindView(R.id.tv_login)
     TextView tvLogin;
     @BindView(R.id.rl_un_login)
     RelativeLayout rlUnLogin;
@@ -201,9 +204,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             @Override
             public void onNext(QueryFireCoinInfoBean queryFireCoinInfoBean) {
-//                LogUtils.d("" + queryFireCoinInfoBean.toString() + "  erro:" + queryFireCoinInfoBean.getErrcode());
 
-                if (null != queryFireCoinInfoBean) {
+                if (null != queryFireCoinInfoBean && MyConstant.resultCodeIsOK .equals(queryFireCoinInfoBean.getErrcode())) {
                     fireCoinBeanList = queryFireCoinInfoBean.getMarketList();
 
                     myFireCoinInfoAdapter = new MyFireCoinInfoAdapter();
@@ -250,6 +252,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     };
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventExitLogin(ExitLoginEvent exitLoginEvent){
+        rlUserInfo.setVisibility(View.GONE);
+        rlUnLogin.setVisibility(View.VISIBLE);
+    }
+
+
 //    @BindView(R.id.iv_left_small_bell_icon)
 //    ImageView ivLeftSmallBellIcon;
 //    @BindView(R.id.iv_right_scan_icon)
@@ -281,7 +290,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
         switch (v.getId()) {
 
-            case R.id.tv_skip_not_download:
+            case R.id.tv_login:
 
                 startActivity(new Intent(mActivity,LoginActivity.class));
 
@@ -293,6 +302,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
                 break;
 
+            case R.id.iv_right_scan_icon:
+
+                scanCode();
+
+                break;
             case R.id.rl_scan_and_transfer:
 
                 scanCode();
@@ -309,9 +323,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.cb_no_longer_remind:  //首次转账 不再提醒说明的 cb
 
                 if (cbNoLongerRemind0AB.isChecked()) {
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, true);
+                    PreferenceHelper.getInstance().putBooleanValue(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, true);
                 } else {
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, false);
+                    PreferenceHelper.getInstance().putBooleanValue(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN_0AB, false);
                 }
 
                 break;
@@ -327,9 +341,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.cb_no_longer_remind_transfer:   //扫码转账
 
                 if (cbScanQrCodeTransfer.isChecked()) {
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, true);
+                    PreferenceHelper.getInstance().putBooleanValue(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, true);
                 } else {
-                    PreferenceHelper.getInstance().storeBooleanShareData(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, false);
+                    PreferenceHelper.getInstance().putBooleanValue(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, false);
                 }
 
 
@@ -511,7 +525,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             tvCoinPrice.setText(fireCoinBean.getPrice());
             tvChinesePrice.setText(fireCoinBean.getRmbPrice());
 
-            LogUtils.d("fireCoinBean.getUpAndDown().contains(\"-\"):" + (fireCoinBean.getUpAndDown().contains("-")));
+//            LogUtils.d("fireCoinBean.getUpAndDown().contains(\"-\"):" + (fireCoinBean.getUpAndDown().contains("-")));
 
             tvIncreasePercent.setText(fireCoinBean.getUpAndDown());
             if (fireCoinBean.getUpAndDown().contains("-")) {
@@ -602,5 +616,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             }
         });
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage (MessageEvent event){
     }
 }

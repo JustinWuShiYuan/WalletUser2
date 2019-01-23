@@ -220,7 +220,7 @@
                                 android:textColor="@color/colorWhite" />
 
                             <TextView
-                                android:id="@+id/tv_skip_not_download"
+                                android:id="@+id/tv_login"
                                 style="@style/text_style_15sp_blue3"
                                 android:layout_width="100dp"
                                 android:layout_height="28dp"

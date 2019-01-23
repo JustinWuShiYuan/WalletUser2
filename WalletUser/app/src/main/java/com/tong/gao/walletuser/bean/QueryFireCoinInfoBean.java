@@ -9,6 +9,8 @@ public class QueryFireCoinInfoBean implements Serializable {
     private String msg;
     private List<FireCoinBean>  marketList;
 
+    public QueryFireCoinInfoBean() {
+    }
 
     public QueryFireCoinInfoBean(String errcode, String msg, List<FireCoinBean> marketList) {
         this.errcode = errcode;

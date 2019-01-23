@@ -1,6 +1,7 @@
 package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
@@ -9,15 +10,18 @@ import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
+import com.tong.gao.walletuser.bean.response.ResponseChangeNickNameBean;
 import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMessageInformBean;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
+import com.tong.gao.walletuser.bean.response.ResponseNormalBean;
+import com.tong.gao.walletuser.bean.response.ResponsePersonalBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
+import com.tong.gao.walletuser.bean.response.ResponseQueryMyAssertBean;
 import com.tong.gao.walletuser.bean.response.ResponseRegisterBean;
 import com.tong.gao.walletuser.bean.response.ResponseVerifyGoogleBean;
 import com.tong.gao.walletuser.constants.MyConstant;
-import com.tong.gao.walletuser.ui.loading.LoadingPager;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -104,6 +108,22 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.queryMessageInform)
         Observable<ResponseMessageInformBean> queryMessageInformList(@Body RequestMessageInformBean requestMessageInformBean);
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryPersonalInfo)
+        Observable<ResponsePersonalBean> queryPersonalInfo();
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.changeNickName)
+        Observable<ResponseChangeNickNameBean> changeNickName(@Body RequestChangeNickNameBean requestChangeNickNameBean);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @GET(MyConstant.exitLogin)
+        Observable<ResponseNormalBean> exitLogin();
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @GET(MyConstant.queryAssert)
+        Observable<ResponseQueryMyAssertBean> queryAssert();
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
@@ -160,6 +180,25 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryMessageInformList(RequestMessageInformBean requestMessageInformBean,Observer<ResponseMessageInformBean> observer){
         setSubscribe(service.queryMessageInformList(requestMessageInformBean),observer);
+    }
+
+
+    public static void queryPersonalInfo(Observer<ResponsePersonalBean> observer){
+        setSubscribe(service.queryPersonalInfo(),observer);
+    }
+
+    public static void changeNickName(RequestChangeNickNameBean requestChangeNickNameBean,Observer<ResponseChangeNickNameBean> observer){
+        setSubscribe(service.changeNickName(requestChangeNickNameBean),observer);
+    }
+
+
+    public static void exitLogin(Observer<ResponseNormalBean> observer){
+        setSubscribe(service.exitLogin(),observer);
+    }
+
+
+    public static void queryMyAssert(Observer<ResponseQueryMyAssertBean> observer){
+        setSubscribe(service.queryAssert(),observer);
     }
 
 

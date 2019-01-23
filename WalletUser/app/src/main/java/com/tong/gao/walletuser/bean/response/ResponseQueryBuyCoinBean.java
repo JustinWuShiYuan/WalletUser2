@@ -13,12 +13,14 @@ public class ResponseQueryBuyCoinBean implements Serializable {
     private List<CoinBean> advert;
     private PageBean page;
 
+
     public ResponseQueryBuyCoinBean(String errcode, String msg, List<CoinBean> advert, PageBean page) {
         this.errcode = errcode;
         this.msg = msg;
         this.advert = advert;
         this.page = page;
     }
+
 
     public String getErrcode() {
         return errcode;
@@ -42,6 +44,14 @@ public class ResponseQueryBuyCoinBean implements Serializable {
 
     public void setAdvert(List<CoinBean> advert) {
         this.advert = advert;
+    }
+
+    public PageBean getPage() {
+        return page;
+    }
+
+    public void setPage(PageBean page) {
+        this.page = page;
     }
 
     @Override

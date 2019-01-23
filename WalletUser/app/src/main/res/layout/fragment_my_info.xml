@@ -8,45 +8,67 @@
     <include layout="@layout/title_bar_no_background"/>
 
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="115dp"
-        android:id="@+id/rl_my_info">
+        android:layout_height="115dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:id="@+id/civ_user_head_src"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/colorWhite"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:id="@+id/rl_my_info"
+            android:visibility="gone">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/civ_user_head_src"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/colorWhite"
+                android:src="@drawable/img_logo_head"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="top|center"
+                android:layout_marginLeft="21dp"
+                android:layout_toRightOf="@id/civ_user_head_src"
+                android:layout_alignTop="@id/civ_user_head_src"
+                style="@style/text_style_20sp_gray_3"
+                android:text="JustinAndXiaoHan"
+                android:id="@+id/tv_user_name"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_alignBottom="@id/civ_user_head_src"
+                android:layout_marginLeft="21dp"
+                android:layout_toRightOf="@id/civ_user_head_src"
+                style="@style/text_style_13sp_gray_6"
+                android:text="ID:352214325"
+                android:id="@+id/tv_user_id"/>
+
+
+        </RelativeLayout>
+
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="top|center"
-            android:layout_marginLeft="21dp"
-            android:layout_toRightOf="@id/civ_user_head_src"
-            android:layout_alignTop="@id/civ_user_head_src"
-            style="@style/text_style_20sp_gray_3"
-            android:text="JustinAndXiaoHan"
-            android:id="@+id/tv_user_name"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_alignBottom="@id/civ_user_head_src"
-            android:layout_marginLeft="21dp"
-            android:layout_toRightOf="@id/civ_user_head_src"
-            style="@style/text_style_13sp_gray_6"
-            android:text="ID:352214325"
-            android:id="@+id/tv_user_id"/>
-
+            android:id="@+id/tv_first_to_login"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            style="@style/text_style_16sp_white_1"
+            android:text="请先登录"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_blue_bg"/>
 
     </RelativeLayout>
+
+
 
 
     <View
@@ -82,11 +104,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
 
     </RelativeLayout>
@@ -120,11 +142,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
     </RelativeLayout>
     <!--我的收款账号 结束 -->
@@ -157,11 +179,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
     </RelativeLayout>
     <!--我的订单 结束 -->
@@ -194,11 +216,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
     </RelativeLayout>
     <!--我的广告 结束 -->
@@ -237,11 +259,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
     </RelativeLayout>
     <!--认证 结束 -->
@@ -274,11 +296,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
     </RelativeLayout>
     <!--安全设置 结束 -->
@@ -311,11 +333,11 @@
 
         <ImageView
             android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitXY"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_blue"/>
+            android:src="@drawable/ic_arrow_right_gray"/>
 
     </RelativeLayout>
     <!--关于我们 结束 -->

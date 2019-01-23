@@ -13,6 +13,8 @@ public class ReponseTransferAccountBean implements Serializable {
     private String transferTime;
     private String txhash;
 
+    public ReponseTransferAccountBean() {
+    }
 
     public ReponseTransferAccountBean(String errcode, String msg, String accountTransferId, String address, String number, String remark, String transferTime, String txhash) {
         this.errcode = errcode;

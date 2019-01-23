@@ -7,6 +7,7 @@ import com.tong.gao.walletuser.factory.CustomGsonConverterFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 public abstract class RetrofitUtils {
 
@@ -23,6 +24,7 @@ public abstract class RetrofitUtils {
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(MyConstant.baseUrl)
                     .addConverterFactory(CustomGsonConverterFactory.create())
+//                    .addConverterFactory(FastJsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(mOkHttpClient)
                     .build();

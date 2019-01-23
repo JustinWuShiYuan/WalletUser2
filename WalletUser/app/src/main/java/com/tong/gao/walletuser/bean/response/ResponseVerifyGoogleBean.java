@@ -7,6 +7,8 @@ public class ResponseVerifyGoogleBean implements Serializable {
     private String errcode;
     private String msg;
 
+    public ResponseVerifyGoogleBean() {
+    }
 
     public ResponseVerifyGoogleBean(String errcode, String msg) {
         this.errcode = errcode;

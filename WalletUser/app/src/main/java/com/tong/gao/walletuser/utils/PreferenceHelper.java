@@ -86,7 +86,7 @@ public class PreferenceHelper {
         return getPreference().getString(key, defaultString);
     }
 
-    public boolean storeBooleanShareData(String key, boolean paramBoolean) {
+    public boolean putBooleanValue(String key, boolean paramBoolean) {
         if (getMcontext() != null) {
             synchronized (syncObj) {
                 if (edit == null) {
@@ -99,7 +99,7 @@ public class PreferenceHelper {
         return false;
     }
 
-    public boolean storeIntShareData(String key, int paramInt)
+    public boolean putIntValue(String key, int paramInt)
     {
         if (getMcontext() != null) {
             synchronized (syncObj)
@@ -114,7 +114,7 @@ public class PreferenceHelper {
         return false;
     }
 
-    public void storeLongShareData(String key, long paramLong)
+    public void putLongValue(String key, long paramLong)
     {
         if (getMcontext() != null) {
             synchronized (syncObj)
@@ -127,7 +127,7 @@ public class PreferenceHelper {
         }
     }
 
-    public void storeStringShareData(String key, String paramString)
+    public void putStringValue(String key, String paramString)
     {
         if (getMcontext() != null) {
             synchronized (syncObj)
@@ -139,6 +139,9 @@ public class PreferenceHelper {
             }
         }
     }
+
+
+
 
     /**
      * load object
@@ -186,7 +189,7 @@ public class PreferenceHelper {
      * @param key
      * @param object
      */
-    public void setObject(String key, Object object) {
+    public void putObject(String key, Object object) {
         if (getMcontext() != null) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream out = null;

@@ -11,6 +11,7 @@ import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.bean.event.MessageEvent;
 import com.tong.gao.walletuser.utils.LogUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -28,6 +29,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         return initView(inflater,container);
     }
 
