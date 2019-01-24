@@ -6,16 +6,22 @@ public class RequestQueryBuyCoinBean implements Serializable {
 
     private String pageNum;
     private String pageSize;
-    private String payWay;
+    private String paymentWay;
     private String type;
     private String price;
     private String limitMaxPrice;
     private String limitMinPrice;
 
-    public RequestQueryBuyCoinBean(String pageNum, String pageSize, String payWay, String type, String price, String limitMaxPrice, String limitMinPrice) {
+    public RequestQueryBuyCoinBean(String pageNum, String pageSize, String paymentWay) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
-        this.payWay = payWay;
+        this.paymentWay = paymentWay;
+    }
+
+    public RequestQueryBuyCoinBean(String pageNum, String pageSize, String paymentWay, String type, String price, String limitMaxPrice, String limitMinPrice) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+        this.paymentWay = paymentWay;
         this.type = type;
         this.price = price;
         this.limitMaxPrice = limitMaxPrice;
@@ -40,12 +46,12 @@ public class RequestQueryBuyCoinBean implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public String getPayWay() {
-        return payWay;
+    public String getPaymentWay() {
+        return paymentWay;
     }
 
-    public void setPayWay(String payWay) {
-        this.payWay = payWay;
+    public void setPaymentWay(String paymentWay) {
+        this.paymentWay = paymentWay;
     }
 
     public String getType() {
@@ -85,7 +91,7 @@ public class RequestQueryBuyCoinBean implements Serializable {
         return "RequestQueryBuyCoinBean{" +
                 "pageNum='" + pageNum + '\'' +
                 ", pageSize='" + pageSize + '\'' +
-                ", payWay='" + payWay + '\'' +
+                ", paymentWay='" + paymentWay + '\'' +
                 ", type='" + type + '\'' +
                 ", price='" + price + '\'' +
                 ", limitMaxPrice='" + limitMaxPrice + '\'' +

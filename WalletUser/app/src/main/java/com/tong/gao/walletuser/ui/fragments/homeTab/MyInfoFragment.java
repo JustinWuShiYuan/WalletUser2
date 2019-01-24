@@ -13,6 +13,7 @@ import com.tong.gao.walletuser.bean.PersonalBean;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
 import com.tong.gao.walletuser.bean.event.ExitLoginEvent;
+import com.tong.gao.walletuser.bean.event.StartLoadDataEvent;
 import com.tong.gao.walletuser.bean.response.ResponsePersonalBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
@@ -67,7 +68,6 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
     @BindView(R.id.rl_about_us)
     RelativeLayout rlAboutUs;
     Unbinder unbinder;
-    private boolean firstIn = true;
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
@@ -77,37 +77,33 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void initData() {
 
-        if (!firstIn) {
-            NetWorks.queryPersonalInfo(new Observer<ResponsePersonalBean>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-                    LogUtils.d("查询个人信息");
+        NetWorks.queryPersonalInfo(new Observer<ResponsePersonalBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogUtils.d("查询个人信息");
+            }
+
+            @Override
+            public void onNext(ResponsePersonalBean responsePersonalBean) {
+
+                if (null != responsePersonalBean && MyConstant.resultCodeIsOK.equals(responsePersonalBean.getErrcode())) {
+                    PersonalBean personalBean = responsePersonalBean.getUserinfo();
+                    updateUI(personalBean);
+                    PreferenceHelper.getInstance().putObject(MyConstant.personalBeanKey,personalBean);
                 }
 
-                @Override
-                public void onNext(ResponsePersonalBean responsePersonalBean) {
+            }
 
-                    if (null != responsePersonalBean && MyConstant.resultCodeIsOK.equals(responsePersonalBean.getErrcode())) {
-                        PersonalBean personalBean = responsePersonalBean.getUserinfo();
-                        updateUI(personalBean);
-                        PreferenceHelper.getInstance().putObject(MyConstant.personalBeanKey,personalBean);
-                    }
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("查询个人信息" + e.toString());
+            }
 
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    LogUtils.d("查询个人信息" + e.toString());
-                }
-
-                @Override
-                public void onComplete() {
-                    LogUtils.d("onComplete()");
-                }
-            });
-        } else {
-            firstIn = false;
-        }
+            @Override
+            public void onComplete() {
+                LogUtils.d("onComplete()");
+            }
+        });
 
 
     }
@@ -117,8 +113,14 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
         UIUtils.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tvUserName.setText(personalBean.getNickname());
-                tvUserId.setText("ID:" + personalBean.getUserid());
+
+                LogUtils.d("null != tvUserName:"+(null != tvUserName));
+                if(null != personalBean && null != tvUserName){
+                    tvUserName.setText(personalBean.getNickname());
+                    tvUserId.setText("ID:" + personalBean.getUserid());
+                }
+
+
             }
         });
     }
@@ -156,7 +158,7 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
 
-        if (!firstIn && PreferenceHelper.getInstance().getStringShareData(MyConstant.loginStatuesFlag, "false").equals("true")) {
+        if (PreferenceHelper.getInstance().getStringShareData(MyConstant.loginStatuesFlag, "false").equals("true")) {
             rlMyInfo.setVisibility(View.VISIBLE);
             tvFirstToLogin.setVisibility(View.GONE);
             initData();
@@ -164,11 +166,6 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
 
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventExitLogin(ExitLoginEvent exitLoginEvent){
-//        LogUtils.d("onEventExitLogin `111111111111111");
-    }
 
 
 
@@ -291,5 +288,11 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
         String aFalse = PreferenceHelper.getInstance().getStringShareData(MyConstant.loginStatuesFlag, "false");
 
         return aFalse.equals("true");
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventStartLoadData(StartLoadDataEvent event){
+        initData();
     }
 }

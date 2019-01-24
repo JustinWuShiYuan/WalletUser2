@@ -34,6 +34,13 @@ public class MyConstant {
     public static final String loginStatues = "loginStatues";
     public static final String loginStatuesFlag = "loginStatuesFlag";
     public static final String personalBeanKey = "personalBeanKey";
+    public static final String sellerIsVip = "1";       //为vip
+    public static final String tradeFixedAmountType = "2";       //1.限额2.固额
+    public static final String paymentWayZfb = "1";       //
+    public static final String paymentWayWeChat = "2";       //
+    public static final String paymentWayBank = "3";       //
+    public static final String tradeFragmentCoinBeanKey = "tradeFragmentCoinBeanKey";       //
+
 
 
 

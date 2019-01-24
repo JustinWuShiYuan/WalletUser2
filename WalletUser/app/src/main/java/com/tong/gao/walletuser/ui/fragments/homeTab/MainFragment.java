@@ -75,6 +75,12 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
     private View rootView;
     private List<Fragment> pagerList = null;
+
+    public final String bottomTabBuyCoin ="2";
+    public final String bottomTabMessage ="3";
+    public final String bottomTabMyInfo ="4";
+
+
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
         fixBottomIcon();
@@ -83,6 +89,8 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         btnNextBuyCoin.setOnClickListener(this);
         btnIKnow.setOnClickListener(this);
         btnNextSellCoin.setOnClickListener(this);
+
+        initData();
 
         return rootView;
     }
@@ -114,6 +122,7 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         vpContainer.setOffscreenPageLimit(4);
 
         rgFragmentContainer.check(R.id.rb_fragment_home); // 设置默认选中的是home页签
+        ((BaseFragment)pagerList.get(0)).initData();
         rgFragmentContainer.setOnCheckedChangeListener(this);
 
     }
@@ -193,6 +202,7 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
         vpContainer.setCurrentItem(pageIndex);
 
         //第三个模块 是融云消息模块 没有集成baseFragment
+        LogUtils.d("pageIndex:"+pageIndex);
         if(pageIndex != 2){
             ((BaseFragment)pagerList.get(pageIndex)).initData();
         }
@@ -203,7 +213,29 @@ public class MainFragment extends BaseFragment implements RadioGroup.OnCheckedCh
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMessage(MessageEvent event) {
-        rgFragmentContainer.check(R.id.rb_fragment_message);
+
+        switch (event.getBottomTabIndex()){
+
+            case bottomTabBuyCoin:
+
+                rgFragmentContainer.check(R.id.rb_fragment_trade);
+
+                break;
+
+            case bottomTabMessage:
+
+                rgFragmentContainer.check(R.id.rb_fragment_message);
+
+                break;
+
+            case bottomTabMyInfo:
+
+                rgFragmentContainer.check(R.id.rb_fragment_myInfo);
+
+                break;
+
+
+        }
     }
 
 

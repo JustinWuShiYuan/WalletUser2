@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
+import com.tong.gao.walletuser.bean.event.StartLoadDataEvent;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
 import com.tong.gao.walletuser.constants.MyConstant;
@@ -17,6 +18,8 @@ import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.StringUtils;
 import com.tong.gao.walletuser.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -145,6 +148,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                     } else {
                         finish();
                     }
+                    EventBus.getDefault().post(new StartLoadDataEvent());
 
                 }
 

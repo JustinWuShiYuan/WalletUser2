@@ -29,6 +29,7 @@ import com.tong.gao.walletuser.bean.FireCoinBean;
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.event.ExitLoginEvent;
 import com.tong.gao.walletuser.bean.event.MessageEvent;
+import com.tong.gao.walletuser.bean.event.StartLoadDataEvent;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.factory.ThreadPoolFactory;
@@ -163,6 +164,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         tvTransferRecord.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
         rlScanAndTransfer.setOnClickListener(this);
+        rlBuyCoin.setOnClickListener(this);
+        rlSaleCoinRoot.setOnClickListener(this);
+        rlOrderContainer.setOnClickListener(this);
+        rlHelperRoot.setOnClickListener(this);
+        rlExchangeCoinRoot.setOnClickListener(this);
 
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_red_light, android.R.color.holo_orange_light);
@@ -259,31 +265,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
 
-//    @BindView(R.id.iv_left_small_bell_icon)
-//    ImageView ivLeftSmallBellIcon;
-//    @BindView(R.id.iv_right_scan_icon)
-//    ImageView ivRightScanIcon;
-//    @BindView(R.id.tv_assert_ug_num)
-//    TextView tvAssertUgNum;
-//    @BindView(R.id.tv_assert_money)
-//    TextView tvAssertMoney;
-//    @BindView(R.id.tv_transfer_record)
-//    TextView tvTransferRecord;
-//    @BindView(R.id.de_recycle_img)
-//    HomeADPageView deRecycleImg;
-//    @BindView(R.id.rl_scan_and_transfer)
-//    RelativeLayout rlScanAndTransfer;
-//    @BindView(R.id.rl_exchange_coin_root)
-//    RelativeLayout rlExchangeCoinRoot;
-//    @BindView(R.id.rl_buy_coin)
-//    RelativeLayout rlBuyCoin;
-//    @BindView(R.id.rl_sale_coin_root)
-//    RelativeLayout rlSaleCoinRoot;
-//    @BindView(R.id.rl_order_container)
-//    RelativeLayout rlOrderContainer;
-//    @BindView(R.id.rl_helper_root)
-//    RelativeLayout rlHelperRoot;
-
 
     @Override
     public void onClick(View v) {
@@ -292,13 +273,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             case R.id.tv_login:
 
-                startActivity(new Intent(mActivity,LoginActivity.class));
+                startActivity(new Intent(mActivity, LoginActivity.class));
 
                 break;
 
             case R.id.iv_left_small_bell_icon:
 
-                EventBus.getDefault().post(new MessageEvent());
+                EventBus.getDefault().post(new MessageEvent("3"));
 
                 break;
 
@@ -307,15 +288,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 scanCode();
 
                 break;
-            case R.id.rl_scan_and_transfer:
-
-                scanCode();
-
-                break;
 
             case R.id.tv_transfer_record:   //转账记录
 
-                startActivity(new Intent(getActivity(),TransferRecordActivity.class));
+                startActivity(new Intent(getActivity(), TransferRecordActivity.class));
 
                 break;
 
@@ -338,7 +314,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                 break;
 
 
-            case R.id.cb_no_longer_remind_transfer:   //扫码转账
+            case R.id.cb_no_longer_remind_transfer:   //扫码转账 对话框
 
                 if (cbScanQrCodeTransfer.isChecked()) {
                     PreferenceHelper.getInstance().putBooleanValue(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, true);
@@ -346,8 +322,45 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     PreferenceHelper.getInstance().putBooleanValue(PreferenceHelper.PreferenceKey.KEY_N0_REMAIN, false);
                 }
 
+                break;
+
+            case R.id.rl_scan_and_transfer:         //中间6个条目扫码转账
+
+                scanCode();
 
                 break;
+
+            case R.id.rl_exchange_coin_root:        //中间6个条目 兑换比特币
+
+                ToastUtils.showNomalShortToast("兑换比特币");
+
+                break;
+
+
+            case R.id.rl_buy_coin:        //中间6个条目 买币
+
+                EventBus.getDefault().post(new MessageEvent("2"));
+
+                break;
+
+            case R.id.rl_sale_coin_root:        //中间6个条目 卖币
+
+                ToastUtils.showNomalShortToast("  卖币");
+
+                break;
+
+            case R.id.rl_order_container:        //中间6个条目 我的订单
+
+                ToastUtils.showNomalShortToast("  我的订单");
+
+                break;
+
+            case R.id.rl_helper_root:        //中间6个条目 帮助中心
+
+                ToastUtils.showNomalShortToast("  帮助中心");
+
+                break;
+
         }
     }
 
@@ -620,5 +633,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMessage (MessageEvent event){
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventStartLoadData(StartLoadDataEvent event){
+        loadMyAccountInfo();
     }
 }

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_base"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#F6F5FA" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="18dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="L****k"
+                android:textColor="#394368"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_vip_3" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:background="#F6F5FA" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="平台已担保交易，可安心付款"
+            android:textColor="#FF9238"
+            android:textSize="13sp" />
+
+
+        <!-- 限额 相关开始1111111111111111111111111111111111111 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ll_limit_container"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:text="100 cny = 1ab"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp">
+
+                <TextView
+                    android:id="@+id/tv_amont_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="限额："
+                    android:textColor="#666666"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_limit_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1000~20000 CNY"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收款方式："
+                    android:textColor="#666666"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_pay_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="微信，支付宝，银行卡"
+                    android:textColor="#4C7FFF"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_can_buy_max_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="25dp"
+                android:text="最大购买数量为 1000"
+                android:textColor="#4C7FFF"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/shape_gray_cornor2"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="35dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="35dp"
+                    android:paddingBottom="15dp">
+
+                    <EditText
+                        android:id="@+id/et_input_money"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@color/transparent"
+                        android:hint="请输入购买金额"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="#394368"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@color/transparent"
+                        android:clickable="true"
+                        android:text="全部"
+                        android:textColor="#4C7FFF"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_divider"
+                        android:layout_width="0.8dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="12dp"
+                        android:layout_toLeftOf="@+id/tv_all"
+                        android:background="#394368" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="12dp"
+                        android:layout_toLeftOf="@+id/tv_divider"
+                        android:background="@color/transparent"
+                        android:clickable="true"
+                        android:text="CNY"
+                        android:textColor="#394368"
+                        android:textSize="18sp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:background="#E6E6E6" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="35dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="35dp"
+                    android:paddingBottom="15dp">
+
+                    <EditText
+                        android:id="@+id/et_input_buy_num"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@color/transparent"
+                        android:hint="请输入购买数量"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="#394368"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@color/transparent"
+                        android:clickable="true"
+                        android:text="AB"
+                        android:textColor="#394368"
+                        android:textSize="18sp" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+        <!-- 限额 相关结束1111111111111111111111111111111111111 -->
+
+
+
+        <!-- 固额 相关开始22222222222222222222222222222222222222 -->
+        <LinearLayout
+            android:layout_marginTop="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_fixed_container"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#f6f5fa"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginTop="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_fixed_coin_num"
+                style="@style/text_style_26sp_color_394368"
+                android:text="1000  AB "
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e6e6e6"/>
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    style="@style/text_style_14sp_gray_6"
+                    android:text="售价:"/>
+
+
+                <TextView
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    style="@style/text_style_14sp_gray_3"
+                    android:id="@+id/tv_sell_price"
+                    android:text="1000 CNY"/>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    style="@style/text_style_14sp_gray_6"
+                    android:text="单价:"/>
+
+
+                <TextView
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    style="@style/text_style_14sp_gray_3"
+                    android:text="1 CNY = 1 AB"
+                    android:id="@+id/tv_single_price"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="20dp"
+                    style="@style/text_style_14sp_gray_6"
+                    android:text="收款账号:"/>
+
+
+                <TextView
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    style="@style/text_style_14sp_blue"
+                    android:text="1 CNY = 1 AB"
+                    android:id="@+id/tv_receipt_account"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <!-- 固额 相关开始22222222222222222222222222222222222222 -->
+
+
+        <!--卖家备注 开始 -->
+        <TextView
+            style="@style/text_style_15sp_gray_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:text="卖家备注：" />
+
+        <TextView
+            style="@style/text_style_14sp_gray_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="12dp"
+            android:lineSpacingExtra="2dp"
+            android:maxLines="5"
+            android:text="dsgddddddddddddddddddddddddddddddddddddddddddgfegedsgdddddddddddddddddddddddddddddddddddddddddd" />
+
+        <!--卖家备注 结束 -->
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="该订单需要你在15分钟内完成付款"
+        style="@style/text_style_14sp_blue"
+        />
+
+
+
+    <LinearLayout
+        android:id="@+id/rl_cancel_and_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_gray_cornor3"
+            android:text="取消"
+            android:textColor="#4C7FFF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_gray_cornor4"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

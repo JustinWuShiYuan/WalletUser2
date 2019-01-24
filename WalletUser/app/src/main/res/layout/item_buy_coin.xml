@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_item_background"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        >
+        <TextView
+            android:id="@+id/tv_seller_first_name"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/white1"
+            android:background="@drawable/shape_gray_cornor18"
+            android:text="L"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c_text2"
+            android:textSize="14sp"
+            android:text="L****k"
+            android:drawablePadding="5dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_seller_name"
+            />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_vip_3"
+            android:layout_marginLeft="@dimen/rc_dimen_size_5"
+            android:id="@+id/iv_vip_icon"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交易量 112875"
+            android:textSize="13sp"
+            android:textColor="#8C96A5"
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_trade_num"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成功率 98%"
+            android:textSize="13sp"
+            android:textColor="#8C96A5"
+            android:id="@+id/tv_success_rate"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#F0F1F3"
+        android:layout_marginLeft="18dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="单笔限额：10~100000 CNY"
+        android:textColor="#4C7FFF"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        android:background="@drawable/shape_gray_cornor21"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:id="@+id/tv_coin_trade_type"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#394368"
+            android:textSize="14sp"
+            android:text="单价:"
+            android:drawablePadding="5dp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#394368"
+            android:textSize="16sp"
+            android:text="10 CNY = 1AB"
+            android:drawablePadding="5dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_coin_unit_price"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#394368"
+            android:textSize="14sp"
+            android:text="数量:"
+            android:drawablePadding="5dp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#394368"
+            android:textSize="16sp"
+            android:text="1,000.00"
+            android:drawablePadding="5dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_coin_seller_num"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支付方式："
+            android:textSize="13sp"
+            android:textColor="#394368"
+            android:layout_marginRight="5dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_cir_zhifubao_3"
+            android:layout_marginRight="4dp"
+            android:id="@+id/iv_zfb"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_cir_weixin_3"
+            android:layout_marginRight="4dp"
+            android:id="@+id/iv_we_chat"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_cir_bank_3"
+            android:id="@+id/iv_bank"
+            android:visibility="invisible"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#F0F1F3"
+        />
+
+
+</LinearLayout>

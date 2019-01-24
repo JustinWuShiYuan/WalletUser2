@@ -243,6 +243,12 @@
         <item name="android:textColor">@color/colorBlue2</item>
     </style>
 
+    <style name="text_style_26sp_color_394368">
+        <item name="android:textSize">26sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/color394368</item>
+    </style>
+
     <style name="text_style_15sp_gray_8">
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center_vertical</item>
