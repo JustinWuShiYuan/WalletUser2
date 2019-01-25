@@ -8,8 +8,6 @@ public class PageBean implements Serializable {
     private String pagesize;
     private String sum;
 
-    public PageBean() {
-    }
 
     public PageBean(String pageno, String pagesize, String sum) {
         this.pageno = pageno;

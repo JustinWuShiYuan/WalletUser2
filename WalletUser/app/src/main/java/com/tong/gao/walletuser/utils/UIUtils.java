@@ -1,6 +1,8 @@
 package com.tong.gao.walletuser.utils;
 
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
@@ -109,5 +111,19 @@ public class UIUtils {
 	public static int getColor(int resId)
 	{
 		return getResources().getColor(resId);
+	}
+
+
+	public static void copyTextToClipboard(final String text, final Context context) {
+
+		UIUtils.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+				ClipData clipData = ClipData.newPlainText("playerId", text);
+				clipboardManager.setPrimaryClip(clipData);
+				ToastUtils.showNomalShortToast("复制成功");
+			}
+		});
 	}
 }

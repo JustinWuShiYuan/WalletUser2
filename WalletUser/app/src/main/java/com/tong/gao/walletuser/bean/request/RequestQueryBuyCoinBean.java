@@ -12,11 +12,6 @@ public class RequestQueryBuyCoinBean implements Serializable {
     private String limitMaxPrice;
     private String limitMinPrice;
 
-    public RequestQueryBuyCoinBean(String pageNum, String pageSize, String paymentWay) {
-        this.pageNum = pageNum;
-        this.pageSize = pageSize;
-        this.paymentWay = paymentWay;
-    }
 
     public RequestQueryBuyCoinBean(String pageNum, String pageSize, String paymentWay, String type, String price, String limitMaxPrice, String limitMinPrice) {
         this.pageNum = pageNum;

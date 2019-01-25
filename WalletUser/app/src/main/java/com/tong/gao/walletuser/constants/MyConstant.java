@@ -18,6 +18,8 @@ public class MyConstant {
     public static final String changeNickName = "/ug/usr/pbmns.do";           //修改昵称
     public static final String exitLogin = "/ug/usr/pblou.do";           //退出登录
     public static final String queryMyAssert = "/ug/acc/pbads.do";           //资产查询
+    public static final String uesrBuyOrder = "/ug/ord/pbpos.do";           //用户下单接口
+
 
 
 
@@ -40,6 +42,8 @@ public class MyConstant {
     public static final String paymentWayWeChat = "2";       //
     public static final String paymentWayBank = "3";       //
     public static final String tradeFragmentCoinBeanKey = "tradeFragmentCoinBeanKey";       //
+    public static final String buyCoinNoMoreNotify = "buyCoinNoMoreNotify";       //买币不在提醒对话框
+    public static final String downOrderKey = "downOrderKey";   //下单key
 
 
 

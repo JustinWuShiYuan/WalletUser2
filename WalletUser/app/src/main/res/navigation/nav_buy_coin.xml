@@ -9,5 +9,15 @@
         android:id="@+id/fragmentBuyCoin"
         android:name="com.tong.gao.walletuser.ui.fragments.buyCoin.FragmentBuyCoin"
         android:label="fragment_buy_coin"
-        tools:layout="@layout/fragment_buy_coin" />
+        tools:layout="@layout/fragment_buy_coin" ><action android:id="@+id/action_fragmentBuyCoin_to_fragmentBuyCoinoDetail" app:destination="@id/fragmentBuyCoinoDetail"/></fragment>
+    <fragment
+        android:id="@+id/fragmentBuyCoinoDetail"
+        android:name="com.tong.gao.walletuser.ui.fragments.buyCoin.FragmentBuyCoinDetail"
+        android:label="fragment_buy_coin_detail"
+        tools:layout="@layout/fragment_buy_coin_detail" ><action android:id="@+id/action_fragmentBuyCoinoDetail_to_fragmentBuyCoinResult" app:destination="@id/fragmentBuyCoinResult"/></fragment>
+    <fragment
+        android:id="@+id/fragmentBuyCoinResult"
+        android:name="com.tong.gao.walletuser.ui.fragments.buyCoin.FragmentBuyCoinResult"
+        android:label="fragment_buy_coin_result"
+        tools:layout="@layout/fragment_buy_coin_result" />
 </navigation>

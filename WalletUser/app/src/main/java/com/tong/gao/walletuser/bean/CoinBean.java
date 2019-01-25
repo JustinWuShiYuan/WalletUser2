@@ -20,23 +20,6 @@ public class CoinBean implements Serializable {
     private String createdtime;
     private String paymentway;
 
-
-    public CoinBean(String ugOtcAdvertId, String userId, String nickName, String isVip, String orderAllNumber, String orderTotle, String successRate, String number, String amountType, String fixedAmount, String price, String createdtime, String paymentway) {
-        this.ugOtcAdvertId = ugOtcAdvertId;
-        this.userId = userId;
-        this.nickName = nickName;
-        this.isVip = isVip;
-        this.orderAllNumber = orderAllNumber;
-        this.orderTotle = orderTotle;
-        this.successRate = successRate;
-        this.number = number;
-        this.amountType = amountType;
-        this.fixedAmount = fixedAmount;
-        this.price = price;
-        this.createdtime = createdtime;
-        this.paymentway = paymentway;
-    }
-
     public CoinBean(String ugOtcAdvertId, String userId, String nickName, String isVip, String orderAllNumber, String orderTotle, String successRate, String number, String amountType, String limitMaxAmount, String limitMinAmount, String fixedAmount, String price, String createdtime, String paymentway) {
         this.ugOtcAdvertId = ugOtcAdvertId;
         this.userId = userId;

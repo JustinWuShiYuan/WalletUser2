@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.buyCoin.MerchantInfoActivity"
+    android:background="@color/white1">
+
+
+    <include layout="@layout/title_bar"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/lineColor"/>
+
+
+
+    <RelativeLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user_nick_name"
+            style="@style/text_style_17sp_blue3"
+            android:text="L****k"/>
+
+
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_user_nick_name"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/icon_vip"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineColor"/>
+
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/text_style_14sp_gray_999999"
+        android:text="商户已缴保证金，平台担保交易"/>
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f6f5fa">
+
+        <LinearLayout
+            android:id="@+id/ll_tab_container"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                style="@style/text_style_15sp_gray_6"
+                android:text="交易次数"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                style="@style/text_style_15sp_gray_6"
+                android:text="成功率"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                style="@style/text_style_15sp_gray_6"
+                android:text="平均放行时间"/>
+
+
+
+        </LinearLayout>
+
+
+
+        <View
+            android:id="@+id/line1"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/ll_tab_container"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6"
+            />
+
+
+
+        <LinearLayout
+            android:layout_below="@id/line1"
+            android:id="@+id/ll_tab_value_container"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                style="@style/text_style_20sp_blue"
+                android:gravity="center"
+                android:layout_marginLeft="-35dp"
+                android:text="10000"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                style="@style/text_style_20sp_blue"
+                android:layout_marginLeft="-30dp"
+                android:text="99%"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                style="@style/text_style_20sp_blue"
+                android:text="3.2 分钟"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/lineColor"/>
+
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="认证信息："
+        style="@style/text_style_13sp_gray_6"/>
+
+
+    <!--支付方式 开始 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="566dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="75dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/payType"
+            android:textColor="#999999"
+            android:textSize="15sp"/>
+
+
+        <RelativeLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_zfb"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="33dp"
+                android:text="实名认证"
+                android:gravity="center"/>
+
+            <CheckBox
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp"
+                android:id="@+id/cb_real_name_authentication"
+                style="@style/MyCheck_Box"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="10dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_wechat"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="33dp"
+                android:text="身份认证"
+                android:gravity="center"/>
+
+            <CheckBox
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp"
+                android:id="@+id/cb_identity_authentication"
+                style="@style/MyCheck_Box"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="10dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:layout_width="29dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_bank"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="33dp"
+                android:text="赔付担保"
+                android:gravity="center"/>
+
+            <!--compensate 赔偿  guarantee 担保人-->
+            <CheckBox
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp"
+                android:id="@+id/cb_compensate_guarantee"
+                style="@style/MyCheck_Box"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="10dp"
+                />
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <!--支付方式 结束 -->
+
+
+
+</LinearLayout>

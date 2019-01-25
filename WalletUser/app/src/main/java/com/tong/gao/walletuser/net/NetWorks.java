@@ -4,6 +4,7 @@ import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
+import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
@@ -16,6 +17,7 @@ import com.tong.gao.walletuser.bean.response.ResponseMessageInformBean;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
 import com.tong.gao.walletuser.bean.response.ResponseNormalBean;
+import com.tong.gao.walletuser.bean.response.ResponseOrdersBean;
 import com.tong.gao.walletuser.bean.response.ResponsePersonalBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryMyAssertBean;
@@ -125,6 +127,14 @@ public class NetWorks extends RetrofitUtils {
         @GET(MyConstant.queryAssert)
         Observable<ResponseQueryMyAssertBean> queryAssert();
 
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.uesrBuyOrder)
+        Observable<ResponseOrdersBean> userBuyOrders(@Body RequestOrdersBean requestOrdersBean);
+
+
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -201,6 +211,10 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(service.queryAssert(),observer);
     }
 
+
+    public static void buyOrders(RequestOrdersBean requestOrdersBean,Observer<ResponseOrdersBean> observer){
+        setSubscribe(service.userBuyOrders(requestOrdersBean),observer);
+    }
 
 
 //

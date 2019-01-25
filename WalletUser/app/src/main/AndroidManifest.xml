@@ -95,7 +95,10 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.buyCoin.BuyCoinActivity"
+        <activity
+            android:name=".ui.activity.buyCoin.BuyCoinActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.activity.buyCoin.MerchantInfoActivity"
             android:launchMode="singleTask"></activity>
     </application>
 

@@ -1,5 +1,7 @@
 package com.tong.gao.walletuser.ui.fragments.buyCoin;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,17 +20,28 @@ import android.widget.TextView;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.BaseFragment;
 import com.tong.gao.walletuser.bean.CoinBean;
+import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
+import com.tong.gao.walletuser.bean.response.ResponseOrdersBean;
 import com.tong.gao.walletuser.constants.MyConstant;
+import com.tong.gao.walletuser.interfaces.DialogCallBack;
+import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.utils.CalculateUtils;
+import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
+import com.tong.gao.walletuser.utils.StringUtils;
+import com.tong.gao.walletuser.utils.ToastUtils;
 
+import java.util.List;
+
+import androidx.navigation.fragment.NavHostFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
-public class FragmentBuyCoin extends BaseFragment {
-
+public class FragmentBuyCoin extends BaseFragment implements View.OnClickListener {
 
     @BindView(R.id.ll_limit_container)
     LinearLayout llLimitContainer;
@@ -84,15 +98,17 @@ public class FragmentBuyCoin extends BaseFragment {
     }
 
 
+    private CoinBean coinBean;
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
 
-        Object object = PreferenceHelper.getInstance().getObject(MyConstant.tradeFragmentCoinBeanKey, null);
-        CoinBean coinBean = null;
-        if (null != object) {
-            coinBean = (CoinBean) object;
+        Intent intent = getActivity().getIntent();
+        if(null != intent){
+            coinBean = (CoinBean) intent.getSerializableExtra("coinBean");
+        }
 
-            LogUtils.d("coinBean.getAmountType():"+coinBean.getAmountType());
+        if (null != coinBean) {
+
             if (coinBean.getAmountType().equals(MyConstant.tradeFixedAmountType)) {
                 llLimitContainer.setVisibility(View.GONE);
                 llFixedContainer.setVisibility(View.VISIBLE);
@@ -102,65 +118,69 @@ public class FragmentBuyCoin extends BaseFragment {
             }
 
             updateUI(coinBean);
+
+
+            final CoinBean finalCoinBean = coinBean;
+            etInputMoney.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (flag) {
+                        flag = false;
+                        String text = s.toString().trim();
+                        if (TextUtils.isEmpty(text)) {
+                            etInputBuyNum.setText("");
+                            return;
+                        }
+                        String result = CalculateUtils.div(text, finalCoinBean.getPrice(), 2);
+                        etInputBuyNum.setText(result);
+                    } else {
+                        flag = true;
+                    }
+                }
+            });
+
+            etInputBuyNum.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (flag) {
+                        flag = false;
+                        String text = s.toString().trim();
+                        if (TextUtils.isEmpty(text)) {
+                            etInputMoney.setText("");
+                            return;
+                        }
+                        String result = CalculateUtils.mul(text, finalCoinBean.getPrice(), 2);
+                        etInputMoney.setText(result);
+                    } else {
+                        flag = true;
+                    }
+                }
+            });
         }
 
 
-        final CoinBean finalCoinBean = coinBean;
-        etInputMoney.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (flag) {
-                    flag = false;
-                    String text = s.toString().trim();
-                    if (TextUtils.isEmpty(text)) {
-                        etInputBuyNum.setText("");
-                        return;
-                    }
-                    String result = CalculateUtils.div(text, finalCoinBean.getPrice(), 2);
-                    etInputBuyNum.setText(result);
-                } else {
-                    flag = true;
-                }
-            }
-        });
-
-        etInputBuyNum.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (flag) {
-                    flag = false;
-                    String text = s.toString().trim();
-                    if (TextUtils.isEmpty(text)) {
-                        etInputMoney.setText("");
-                        return;
-                    }
-                    String result = CalculateUtils.mul(text, finalCoinBean.getPrice(), 2);
-                    etInputMoney.setText(result);
-                } else {
-                    flag = true;
-                }
-            }
-        });
+        btnCancel.setOnClickListener(this);
+        btnConfirm.setOnClickListener(this);
 
 
         return rootView;
@@ -181,15 +201,10 @@ public class FragmentBuyCoin extends BaseFragment {
 
 //    @Subscribe(threadMode = ThreadMode.MAIN)
 //    public void onEventCoinBean(CoinBeanEvent event){
-//
-//        LogUtils.d("收到 event 事件 1111111111111111");
-//
+//        LogUtils.d("收到 CoinBeanEvent 事件 1111111111111111");
 //        if(null != event){
-//
 //            updateUI(event.getCoinBean());
-//
 //        }
-//
 //    }
 
 
@@ -200,12 +215,14 @@ public class FragmentBuyCoin extends BaseFragment {
 
         tvPrice.setText(coinBean.getPrice() + " CNY = 1 AB");
 
-        if (MyConstant.tradeFixedAmountType.equals(coinBean.getAmountType())) { //限额
-            tvAmountType.setText("限额");
-            tvLimitValue.setText(coinBean.getLimitMinAmount() + "~" + coinBean.getLimitMaxAmount() + "CNY");
-        } else { //固额
+        if (MyConstant.tradeFixedAmountType.equals(coinBean.getAmountType())) { //固额
             tvAmountType.setText("固额");
             tvLimitValue.setText(coinBean.getFixedAmount() + "CNY");
+
+        } else { //限额
+            tvAmountType.setText("限额");
+            tvLimitValue.setText(coinBean.getLimitMinAmount() + "~" + coinBean.getLimitMaxAmount() + "CNY");
+
         }
 
         //支付方式 有哪些
@@ -224,33 +241,21 @@ public class FragmentBuyCoin extends BaseFragment {
             }
 
         }else{
-            getPaymentTypeValue(paymentValue);
+            paymentValue = getPaymentTypeValue(paymentway);
         }
 
         tvPayType.setText(paymentValue);
 
-        tvCanBuyMaxNum.setText(coinBean.getLimitMaxAmount());
+        tvCanBuyMaxNum.setText("最大购买数量为 "+coinBean.getLimitMaxAmount());
 
         //更新 限额 相关部分---------------------------------------------结束
 
 
+
         //更新 固额 相关部分---------------------------------------------开始
         tvFixedCoinNum.setText(coinBean.getFixedAmount() +" AB");
-
-        LogUtils.d("coinBean.getFixedAmount():"+coinBean.getFixedAmount());
-//        String result = CalculateUtils.mul(coinBean.getFixedAmount(), coinBean.getPrice(), 2);
-//        tvSellPrice.setText(result);
-
         tvSinglePrice.setText(coinBean.getPrice());
-
         tvReceiptAccount.setText(paymentValue);
-
-//        @BindView(R.id.tv_receipt_account)
-//        TextView tvReceiptAccount;
-//        @BindView(R.id.rl_cancel_and_submit)
-//        LinearLayout rlCancelAndSubmit;
-
-
         //更新 固额 相关部分---------------------------------------------结束
 
 
@@ -259,21 +264,128 @@ public class FragmentBuyCoin extends BaseFragment {
 
     private String getPaymentTypeValue(String paymentType) {
 
-        String paymentValue = "";
+       StringBuffer paymentValue = new StringBuffer();
         if (paymentType.equals(MyConstant.paymentWayZfb)) {
-            paymentValue.concat("支付宝");
+            paymentValue.append("支付宝");
         }
 
         if (paymentType.equals(MyConstant.paymentWayWeChat)) {
-            paymentValue.concat("微信");
+            paymentValue.append("微信");
         }
 
         if (paymentType.equals(MyConstant.paymentWayBank)) {
-            paymentValue.concat("银行卡");
+            paymentValue.append("银行卡");
         }
 
-        return paymentValue;
+        return paymentValue.toString();
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+
+        switch (v.getId()){
+
+            case R.id.btn_cancel:
+
+
+
+                break;
+
+
+
+            case R.id.btn_confirm:
+
+
+                if (null != coinBean) {
+
+                    if(coinBean.getAmountType() .equals(MyConstant.tradeFixedAmountType)){//固额
+
+                        if(PreferenceHelper.getInstance().getBooleanShareData(MyConstant.buyCoinNoMoreNotify,false)){
+                            requestOrders();
+                            return;
+                        }
+
+                    }else{ //判断是限额
+                        //需要判断输入的购买数量是否为空
+                        if(StringUtils.isEmpty(etInputMoney.getText().toString())
+                                || StringUtils.isEmpty(etInputBuyNum.getText().toString())){
+
+                            ToastUtils.showNomalShortToast("请填写购买数量");
+
+                            return;
+                        }
+                    }
+
+                    View dialog = DialogUtils.createAlertDialog(getActivity(), R.layout.dialog_buy_coin_notice, R.id.btn_confirm, 330, 300, new DialogCallBack() {
+                        @Override
+                        public void cancel(Dialog dialog) {
+                        }
+                        @Override
+                        public void sure(Dialog dialog) {
+                            dialog.dismiss();
+
+                            NavHostFragment.findNavController(FragmentBuyCoin.this)
+                                    .navigate(R.id.action_fragmentBuyCoin_to_fragmentBuyCoinoDetail);
+
+                            requestOrders();
+
+                        }
+                    });
+                    CheckBox cbNoNotice = dialog.findViewById(R.id.cb_no_notice);
+
+                    PreferenceHelper.getInstance().putBooleanValue(MyConstant.buyCoinNoMoreNotify,cbNoNotice.isChecked());
+
+                }else{
+                    ToastUtils.showNomalShortToast("请退回上一步重试");
+                }
+
+                break;
+
+
+
+        }
+
+    }
+
+    //调用 下单接口
+    private void requestOrders() {
+
+
+
+        NetWorks.buyOrders(new RequestOrdersBean(coinBean.getUgOtcAdvertId(),coinBean.getNumber()), new Observer<ResponseOrdersBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogUtils.d("开始定义 下单接口");
+            }
+
+            @Override
+            public void onNext(ResponseOrdersBean responseOrdersBean) {
+
+                LogUtils.d("responseOrdersBean:"+responseOrdersBean.toString());
+
+                if(null != responseOrdersBean && MyConstant.resultCodeIsOK.equals(responseOrdersBean.getErrcode()) ){
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(MyConstant.downOrderKey,responseOrdersBean);
+
+                    NavHostFragment.findNavController(FragmentBuyCoin.this)
+                            .navigate(R.id.action_fragmentBuyCoin_to_fragmentBuyCoinoDetail,bundle);
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("e:"+e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("e: onComplete()");
+            }
+        });
+
+    }
 }

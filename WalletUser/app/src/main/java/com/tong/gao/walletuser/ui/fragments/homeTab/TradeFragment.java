@@ -36,6 +36,7 @@ import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.ui.activity.buyCoin.BuyCoinActivity;
+import com.tong.gao.walletuser.ui.activity.buyCoin.MerchantInfoActivity;
 import com.tong.gao.walletuser.ui.fragments.FragmentCashFastSelect;
 import com.tong.gao.walletuser.ui.fragments.FragmentSetCashRange;
 import com.tong.gao.walletuser.utils.DialogUtils;
@@ -115,7 +116,7 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 
     private int pageNum = 1;
     private String pageSize = "4";
-    private String paymentWay = "1,2,3";
+    private String payWay = "1,2,3";
     private String type = "";
     private String price ="";
     private String limitMaxPrice ="" ;
@@ -152,19 +153,8 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
         rvMyTrade.setLayoutManager(mLinearLayoutManager);
         rvMyTrade.setAdapter(myTradeAdapter);
 
-        myTradeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getActivity(), "onItemClick" + position, Toast.LENGTH_SHORT).show();
-                PreferenceHelper.getInstance().putObject(MyConstant.tradeFragmentCoinBeanKey,(CoinBean)adapter.getData().get(position));
-                Intent intent = new Intent();
-//                intent.putExtra("coinBean",(CoinBean)adapter.getData().get(position));
-                intent.setClass(getActivity(),BuyCoinActivity.class);
-                startActivity(intent);
 
-//                EventBus.getDefault().post(new CoinBeanEvent((CoinBean)adapter.getData().get(position)));
-            }
-        });
+
 
         addLoadMoreListener();
 
@@ -178,7 +168,7 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
                 //TODO 刷新数据
                 sellList.clear();
 
-                loadData(pageNum+"",pageSize,paymentWay,type,price,limitMaxPrice,limitMinPrice);
+                loadData(pageNum+"",pageSize,payWay,type,price,limitMaxPrice,limitMinPrice);
             }
         });
 
@@ -198,9 +188,11 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 
         if(!isInitData){
 
-            DialogUtils.showProgressDialog(getActivity(),"加载数据中...");
+//            LogUtils.d("getActivity():"+getActivity());
 
-            loadData(pageNum+"",pageSize,paymentWay,type,price,limitMaxPrice,limitMinPrice);
+            DialogUtils.showProgressDialog(getContext(),"加载数据中...");
+
+            loadData(pageNum+"",pageSize,payWay,type,price,limitMaxPrice,limitMinPrice);
 
 
             if(null == fragmentCashFastSelect ){
@@ -235,7 +227,10 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 
                     TOTAL_COUNTER =Integer.parseInt(responseQueryBuyCoinBean.getPage().getSum()) ;
 
-                    updateUI(responseQueryBuyCoinBean.getAdvert());
+                    if(null != responseQueryBuyCoinBean.getAdvert()){
+                        updateUI(responseQueryBuyCoinBean.getAdvert());
+                    }
+
                     DialogUtils.hideProgressDialog();
 
                     isInitData = true;
@@ -304,7 +299,7 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 //        loadData(pageNum+"",pageSize,paymentWay,type,price,limitMaxPrice,limitMinPrice);
 
         RequestQueryBuyCoinBean requestQueryBuyCoinBean
-                = new RequestQueryBuyCoinBean(pageNum+"",pageSize,paymentWay,type,price,limitMaxPrice,limitMinPrice);
+                = new RequestQueryBuyCoinBean(pageNum+"",pageSize,payWay,type,price,limitMaxPrice,limitMinPrice);
 
         NetWorks.queryBuyCoins(requestQueryBuyCoinBean, new Observer<ResponseQueryBuyCoinBean>() {
             @Override
@@ -422,6 +417,8 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 
     }
 
+
+
     private void startAllContainerAnimation(boolean openOrCloseView) {
 
         if (openOrCloseView) {//如果打开
@@ -472,7 +469,6 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
         rlSelectTypeContainer.setVisibility(View.VISIBLE);
         int flSafeRootViewHeight = llSelectTypeView.getMeasuredHeight();
         int height = llSelectTypeView.getHeight();
-        LogUtils.d("flSafeRootViewHeight:" + flSafeRootViewHeight + " height:" + height);
         ObjectAnimator translation = ObjectAnimator.ofFloat(llSelectTypeView, "translationY", -460, 0);
         translation.setDuration(400);
         translation.start();
@@ -516,7 +512,7 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, CoinBean item) {
+        protected void convert(BaseViewHolder helper, final CoinBean item) {
 
             String nickName = item.getNickName();
             helper.setText(R.id.tv_seller_first_name, ""+nickName.charAt(0));  //名字首字母
@@ -530,9 +526,9 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
             helper.setText(R.id.tv_success_rate, item.getSuccessRate());
 
             if(item.getAmountType() .equals(MyConstant.tradeFixedAmountType)){//限额
-                helper.setText(R.id.tv_coin_trade_type, "单笔限额："+item.getLimitMinAmount() +"~"+item.getLimitMaxAmount()+"CNY");
-            }else{//固额
                 helper.setText(R.id.tv_coin_trade_type, "单笔固额："+item.getFixedAmount()+"CNY");
+            }else{//固额
+                helper.setText(R.id.tv_coin_trade_type, "单笔限额："+item.getLimitMinAmount() +"~"+item.getLimitMaxAmount()+"CNY");
             }
 
             helper.setText(R.id.tv_coin_unit_price, item.getPrice()+" CNY = 1AB");
@@ -550,6 +546,30 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
             }else{
                 displayPaymentIcon(helper, paymentway);
             }
+
+
+            helper.itemView.findViewById(R.id.ll_merchant_container_bottom).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("coinBean",item);
+                    intent.setClass(getActivity(),BuyCoinActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+
+            helper.itemView.findViewById(R.id.ll_merchant_container_top).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(getActivity(), "点击了头部" , Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.putExtra("coinBean",item);
+                    intent.setClass(getActivity(),MerchantInfoActivity.class);
+                    startActivity(intent);
+                }
+            });
+
 
 
 

@@ -223,6 +223,11 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/gray_8</item>
     </style>
+    <style name="text_style_14sp_gray_999999">
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/gray_999999</item>
+    </style>
 
     <style name="text_style_18sp_gray_7">
         <item name="android:textSize">18sp</item>

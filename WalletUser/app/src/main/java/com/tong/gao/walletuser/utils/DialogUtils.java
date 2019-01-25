@@ -30,7 +30,7 @@ public class DialogUtils {
         Window window = dialog.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
 
-        lp.width = DensityUtil.dp2px(mActivity, 330);
+        lp.width = DensityUtil.dp2px(mActivity, 310);
         lp.height = DensityUtil.dp2px(mActivity, 440);
         window.setGravity(Gravity.CENTER);
         window.setAttributes(lp);
@@ -75,6 +75,73 @@ public class DialogUtils {
 
 
 
+        v.findViewById(sureId).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCallBack.sure(dialog);
+            }
+        });
+
+
+        return v;
+    }
+
+
+
+    public static View createAlertDialog(Activity mActivity, int resource,int sureId, int height,int width,final DialogCallBack dialogCallBack) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity,R.style.Dialog);
+        View v = LayoutInflater.from(mActivity).inflate(resource, null);
+        final Dialog dialog = builder.create();
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+
+        lp.width = DensityUtil.dp2px(mActivity, width);
+        lp.height = DensityUtil.dp2px(mActivity, height);
+        window.setGravity(Gravity.CENTER);
+        window.setAttributes(lp);
+        window.setContentView(v);
+
+
+
+        v.findViewById(sureId).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCallBack.sure(dialog);
+            }
+        });
+
+
+        return v;
+    }
+
+
+    public static View createAlertDialog(Activity mActivity, int resource,int sureId,int cancelId, int height,int width,final DialogCallBack dialogCallBack) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity,R.style.Dialog);
+        View v = LayoutInflater.from(mActivity).inflate(resource, null);
+        final Dialog dialog = builder.create();
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+
+        lp.width = DensityUtil.dp2px(mActivity, width);
+        lp.height = DensityUtil.dp2px(mActivity, height);
+        window.setGravity(Gravity.CENTER);
+        window.setAttributes(lp);
+        window.setContentView(v);
+
+
+
+        v.findViewById(cancelId).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCallBack.cancel(dialog);
+            }
+        });
         v.findViewById(sureId).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
