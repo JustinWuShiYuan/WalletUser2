@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-582" />
-                            <option name="y" value="-69" />
+                            <option name="x" value="-791" />
+                            <option name="y" value="-63" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -34,9 +34,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-9" />
-                            <option name="y" value="-73" />
+                            <option name="x" value="-276" />
+                            <option name="y" value="-75" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentBuyCoinResult_to_fragmentMyAssert2">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -46,18 +55,35 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-298" />
-                            <option name="y" value="-72" />
+                            <option name="x" value="-516" />
+                            <option name="y" value="58" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_fragmentBuyCoinoDetail_to_fragmentBuyCoin">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_fragmentBuyCoinoDetail_to_fragmentBuyCoinResult">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentMyAssert2">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-46" />
+                            <option name="y" value="-75" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -1,6 +1,8 @@
 package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestBuyerHadPayMoney;
+import com.tong.gao.walletuser.bean.request.RequestCancelOrder;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
@@ -11,6 +13,8 @@ import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
+import com.tong.gao.walletuser.bean.response.ResponseBuyerHadPayMoney;
+import com.tong.gao.walletuser.bean.response.ResponseCancelOrder;
 import com.tong.gao.walletuser.bean.response.ResponseChangeNickNameBean;
 import com.tong.gao.walletuser.bean.response.ResponseLoginInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMessageInformBean;
@@ -134,6 +138,16 @@ public class NetWorks extends RetrofitUtils {
         Observable<ResponseOrdersBean> userBuyOrders(@Body RequestOrdersBean requestOrdersBean);
 
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.buyerHadPayMoney)
+        Observable<ResponseBuyerHadPayMoney> buyerHadPayMoney(@Body RequestBuyerHadPayMoney requestBuyerHadPayMoney);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.cancelOrder)
+        Observable<ResponseCancelOrder> cancelOrder(@Body RequestCancelOrder requestCancelOrder);
+
+
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
@@ -214,6 +228,15 @@ public class NetWorks extends RetrofitUtils {
 
     public static void buyOrders(RequestOrdersBean requestOrdersBean,Observer<ResponseOrdersBean> observer){
         setSubscribe(service.userBuyOrders(requestOrdersBean),observer);
+    }
+
+
+    public static void buyerHadPay(RequestBuyerHadPayMoney requestBuyerHadPayMoney,Observer<ResponseBuyerHadPayMoney> observer){
+        setSubscribe(service.buyerHadPayMoney(requestBuyerHadPayMoney),observer);
+    }
+
+    public static void cancleOrder(RequestCancelOrder requestCancelOrder,Observer<ResponseCancelOrder> observer){
+        setSubscribe(service.cancelOrder(requestCancelOrder),observer);
     }
 
 

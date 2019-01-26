@@ -267,7 +267,8 @@
                         android:layout_marginRight="10dp"
                         android:gravity="center"
                         android:id="@+id/rl_payment_zfb"
-                        android:background="@drawable/shape_white_bg_blue_line">
+                        android:background="@drawable/shape_white_bg_blue_line"
+                        android:visibility="gone">
 
 
                         <ImageView
@@ -299,7 +300,8 @@
                         android:layout_marginRight="8dp"
                         android:gravity="center"
                         android:id="@+id/rl_payment_we_chat"
-                        android:background="@drawable/shape_white_bg_gray_line">
+                        android:background="@drawable/shape_white_bg_gray_line"
+                        android:visibility="gone">
 
 
                         <ImageView
@@ -325,13 +327,13 @@
 
                     <RelativeLayout
                         android:layout_width="92dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:id="@+id/rl_payment_bank"
-                        android:background="@drawable/shape_white_bg_gray_line">
+                        android:background="@drawable/shape_white_bg_gray_line"
+                        android:visibility="gone">
 
 
                         <ImageView
@@ -403,7 +405,8 @@
                             android:layout_height="16dp"
                             android:layout_marginLeft="6dp"
                             android:background="@drawable/icon_details_3"
-                            android:id="@+id/iv_copy_payment_reference_num_zfb"/>
+                            android:id="@+id/iv_copy_payment_reference_num_zfb"
+                            />
 
                     </LinearLayout>
 
@@ -739,6 +742,7 @@
             android:paddingBottom="4dp">
 
             <ImageView
+                android:clickable="false"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:src="@drawable/icon_cont_3" />

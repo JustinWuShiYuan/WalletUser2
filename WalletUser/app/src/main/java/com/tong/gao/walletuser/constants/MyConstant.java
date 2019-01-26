@@ -19,6 +19,8 @@ public class MyConstant {
     public static final String exitLogin = "/ug/usr/pblou.do";           //退出登录
     public static final String queryMyAssert = "/ug/acc/pbads.do";           //资产查询
     public static final String uesrBuyOrder = "/ug/ord/pbpos.do";           //用户下单接口
+    public static final String buyerHadPayMoney = "/ug/ord/pbcfs.do";           //买家确认付款接口
+    public static final String cancelOrder = "/ug/ord/pbcos.do";           //取消订单接口
 
 
 
@@ -38,12 +40,15 @@ public class MyConstant {
     public static final String personalBeanKey = "personalBeanKey";
     public static final String sellerIsVip = "1";       //为vip
     public static final String tradeFixedAmountType = "2";       //1.限额2.固额
-    public static final String paymentWayZfb = "1";       //
-    public static final String paymentWayWeChat = "2";       //
+    public static final String paymentWayWeChat = "1";       //
+    public static final String paymentWayZfb = "2";       //
     public static final String paymentWayBank = "3";       //
     public static final String tradeFragmentCoinBeanKey = "tradeFragmentCoinBeanKey";       //
     public static final String buyCoinNoMoreNotify = "buyCoinNoMoreNotify";       //买币不在提醒对话框
-    public static final String downOrderKey = "downOrderKey";   //下单key
+    public static final String downOrderKey = "downOrderKey";                      //下单key
+    public static final String hadPayMoneyOrderKey = "hadPayMoneyOrderKey";                      //下单 付完钱的key
+    public static final String orderCoinBeanKey = "orderCoinBeanKey";
+    public static final String valueIsNull = "*null*";
 
 
 

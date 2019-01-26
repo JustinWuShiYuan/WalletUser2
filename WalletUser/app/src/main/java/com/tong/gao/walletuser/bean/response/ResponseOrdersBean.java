@@ -14,6 +14,9 @@ public class ResponseOrdersBean implements Serializable {
     public String orderAmount;
     public String orderPrice;
     public String orderNumber;
+    public String buyUserId;
+    public String sellUserId;
+    public String rongyunToken;
     public String createdTime;
     public String prompt;
     public String paymentNumber;
@@ -21,7 +24,7 @@ public class ResponseOrdersBean implements Serializable {
 
     public List<PaymentBean> paymentWay;
 
-    public ResponseOrdersBean(String errcode, String msg, String orderId, String orderNo, String orderAmount, String orderPrice, String orderNumber, String createdTime, String prompt, String paymentNumber, List<PaymentBean> paymentWay) {
+    public ResponseOrdersBean(String errcode, String msg, String orderId, String orderNo, String orderAmount, String orderPrice, String orderNumber, String buyUserId, String sellUserId, String rongyunToken, String createdTime, String prompt, String paymentNumber, List<PaymentBean> paymentWay) {
         this.errcode = errcode;
         this.msg = msg;
         this.orderId = orderId;
@@ -29,10 +32,37 @@ public class ResponseOrdersBean implements Serializable {
         this.orderAmount = orderAmount;
         this.orderPrice = orderPrice;
         this.orderNumber = orderNumber;
+        this.buyUserId = buyUserId;
+        this.sellUserId = sellUserId;
+        this.rongyunToken = rongyunToken;
         this.createdTime = createdTime;
         this.prompt = prompt;
         this.paymentNumber = paymentNumber;
         this.paymentWay = paymentWay;
+    }
+
+    public String getBuyUserId() {
+        return buyUserId;
+    }
+
+    public void setBuyUserId(String buyUserId) {
+        this.buyUserId = buyUserId;
+    }
+
+    public String getSellUserId() {
+        return sellUserId;
+    }
+
+    public void setSellUserId(String sellUserId) {
+        this.sellUserId = sellUserId;
+    }
+
+    public String getRongyunToken() {
+        return rongyunToken;
+    }
+
+    public void setRongyunToken(String rongyunToken) {
+        this.rongyunToken = rongyunToken;
     }
 
     public String getErrcode() {

@@ -14,10 +14,15 @@
         android:id="@+id/fragmentBuyCoinoDetail"
         android:name="com.tong.gao.walletuser.ui.fragments.buyCoin.FragmentBuyCoinDetail"
         android:label="fragment_buy_coin_detail"
-        tools:layout="@layout/fragment_buy_coin_detail" ><action android:id="@+id/action_fragmentBuyCoinoDetail_to_fragmentBuyCoinResult" app:destination="@id/fragmentBuyCoinResult"/></fragment>
+        tools:layout="@layout/fragment_buy_coin_detail" ><action android:id="@+id/action_fragmentBuyCoinoDetail_to_fragmentBuyCoinResult" app:destination="@id/fragmentBuyCoinResult"/><action android:id="@+id/action_fragmentBuyCoinoDetail_to_fragmentBuyCoin" app:destination="@id/fragmentBuyCoin"/></fragment>
     <fragment
         android:id="@+id/fragmentBuyCoinResult"
         android:name="com.tong.gao.walletuser.ui.fragments.buyCoin.FragmentBuyCoinResult"
         android:label="fragment_buy_coin_result"
-        tools:layout="@layout/fragment_buy_coin_result" />
+        tools:layout="@layout/fragment_buy_coin_result" ><action android:id="@+id/action_fragmentBuyCoinResult_to_fragmentMyAssert2" app:destination="@id/fragmentMyAssert2"/></fragment>
+    <fragment
+        android:id="@+id/fragmentMyAssert2"
+        android:name="com.tong.gao.walletuser.ui.fragments.personTab.FragmentMyAssert"
+        android:label="fragment_my_assert"
+        tools:layout="@layout/fragment_my_assert" />
 </navigation>

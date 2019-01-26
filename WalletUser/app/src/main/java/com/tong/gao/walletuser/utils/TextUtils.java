@@ -1,5 +1,9 @@
 package com.tong.gao.walletuser.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by terry.c on 29/03/2018.
  */
@@ -131,6 +135,64 @@ public class TextUtils {
 
     public static String hidePhone(String phone) {
         return phone.substring(0,3)+"****"+phone.substring(7,phone.length());
+    }
+
+
+    public static String parseTime1(long mss) {
+        long days = mss / (1000 * 60 * 60 * 24);
+        long hours = (mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+        long minutes = (mss % (1000 * 60 * 60)) / (1000 * 60);
+        long seconds = (mss % (1000 * 60)) / 1000;
+//        return days + " days " + hours + " hours " + minutes + " minutes "
+//                + seconds + " seconds ";
+        StringBuffer str = new StringBuffer();
+        if (minutes<10) {
+            str.append("0" + minutes);
+        } else {
+            str.append(minutes);
+        }
+        str.append(":");
+        if (seconds<10) {
+            str.append("0" + seconds);
+        } else {
+            str.append(seconds);
+        }
+
+        return  str.toString();
+    }
+    /**
+     *
+     * @param begin 时间段的开始
+     * @param end   时间段的结束
+     * @return  输入的两个Date类型数据之间的时间间格用* days * hours * minutes * seconds的格式展示
+     * @author fy.zhang
+     */
+    public static String formatDuring(Date begin, Date end) {
+        return parseTime1(end.getTime() - begin.getTime());
+    }
+
+
+    public static long stringToLong(String strTime, String formatType)
+            throws ParseException {
+        Date date = stringToDate(strTime, formatType); // String类型转成date类型
+        if (date == null) {
+            return 0;
+        } else {
+            long currentTime = dateToLong(date); // date类型转成long类型
+            return currentTime;
+        }
+    }
+
+    public static Date stringToDate(String strTime, String formatType)
+            throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat(formatType);
+        Date date = null;
+        date = formatter.parse(strTime);
+        return date;
+    }
+
+    public static long dateToLong(Date date) {
+        return date.getTime();
     }
 
 }

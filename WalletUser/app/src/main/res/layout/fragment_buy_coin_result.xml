@@ -54,7 +54,8 @@
                 android:textSize="24sp"
                 android:textColor="@color/gray_3"
                 android:text="订单状态"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                android:id="@+id/tv_order_status"/>
 
         </RelativeLayout>
 
@@ -90,6 +91,7 @@
                 android:textSize="15sp" />
 
             <ImageView
+                android:id="@+id/iv_copy_order_num"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_centerVertical="true"
@@ -110,7 +112,7 @@
                 android:id="@+id/tv_order_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订单金额：:"
+                android:text="订单金额:"
                 android:textColor="@color/gray_6"
                 android:textSize="15sp" />
 
@@ -188,6 +190,7 @@
                 android:textColor="@color/gray_3"
                 android:textSize="15sp"
                 android:text="590 AB"
+                android:id="@+id/tv_buy_coin_number"
                 />
 
         </RelativeLayout>
@@ -245,6 +248,7 @@
                 android:textColor="@color/gray_3"
                 android:textSize="15sp"
                 android:text="437867"
+                android:id="@+id/tv_payment_reference_num"
                 />
 
         </RelativeLayout>
@@ -260,7 +264,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_sold_out"
+                android:id="@+id/btn_look_assert"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -273,7 +277,7 @@
 
             <Button
                 android:layout_marginLeft="8dp"
-                android:id="@+id/btn_change_advertisement"
+                android:id="@+id/btn_scan_code_and_transfer"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -290,6 +294,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_contact_merchant"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white1"
@@ -297,6 +302,7 @@
 
 
         <ImageView
+            android:clickable="false"
             android:layout_marginLeft="140dp"
             android:id="@+id/iv_message"
             android:layout_width="26dp"

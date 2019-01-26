@@ -211,6 +211,8 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
 
         if (MyConstant.tradeFixedAmountType.equals(coinBean.getAmountType())) { //固额
             tvAmountType.setText("固额");
+
+
             tvLimitValue.setText(coinBean.getFixedAmount() + "CNY");
 
         } else { //限额
@@ -247,9 +249,15 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
 
 
         //更新 固额 相关部分---------------------------------------------开始
-        tvFixedCoinNum.setText(coinBean.getFixedAmount() +" AB");
-        tvSinglePrice.setText(coinBean.getPrice());
-        tvReceiptAccount.setText(paymentValue);
+
+        if(!coinBean.getFixedAmount().equals(MyConstant.valueIsNull)){
+            float v1 = Float.parseFloat(coinBean.getFixedAmount());
+            float v2 = Float.parseFloat(coinBean.getPrice());
+            tvFixedCoinNum.setText((v1/v2) +" AB");
+            tvSinglePrice.setText(coinBean.getPrice());
+            tvReceiptAccount.setText(paymentValue);
+        }
+
         //更新 固额 相关部分---------------------------------------------结束
 
 
@@ -283,6 +291,7 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
 
             case R.id.btn_cancel:
 
+                getActivity().finish();
 
 
                 break;
@@ -297,7 +306,7 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
                     if(coinBean.getAmountType() .equals(MyConstant.tradeFixedAmountType)){//固额
 
                         if(PreferenceHelper.getInstance().getBooleanShareData(MyConstant.buyCoinNoMoreNotify,false)){
-                            requestOrders();
+                            requestOrders(coinBean.getFixedAmount());
                             return;
                         }
 
@@ -307,7 +316,6 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
                                 || StringUtils.isEmpty(etInputBuyNum.getText().toString())){
 
                             ToastUtils.showNomalShortToast("请填写购买数量");
-
                             return;
                         }
                     }
@@ -320,11 +328,16 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
                         public void sure(Dialog dialog) {
                             dialog.dismiss();
 
-                            NavHostFragment.findNavController(FragmentBuyCoin.this)
-                                    .navigate(R.id.action_fragmentBuyCoin_to_fragmentBuyCoinoDetail);
+                            if(coinBean.getAmountType() .equals(MyConstant.tradeFixedAmountType)){
+                                float v1 = Float.parseFloat(coinBean.getFixedAmount());
+                                float v2 = Float.parseFloat(coinBean.getPrice());
 
-                            requestOrders();
+                                LogUtils.d("v1/v2:"+(v1/v2));
 
+                                requestOrders((v1/v2)+"");
+                            }else{
+                                requestOrders(etInputBuyNum.getText().toString());
+                            }
                         }
                     });
                     CheckBox cbNoNotice = dialog.findViewById(R.id.cb_no_notice);
@@ -344,11 +357,11 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
     }
 
     //调用 下单接口
-    private void requestOrders() {
+    private void requestOrders(String buyCoinNum) {
 
+        LogUtils.d("coinBean.getUgOtcAdvertId()："+coinBean.getUgOtcAdvertId()+" coinBean.getNumber()："+etInputBuyNum.getText().toString());
 
-
-        NetWorks.buyOrders(new RequestOrdersBean(coinBean.getUgOtcAdvertId(),coinBean.getNumber()), new Observer<ResponseOrdersBean>() {
+        NetWorks.buyOrders(new RequestOrdersBean(coinBean.getUgOtcAdvertId(),buyCoinNum), new Observer<ResponseOrdersBean>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.d("开始定义 下单接口");
@@ -366,6 +379,8 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
 
                     NavHostFragment.findNavController(FragmentBuyCoin.this)
                             .navigate(R.id.action_fragmentBuyCoin_to_fragmentBuyCoinoDetail,bundle);
+
+
                 }
 
             }
@@ -382,4 +397,5 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
         });
 
     }
+
 }
