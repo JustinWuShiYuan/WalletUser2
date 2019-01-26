@@ -25,6 +25,8 @@ import com.tong.gao.walletuser.utils.ToastUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
@@ -215,6 +217,7 @@ public class FragmentBuyCoinDetail extends BaseFragment implements View.OnClickL
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
 

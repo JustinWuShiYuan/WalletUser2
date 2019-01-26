@@ -32,6 +32,8 @@ import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.StringUtils;
 import com.tong.gao.walletuser.utils.ToastUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import androidx.navigation.fragment.NavHostFragment;
@@ -196,16 +198,8 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
-
-
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onEventCoinBean(CoinBeanEvent event){
-//        LogUtils.d("收到 CoinBeanEvent 事件 1111111111111111");
-//        if(null != event){
-//            updateUI(event.getCoinBean());
-//        }
-//    }
 
 
     private void updateUI(CoinBean coinBean) {
