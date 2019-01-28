@@ -101,7 +101,8 @@
         <activity
             android:name=".ui.activity.buyCoin.MerchantInfoActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.activity.MyOrderListActivity"></activity>
+        <activity android:name=".ui.activity.MyOrderListActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.tong.gao.walletuser.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,21 +14,18 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.bean.PageBean;
 import com.tong.gao.walletuser.bean.UserOrderBean;
-import com.tong.gao.walletuser.bean.event.MyOrderListEvent;
 import com.tong.gao.walletuser.bean.myEnum.OrderStatus;
 import com.tong.gao.walletuser.bean.request.RequestQueryOrderList;
 import com.tong.gao.walletuser.bean.response.ResponseQueryOrderList;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
+import com.tong.gao.walletuser.ui.activity.OrderDetailActivity;
 import com.tong.gao.walletuser.ui.loading.BaseFragment;
 import com.tong.gao.walletuser.ui.loading.LoadingPager;
 import com.tong.gao.walletuser.utils.LogUtils;
-import com.tong.gao.walletuser.utils.ToastUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -80,7 +78,12 @@ public class FragmentMyOrderList extends BaseFragment {
         myOrderListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showNomalShortToast("1111111111调往详情"+position);
+                UserOrderBean userOrderBean = (UserOrderBean) adapter.getData().get(position);
+                Intent intent = new Intent();
+                intent.putExtra(MyConstant.orderItemDetailKey,userOrderBean);
+                intent.setClass(getActivity(),OrderDetailActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -189,6 +192,8 @@ public class FragmentMyOrderList extends BaseFragment {
                         TOTAL_COUNTER =Integer.parseInt(pageOut.getSum()) ;
                     }
                     updateUI();
+                }else{
+                    getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
                 }
 
             }

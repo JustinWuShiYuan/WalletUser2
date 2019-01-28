@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_order_detail"
+    app:startDestination="@id/orderDetailFragment">
+
+
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.tong.gao.walletuser.ui.fragments.orderDetail.FragmentOrderDetail"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" ><action android:id="@+id/action_orderDetailFragment_to_fragmentOrderAppeal" app:destination="@id/fragmentOrderAppeal"/></fragment>
+    <fragment
+        android:id="@+id/fragmentOrderAppeal"
+        android:name="com.tong.gao.walletuser.ui.fragments.orderDetail.FragmentOrderAppeal"
+        android:label="fragment_order_appeal"
+        tools:layout="@layout/fragment_order_appeal" />
+
+</navigation>

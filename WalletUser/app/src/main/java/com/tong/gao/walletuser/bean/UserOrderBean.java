@@ -25,8 +25,10 @@ public class UserOrderBean implements Serializable {
     private String orderAmount;
     private String orderType;
     private String orderSellIsVip;
+    private String restTime;//剩余时间
+    private String txHash;//交易号
 
-    public UserOrderBean(String otcOrderId, String orderNo, String advertId, String buyUserId, String sellUserId, String number, String price, String brokerage, String status, String createdTime, String modifyTime, String paymentTime, String finishTime, String confirmTime, String closeTime, String isEvaluation, String convertRmb, String paymentWay, String orderAmount, String orderType, String orderSellIsVip) {
+    public UserOrderBean(String otcOrderId, String orderNo, String advertId, String buyUserId, String sellUserId, String number, String price, String brokerage, String status, String createdTime, String modifyTime, String paymentTime, String finishTime, String confirmTime, String closeTime, String isEvaluation, String convertRmb, String paymentWay, String orderAmount, String orderType, String orderSellIsVip, String restTime, String txHash) {
         this.otcOrderId = otcOrderId;
         this.orderNo = orderNo;
         this.advertId = advertId;
@@ -48,6 +50,24 @@ public class UserOrderBean implements Serializable {
         this.orderAmount = orderAmount;
         this.orderType = orderType;
         this.orderSellIsVip = orderSellIsVip;
+        this.restTime = restTime;
+        this.txHash = txHash;
+    }
+
+    public String getRestTime() {
+        return restTime;
+    }
+
+    public void setRestTime(String restTime) {
+        this.restTime = restTime;
+    }
+
+    public String getTxHash() {
+        return txHash;
+    }
+
+    public void setTxHash(String txHash) {
+        this.txHash = txHash;
     }
 
     public String getOrderAmount() {
@@ -242,6 +262,8 @@ public class UserOrderBean implements Serializable {
                 ", orderAmount='" + orderAmount + '\'' +
                 ", orderType='" + orderType + '\'' +
                 ", orderSellIsVip='" + orderSellIsVip + '\'' +
+                ", restTime='" + restTime + '\'' +
+                ", txHash='" + txHash + '\'' +
                 '}';
     }
 }

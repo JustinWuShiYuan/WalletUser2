@@ -22,7 +22,7 @@ public class MyConstant {
     public static final String buyerHadPayMoney = "/ug/ord/pbcfs.do";           //买家确认付款接口
     public static final String cancelOrder = "/ug/ord/pbcos.do";           //取消订单接口
     public static final String queryOrderList = "/ug/ord/pbuos.do";           //查询订单列表接口
-
+    public static final String orderAppeal = "/ug/ord/pbaos.do";           //三十一、订单申诉
 
 
 
@@ -51,6 +51,7 @@ public class MyConstant {
     public static final String orderCoinBeanKey = "orderCoinBeanKey";
     public static final String valueIsNull = "*null*";
     public static final String myOrderListKey = "myOrderListKey";
+    public static final String orderItemDetailKey = "orderItemDetailKey";
     public static final String transferAccountAccordKey = "transferAccountAccordKey";
 
 

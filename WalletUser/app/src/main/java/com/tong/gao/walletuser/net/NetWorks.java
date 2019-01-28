@@ -6,6 +6,7 @@ import com.tong.gao.walletuser.bean.request.RequestCancelOrder;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
+import com.tong.gao.walletuser.bean.request.RequestOrderApply;
 import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryOrderList;
@@ -22,6 +23,7 @@ import com.tong.gao.walletuser.bean.response.ResponseMessageInformBean;
 import com.tong.gao.walletuser.bean.response.ResponseMyAccountInfo;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
 import com.tong.gao.walletuser.bean.response.ResponseNormalBean;
+import com.tong.gao.walletuser.bean.response.ResponseOrderAppeal;
 import com.tong.gao.walletuser.bean.response.ResponseOrdersBean;
 import com.tong.gao.walletuser.bean.response.ResponsePersonalBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
@@ -155,6 +157,11 @@ public class NetWorks extends RetrofitUtils {
         Observable<ResponseQueryOrderList> queryOrderList(@Body RequestQueryOrderList requestQueryOrderList);
 
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.orderAppeal)
+        Observable<ResponseOrderAppeal> orderAppeal(@Body RequestOrderApply requestOrderApply);
+
+
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
@@ -248,6 +255,11 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryOrderList(RequestQueryOrderList requestQueryOrderList, Observer<ResponseQueryOrderList> observer){
         setSubscribe(service.queryOrderList(requestQueryOrderList),observer);
+    }
+
+
+    public static void orderAppeal(RequestOrderApply requestOrderApply, Observer<ResponseOrderAppeal> observer){
+        setSubscribe(service.orderAppeal(requestOrderApply),observer);
     }
 
 

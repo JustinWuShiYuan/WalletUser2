@@ -480,6 +480,7 @@ public class FragmentBuyCoinDetail extends BaseFragment implements View.OnClickL
                                 .navigate(R.id.action_fragmentBuyCoinoDetail_to_fragmentBuyCoinResult,bundle);
 
                     }else{
+                        LogUtils.d("MSG:"+responseBuyerHadPayMoney.getMsg());
                         ToastUtils.showNomalShortToast(responseBuyerHadPayMoney.getMsg());
                     }
 

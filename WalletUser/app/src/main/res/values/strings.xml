@@ -62,7 +62,7 @@
     <string name="checkGetMoneyGo">请确认收到款项后再放行</string>
     <string name="hadPayMoney">对方已确认付款</string>
     <string name="orderNum">数量</string>
-    <string name="give_user_hint">请再15分钟内处理，超时将影响卖家信誉</string>
+    <string name="give_user_hint">15 分钟未确认付款，订单将关闭</string>
     <string name="give_user_hint2">对方未在15分钟内支付，订单已关闭</string>
     <string name="rollOutNum">转出数量</string>
     <string name="getNum">收到数量</string>

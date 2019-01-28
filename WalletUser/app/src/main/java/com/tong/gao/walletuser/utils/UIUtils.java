@@ -5,13 +5,19 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.widget.TextView;
 
 import com.tong.gao.walletuser.AppApplication;
+import com.tong.gao.walletuser.interfaces.CountDownCallBack;
 
 
 public class UIUtils {
+
+
+	private static CountDownTimer countDownTimer;
 
 	/**
 	 * 上下文的获取
@@ -125,5 +131,29 @@ public class UIUtils {
 				ToastUtils.showNomalShortToast("复制成功");
 			}
 		});
+	}
+
+
+	public static void startCountDown(long continueTime, final TextView tvDisplayTime, final CountDownCallBack callback) {
+		if (countDownTimer == null) {
+			countDownTimer = new CountDownTimer(continueTime, 1000) {
+				@Override
+				public void onTick(long millisUntilFinished) {
+					tvDisplayTime.setText(TextUtils.parseTime1(millisUntilFinished));
+				}
+
+				@Override
+				public void onFinish() {
+					callback.countDownFinish();
+				}
+			}.start();
+		}
+	}
+
+	public static void endCountDown() {
+		if (countDownTimer != null) {
+			countDownTimer.cancel();
+			countDownTimer = null;
+		}
 	}
 }
