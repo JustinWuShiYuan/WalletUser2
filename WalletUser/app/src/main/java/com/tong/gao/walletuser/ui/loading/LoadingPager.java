@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.factory.ThreadPoolFactory;
+import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
 
@@ -102,6 +103,9 @@ public abstract class LoadingPager extends FrameLayout implements OnClickListene
 
 	private void updateUIStyle() {
 
+	    LogUtils.d("LoadingPager","mCurrentState:"+mCurrentState +"  mLoadingView != null:"+(mLoadingView != null)+
+        "  mEmptyView != null:"+(mEmptyView != null)+"  mErrorView != null:"+(mErrorView != null));
+
 		// 1.loading
 		if (mLoadingView != null) {
 			mLoadingView.setVisibility(mCurrentState == STATE_LOADING || mCurrentState == STATE_NONE ? View.VISIBLE : View.GONE);
@@ -117,6 +121,7 @@ public abstract class LoadingPager extends FrameLayout implements OnClickListene
 			mErrorView.setVisibility(mCurrentState == STATE_ERROR ? View.VISIBLE : View.GONE);
 		}
 
+//		LogUtils.d("mSuccessView == null :"+(mSuccessView == null )+" mCurrentState == STATE_SUCCESS "+( mCurrentState == STATE_SUCCESS ));
 		// 4. 成功
 		if (mSuccessView == null && mCurrentState == STATE_SUCCESS) {
 			// 初始化View

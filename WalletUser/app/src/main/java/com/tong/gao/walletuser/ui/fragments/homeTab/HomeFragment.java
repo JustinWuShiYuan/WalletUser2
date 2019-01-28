@@ -36,6 +36,7 @@ import com.tong.gao.walletuser.factory.ThreadPoolFactory;
 import com.tong.gao.walletuser.interfaces.DialogCallBack;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.ui.activity.LoginActivity;
+import com.tong.gao.walletuser.ui.activity.MyOrderListActivity;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.ui.activity.TransferRecordActivity;
 import com.tong.gao.walletuser.ui.view.HomeADPageView;
@@ -351,7 +352,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             case R.id.rl_order_container:        //中间6个条目 我的订单
 
-                ToastUtils.showNomalShortToast("  我的订单");
+                startActivity(new Intent(getActivity(),MyOrderListActivity.class));
 
                 break;
 

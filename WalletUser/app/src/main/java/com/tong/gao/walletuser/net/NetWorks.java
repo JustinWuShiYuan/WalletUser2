@@ -8,6 +8,7 @@ import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
 import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
+import com.tong.gao.walletuser.bean.request.RequestQueryOrderList;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
@@ -25,6 +26,7 @@ import com.tong.gao.walletuser.bean.response.ResponseOrdersBean;
 import com.tong.gao.walletuser.bean.response.ResponsePersonalBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryMyAssertBean;
+import com.tong.gao.walletuser.bean.response.ResponseQueryOrderList;
 import com.tong.gao.walletuser.bean.response.ResponseRegisterBean;
 import com.tong.gao.walletuser.bean.response.ResponseVerifyGoogleBean;
 import com.tong.gao.walletuser.constants.MyConstant;
@@ -148,6 +150,11 @@ public class NetWorks extends RetrofitUtils {
         Observable<ResponseCancelOrder> cancelOrder(@Body RequestCancelOrder requestCancelOrder);
 
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryOrderList)
+        Observable<ResponseQueryOrderList> queryOrderList(@Body RequestQueryOrderList requestQueryOrderList);
+
+
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
@@ -235,8 +242,12 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(service.buyerHadPayMoney(requestBuyerHadPayMoney),observer);
     }
 
-    public static void cancleOrder(RequestCancelOrder requestCancelOrder,Observer<ResponseCancelOrder> observer){
+    public static void cancelOrder(RequestCancelOrder requestCancelOrder, Observer<ResponseCancelOrder> observer){
         setSubscribe(service.cancelOrder(requestCancelOrder),observer);
+    }
+
+    public static void queryOrderList(RequestQueryOrderList requestQueryOrderList, Observer<ResponseQueryOrderList> observer){
+        setSubscribe(service.queryOrderList(requestQueryOrderList),observer);
     }
 
 

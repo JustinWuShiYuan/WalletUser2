@@ -414,7 +414,7 @@ public class FragmentBuyCoinDetail extends BaseFragment implements View.OnClickL
     //取消订单
     private void cancelOrder() {
 
-        NetWorks.cancleOrder(new RequestCancelOrder(responseOrdersBean.getOrderNo()), new Observer<ResponseCancelOrder>() {
+        NetWorks.cancelOrder(new RequestCancelOrder(responseOrdersBean.getOrderNo()), new Observer<ResponseCancelOrder>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.d(""+d);

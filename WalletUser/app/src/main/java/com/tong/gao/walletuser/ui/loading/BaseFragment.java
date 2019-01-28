@@ -61,14 +61,12 @@ public abstract class BaseFragment extends Fragment{
 					executeEmptyTask();
 				}
 			};
-			EventBus.getDefault().register(this);
 
 		} else {
 			ViewParent parent = mPager.getParent();
 			if (parent != null && parent instanceof ViewGroup) {
 				((ViewGroup) parent).removeView(mPager);
 			}
-			EventBus.getDefault().unregister(this);
 		}
 
 

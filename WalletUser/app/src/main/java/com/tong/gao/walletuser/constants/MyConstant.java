@@ -21,6 +21,7 @@ public class MyConstant {
     public static final String uesrBuyOrder = "/ug/ord/pbpos.do";           //用户下单接口
     public static final String buyerHadPayMoney = "/ug/ord/pbcfs.do";           //买家确认付款接口
     public static final String cancelOrder = "/ug/ord/pbcos.do";           //取消订单接口
+    public static final String queryOrderList = "/ug/ord/pbuos.do";           //查询订单列表接口
 
 
 
@@ -49,6 +50,17 @@ public class MyConstant {
     public static final String hadPayMoneyOrderKey = "hadPayMoneyOrderKey";                      //下单 付完钱的key
     public static final String orderCoinBeanKey = "orderCoinBeanKey";
     public static final String valueIsNull = "*null*";
+    public static final String myOrderListKey = "myOrderListKey";
+    public static final String transferAccountAccordKey = "transferAccountAccordKey";
+
+
+    public static final String Status_All =0+"";
+    public static final String Status_NotPay =1+"";      //未付款
+    public static final String Status_HadPay =2+"";      //已付款
+    public static final String Status_Complete =3+"";     //已完成
+    public static final String Status_HadCancel =4+"";    //已取消
+    public static final String Status_HadClosed =5+"";   //已关闭
+    public static final String Status_Appeal =6+"";      //申诉中
 
 
 

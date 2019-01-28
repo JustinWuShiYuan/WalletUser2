@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
+import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.factory.LoadingPagerFactory;
 import com.tong.gao.walletuser.ui.loading.BaseFragment;
-import com.tong.gao.walletuser.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +54,7 @@ public class TransferRecordActivity extends ActivityBase implements View.OnClick
         flBack.setOnClickListener(this);
 
         setTabTitles(tabTitles);
-        MyTabAdapter adapter = new MyTabAdapter(getSupportFragmentManager());
+        MyTabAdapter adapter = new MyTabAdapter(getSupportFragmentManager(), MyConstant.transferAccountAccordKey);
         vpMyTransferAccord.setAdapter(adapter);
 
         //将TabLayout和ViewPager关联起来。
@@ -73,7 +72,7 @@ public class TransferRecordActivity extends ActivityBase implements View.OnClick
             @Override
             public void onPageSelected(int index) {
 //                LogUtils.d("onPageSelected" + index );
-                BaseFragment fragment = LoadingPagerFactory.getFragment(index);
+                BaseFragment fragment = LoadingPagerFactory.getFragmentTransferAccord(index);
                 fragment.loadData();
             }
             @Override
@@ -86,7 +85,7 @@ public class TransferRecordActivity extends ActivityBase implements View.OnClick
             @Override
             public void onGlobalLayout() {
                 if(tabLayoutTransferAccord.getSelectedTabPosition() == 0 ){
-                    BaseFragment fragment = LoadingPagerFactory.getFragment(tabLayoutTransferAccord.getSelectedTabPosition());
+                    BaseFragment fragment = LoadingPagerFactory.getFragmentTransferAccord(tabLayoutTransferAccord.getSelectedTabPosition());
                     fragment.loadData();
 
                     tabLayoutTransferAccord.getViewTreeObserver().removeOnGlobalLayoutListener(this);

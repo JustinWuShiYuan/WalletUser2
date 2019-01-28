@@ -202,11 +202,12 @@ public class FragmentTransferAccord extends BaseFragment {
 
                     if(null !=dataList && dataList.size() > 0 ){
                         isLoadMoreSuccess[myTransferType] = true;
-                        EventBus.getDefault().post(new TransferAccordEvent());
+
 
                     }else{
                         isLoadMoreSuccess[myTransferType] = false;
                     }
+                    updateUI();
 
 
                 }
@@ -228,10 +229,7 @@ public class FragmentTransferAccord extends BaseFragment {
     }
 
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventTransferAccord (TransferAccordEvent event){
-
+    private void updateUI() {
         if(null != dataList && dataList.size() == 0){
             getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
         }else if(null != dataList && dataList.size() > 0){
@@ -240,6 +238,19 @@ public class FragmentTransferAccord extends BaseFragment {
             getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
         }
     }
+
+
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onEventTransferAccord (TransferAccordEvent event){
+//
+//        if(null != dataList && dataList.size() == 0){
+//            getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
+//        }else if(null != dataList && dataList.size() > 0){
+//            getmPager().setmCurrentState(LoadingPager.LoadedResult.SUCCESS.getState());
+//        }else{
+//            getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
+//        }
+//    }
 
 
     @Override

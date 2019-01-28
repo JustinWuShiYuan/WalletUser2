@@ -144,7 +144,9 @@ public class FragmentCustomerInform extends BaseFragment {
                     if(null != dataList){
                         LogUtils.d("PageNum:"+responseMessageInformBean.getPage().getSum()+" dataList.size():"+dataList.size());
                     }
-                    EventBus.getDefault().post(new MyOrderInformEvent());
+//                    EventBus.getDefault().post(new MyOrderInformEvent());
+
+                    updateUI();
 
                 }
 
@@ -164,9 +166,7 @@ public class FragmentCustomerInform extends BaseFragment {
         return LoadingPager.LoadedResult.LOADING;
     }
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventOrderInform (MyOrderInformEvent event){
+    private void updateUI() {
 
         if(null == dataList ){
             getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
@@ -176,6 +176,11 @@ public class FragmentCustomerInform extends BaseFragment {
             getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
         }
     }
+
+
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onEventOrderInform (MyOrderInformEvent event){
+//    }
 
     @Override
     protected void executeEmptyTask() {

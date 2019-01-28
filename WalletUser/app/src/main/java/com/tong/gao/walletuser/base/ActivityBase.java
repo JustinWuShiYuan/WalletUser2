@@ -152,15 +152,21 @@ public abstract class ActivityBase extends AppCompatActivity {
     }
 
     public class MyTabAdapter extends FragmentPagerAdapter {
+        private String adapterType;
 
-        public MyTabAdapter(FragmentManager fm) {
+        public MyTabAdapter(FragmentManager fm, String adapterType) {
             super(fm);
+            this.adapterType = adapterType;
         }
 
         @Override
         public Fragment getItem(int position) {
+            if(MyConstant.myOrderListKey.equals(adapterType)){
+                return LoadingPagerFactory.getFragmentMyOrderList(position);
+            }else{
+                return LoadingPagerFactory.getFragmentTransferAccord(position);
+            }
 
-            return LoadingPagerFactory.getFragment(position);
         }
 
         @Override
