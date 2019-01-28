@@ -39,6 +39,7 @@ import com.tong.gao.walletuser.ui.activity.LoginActivity;
 import com.tong.gao.walletuser.ui.activity.MyOrderListActivity;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.ui.activity.TransferRecordActivity;
+import com.tong.gao.walletuser.ui.activity.exchangeBtb.ExchangeCoinActivity;
 import com.tong.gao.walletuser.ui.view.HomeADPageView;
 import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
@@ -333,7 +334,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             case R.id.rl_exchange_coin_root:        //中间6个条目 兑换比特币
 
-                ToastUtils.showNomalShortToast("兑换比特币");
+                startActivity(new Intent(getActivity(),ExchangeCoinActivity.class));
 
                 break;
 

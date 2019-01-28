@@ -4,6 +4,7 @@ import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestBuyerHadPayMoney;
 import com.tong.gao.walletuser.bean.request.RequestCancelOrder;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
+import com.tong.gao.walletuser.bean.request.RequestExchangeApplyList;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
 import com.tong.gao.walletuser.bean.request.RequestOrderApply;
@@ -14,7 +15,8 @@ import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
-import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
+import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeRate;
+import com.tong.gao.walletuser.bean.response.ResponseTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ResponseBuyerHadPayMoney;
 import com.tong.gao.walletuser.bean.response.ResponseCancelOrder;
 import com.tong.gao.walletuser.bean.response.ResponseChangeNickNameBean;
@@ -93,7 +95,7 @@ public class NetWorks extends RetrofitUtils {
 
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @POST(MyConstant.transferAccount)
-        Observable<ReponseTransferAccountBean> transferAccounts(@Body RequestTransferAccountBean requestTransferAccountBean);
+        Observable<ResponseTransferAccountBean> transferAccounts(@Body RequestTransferAccountBean requestTransferAccountBean);
 
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @POST(MyConstant.verify_google_code)
@@ -161,6 +163,15 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.orderAppeal)
         Observable<ResponseOrderAppeal> orderAppeal(@Body RequestOrderApply requestOrderApply);
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryBtcExchangeRate)
+        Observable<ResponseBtcExchangeRate> queryBtcExchangeRate();
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryBtcExchangeAppayList)
+        Observable<ResponseBtcExchangeRate> queryBtcExchangeAppayList(@Body RequestExchangeApplyList requestExchangeApplyList);
+
 
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
@@ -194,7 +205,7 @@ public class NetWorks extends RetrofitUtils {
     }
 
 
-    public static void transferAccount(RequestTransferAccountBean  requestTransferAccountBean,Observer<ReponseTransferAccountBean> observer){
+    public static void transferAccount(RequestTransferAccountBean  requestTransferAccountBean,Observer<ResponseTransferAccountBean> observer){
         setSubscribe(service.transferAccounts(requestTransferAccountBean),observer);
     }
 
@@ -263,7 +274,17 @@ public class NetWorks extends RetrofitUtils {
     }
 
 
-//
+    public static void queryBtcExchangeRate(Observer<ResponseBtcExchangeRate> observer){
+        setSubscribe(service.queryBtcExchangeRate(),observer);
+    }
+
+
+    public static void queryBtcExchangeAppayList(RequestExchangeApplyList requestExchangeApplyList,Observer<ResponseBtcExchangeRate> observer){
+        setSubscribe(service.queryBtcExchangeAppayList(requestExchangeApplyList),observer);
+    }
+
+
+
 //    public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<ResponseLoginInfo> observer){
 //        setSubscribe(service.login(requestLoginInfoBean),observer);
 //    }

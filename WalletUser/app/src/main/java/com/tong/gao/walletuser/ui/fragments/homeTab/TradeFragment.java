@@ -41,7 +41,6 @@ import com.tong.gao.walletuser.ui.fragments.FragmentCashFastSelect;
 import com.tong.gao.walletuser.ui.fragments.FragmentSetCashRange;
 import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.LogUtils;
-import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.ToastUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
 
@@ -96,7 +95,7 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
     RadioGroup rgSelectedCashContainer;
     @BindView(R.id.fl_cash_fragment)
     FrameLayout flCashFragment;
-    @BindView(R.id.btn_confirm)
+    @BindView(R.id.btn_submit_apply)
     Button btnConfirm;
 
 
@@ -399,7 +398,7 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
                 break;
 
 
-            case R.id.btn_confirm:
+            case R.id.btn_submit_apply:
 
                 if(fragmentSelectedIndex){
                     //取 fragmentCashFastSelect 选中的值

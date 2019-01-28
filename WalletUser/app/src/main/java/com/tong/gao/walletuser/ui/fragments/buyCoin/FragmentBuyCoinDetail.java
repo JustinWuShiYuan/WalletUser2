@@ -125,7 +125,7 @@ public class FragmentBuyCoinDetail extends BaseFragment implements View.OnClickL
     LinearLayout llConSeller;
     @BindView(R.id.btn_cancel)
     Button btnCancel;
-    @BindView(R.id.btn_confirm)
+    @BindView(R.id.btn_submit_apply)
     Button btnConfirm;
     Unbinder unbinder;
     @BindView(R.id.tv_payment_reference_num_zfb)
@@ -321,7 +321,7 @@ public class FragmentBuyCoinDetail extends BaseFragment implements View.OnClickL
                 break;
 
 
-            case R.id.btn_confirm:      //点击完成付款
+            case R.id.btn_submit_apply:      //点击完成付款
 
                 View alertDialog = DialogUtils.createAlertDialog(getActivity(), R.layout.dialog_havd_pay, R.id.btn_have_transfer,
                         R.id.btn_later_on, 300, 300, new DialogCallBack() {

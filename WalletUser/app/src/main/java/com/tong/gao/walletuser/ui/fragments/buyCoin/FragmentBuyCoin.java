@@ -34,8 +34,6 @@ import com.tong.gao.walletuser.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.List;
-
 import androidx.navigation.fragment.NavHostFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,7 +70,7 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
     EditText etInputBuyNum;
     @BindView(R.id.btn_cancel)
     Button btnCancel;
-    @BindView(R.id.btn_confirm)
+    @BindView(R.id.btn_submit_apply)
     Button btnConfirm;
     Unbinder unbinder;
     @BindView(R.id.tv_fixed_coin_num)
@@ -298,7 +296,7 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
 
 
 
-            case R.id.btn_confirm:
+            case R.id.btn_submit_apply:
 
 
                 if (null != coinBean) {
@@ -320,7 +318,7 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
                         }
                     }
 
-                    View dialog = DialogUtils.createAlertDialog(getActivity(), R.layout.dialog_buy_coin_notice, R.id.btn_confirm, 330, 300, new DialogCallBack() {
+                    View dialog = DialogUtils.createAlertDialog(getActivity(), R.layout.dialog_buy_coin_notice, R.id.btn_submit_apply, 330, 300, new DialogCallBack() {
                         @Override
                         public void cancel(Dialog dialog) {
                         }

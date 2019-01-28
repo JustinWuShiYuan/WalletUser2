@@ -23,6 +23,8 @@ public class MyConstant {
     public static final String cancelOrder = "/ug/ord/pbcos.do";           //取消订单接口
     public static final String queryOrderList = "/ug/ord/pbuos.do";           //查询订单列表接口
     public static final String orderAppeal = "/ug/ord/pbaos.do";           //三十一、订单申诉
+    public static final String queryBtcExchangeRate = "/ug/btc/pbers.do";           //BTC汇率查询
+    public static final String queryBtcExchangeAppayList = "/ug/btc/pbels.do";           //BTC兑换申请列表
 
 
 

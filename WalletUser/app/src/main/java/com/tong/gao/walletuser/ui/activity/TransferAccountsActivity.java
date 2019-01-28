@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
-import com.tong.gao.walletuser.bean.response.ReponseTransferAccountBean;
+import com.tong.gao.walletuser.bean.response.ResponseTransferAccountBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.utils.LogUtils;
@@ -172,16 +172,16 @@ public class TransferAccountsActivity extends ActivityBase implements View.OnCli
     private void startTransfer() {
 
         NetWorks.transferAccount(new RequestTransferAccountBean(transferAccountAddress, transferAccountNum, transferRemark
-                , paymentPwd, googleCode), new Observer<ReponseTransferAccountBean>() {
+                , paymentPwd, googleCode), new Observer<ResponseTransferAccountBean>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.d("开始订阅");
             }
 
             @Override
-            public void onNext(ReponseTransferAccountBean reponseTransferAccountBean) {
+            public void onNext(ResponseTransferAccountBean responseTransferAccountBean) {
 
-                if(null !=reponseTransferAccountBean && MyConstant.resultCodeIsOK .equals(reponseTransferAccountBean.getErrcode())){
+                if(null != responseTransferAccountBean && MyConstant.resultCodeIsOK .equals(responseTransferAccountBean.getErrcode())){
                     startActivity(new Intent(TransferAccountsActivity.this,TransferAccountSuccessActivity.class));
                     finish();
                 }else{
