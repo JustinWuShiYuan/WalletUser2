@@ -103,10 +103,6 @@ public class PublishCoinActivity extends ActivityBase implements View.OnClickLis
 
                 break;
 
-//            @BindView(R.id.btn_back_to_home)
-//            Button btnBackToHome;
-//            @BindView(R.id.btn_check_advertisement)
-//            Button btnCheckAdvertisement;
 
             case R.id.btn_back_to_home:
 

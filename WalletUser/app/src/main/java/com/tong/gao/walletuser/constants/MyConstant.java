@@ -30,6 +30,7 @@ public class MyConstant {
     public static final String cancelBtcExchangeApply = "/ug/btc/pbces.do";           //三十七、撤销兑换BTC申请
     public static final String sellCoin = "/ug/mer/pbpas.do";           //三十九、商家发布广告
     public static final String queryMoneyRange = "/ug/fac/pbacs.do";           //固定金额和限额范围
+    public static final String queryMerSallCoinList = "/ug/mer/pbmas.do";           //商家广告列表
 
 
 
@@ -61,6 +62,7 @@ public class MyConstant {
     public static final String orderCoinBeanKey = "orderCoinBeanKey";
     public static final String valueIsNull = "*null*";
     public static final String myOrderListKey = "myOrderListKey";
+    public static final String saleCoinListKey = "saleCoinListKey";
     public static final String orderItemDetailKey = "orderItemDetailKey";
     public static final String transferAccountAccordKey = "transferAccountAccordKey";
     public static final String btcExchangeApplyDetailKey = "btcExchangeApplyDetailKey";

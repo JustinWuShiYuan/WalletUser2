@@ -9,6 +9,7 @@ import com.tong.gao.walletuser.bean.request.RequestCancelOrder;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
 import com.tong.gao.walletuser.bean.request.RequestExchangeApplyList;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestMerSaleCoinList;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
 import com.tong.gao.walletuser.bean.request.RequestOrderApply;
 import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
@@ -24,6 +25,7 @@ import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeDetail;
 import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeRate;
 import com.tong.gao.walletuser.bean.response.ResponseCancelExchangeApply;
 import com.tong.gao.walletuser.bean.response.ResponseExchangeApplyList;
+import com.tong.gao.walletuser.bean.response.ResponseMerSaleCoinList;
 import com.tong.gao.walletuser.bean.response.ResponseMoneyRange;
 import com.tong.gao.walletuser.bean.response.ResponseSellCoin;
 import com.tong.gao.walletuser.bean.response.ResponseTransferAccountBean;
@@ -206,6 +208,10 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.queryMoneyRange)
         Observable<ResponseMoneyRange> queryMoneyRange();
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryMerSallCoinList)
+        Observable<ResponseMerSaleCoinList> queryMerSaleCoinList(@Body RequestMerSaleCoinList requestMerSaleCoinList);
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -333,6 +339,11 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryMoneyRange(Observer<ResponseMoneyRange> observer){
         setSubscribe(service.queryMoneyRange(),observer);
+    }
+
+
+    public static void queryMerSaleCoinList(RequestMerSaleCoinList requestMerSaleCoinList,Observer<ResponseMerSaleCoinList> observer){
+        setSubscribe(service.queryMerSaleCoinList(requestMerSaleCoinList),observer);
     }
 
 

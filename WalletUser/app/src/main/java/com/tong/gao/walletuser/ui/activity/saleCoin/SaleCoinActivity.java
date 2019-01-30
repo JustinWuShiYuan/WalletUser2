@@ -157,7 +157,6 @@ public class SaleCoinActivity extends ActivityBase implements  View.OnClickListe
     }
 
     private void loadData() {
-        //ToDO 查询金额范围
 
         DialogUtils.showProgressDialog(this,"加载中.....");
 
@@ -168,7 +167,6 @@ public class SaleCoinActivity extends ActivityBase implements  View.OnClickListe
 
             @Override
             public void onNext(ResponseMoneyRange responseMoneyRange) {
-
 
                 if(null != responseMoneyRange && MyConstant.resultCodeIsOK .equals(responseMoneyRange.getErrcode())){
 
@@ -408,7 +406,6 @@ public class SaleCoinActivity extends ActivityBase implements  View.OnClickListe
         NetWorks.sellCoin(requestSellCoin, new Observer<ResponseSellCoin>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override

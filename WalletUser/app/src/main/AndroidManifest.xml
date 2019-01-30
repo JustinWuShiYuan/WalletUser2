@@ -108,7 +108,8 @@
             android:name=".ui.activity.HelpCenterActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.activity.saleCoin.SaleCoinActivity" />
-        <activity android:name=".ui.activity.saleCoin.PublishCoinActivity"></activity>
+        <activity android:name=".ui.activity.saleCoin.PublishCoinActivity" />
+        <activity android:name=".ui.activity.saleCoin.MySaleCoinListActivity"></activity>
     </application>
 
 </manifest>
