@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.activity.saleCoin.PublishCoinActivity"
     android:background="#F6F5FA">
 
     <include layout="@layout/title_bar"
@@ -27,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cl_root_view"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:paddingBottom="50dp"
         android:layout_marginRight="24dp"
         android:layout_marginLeft="24dp"
@@ -53,9 +54,8 @@
                 android:layout_toRightOf="@id/iv_complete"
                 android:textSize="24sp"
                 android:textColor="@color/gray_3"
-                android:text="订单状态"
-                android:gravity="center_vertical"
-                android:id="@+id/tv_order_status"/>
+                android:text="发布成功"
+                android:gravity="center_vertical"/>
 
         </RelativeLayout>
 
@@ -65,112 +65,40 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#F0F1F3"/>
+        <!--style="@style/main_tab_style"-->
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="23dp">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_6"
+                android:textSize="15sp"
+                android:text="@string/coinTypeText"
                 android:id="@+id/tv_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单号:"
-                android:textColor="@color/gray_6"
-                android:textSize="15sp" />
+                />
 
             <TextView
-                android:id="@+id/tv_order_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/tv_1"
-                android:text="498653498670"
-                android:textColor="@color/gray_3"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:id="@+id/iv_copy_order_num"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tv_order_num"
-                android:src="@drawable/icon_copy" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_3"
+                android:textSize="15sp"
+                android:text="UG"
+                android:id="@+id/tv_coin_type"
+                />
 
         </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:id="@+id/tv_order_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单金额:"
-                android:textColor="@color/gray_6"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tv_order_money_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tv_order_money"
-                android:text="4986"
-                android:textColor="@color/gray_3"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tv_order_money_value"
-                android:src="@drawable/icon_copy"
-                android:id="@+id/iv_copy_order_money"/>
-
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:id="@+id/tv_order_single_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="单价:"
-                android:textColor="@color/gray_6"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tv_order_single_money_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tv_order_single_money"
-                android:text="100 CNY = 1 AB"
-                android:textColor="@color/gray_3"
-                android:textSize="15sp" />
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="23dp">
 
             <TextView
@@ -190,7 +118,7 @@
                 android:textColor="@color/gray_3"
                 android:textSize="15sp"
                 android:text="590 AB"
-                android:id="@+id/tv_buy_coin_number"
+                android:id="@+id/tv_to_sell_coin_num"
                 />
 
         </RelativeLayout>
@@ -207,7 +135,35 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_6"
                 android:textSize="15sp"
-                android:text="支付方式："
+                android:text="@string/coinTypePrice"
+                android:id="@+id/tv_3"
+                />
+
+            <TextView
+                android:layout_toRightOf="@id/tv_3"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_3"
+                android:textSize="15sp"
+                android:text="100 CNY = 1 AB"
+                android:id="@+id/tv_coin_single_price"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="23dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_6"
+                android:textSize="15sp"
+                android:text="@string/paymentType"
                 android:id="@+id/tv_4"
                 />
 
@@ -219,7 +175,7 @@
                 android:textColor="@color/gray_3"
                 android:textSize="15sp"
                 android:text="支付宝"
-                android:id="@+id/tv_payment_type"
+                android:id="@+id/tv_receipt_money_type"
                 />
 
         </RelativeLayout>
@@ -236,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_6"
                 android:textSize="15sp"
-                android:text="付款参考号："
+                android:text="@string/singleOrderLimit"
                 android:id="@+id/tv_trade_type"
                 />
 
@@ -247,8 +203,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray_3"
                 android:textSize="15sp"
-                android:text="437867"
-                android:id="@+id/tv_payment_reference_num"
+                android:text="1000 ~ 23000"
+                android:id="@+id/tv_cash_type_value"
                 />
 
         </RelativeLayout>
@@ -264,26 +220,26 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_look_assert"
+                android:id="@+id/btn_back_to_home"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlue"
                 android:textSize="16sp"
-                android:text="查看资产"
+                android:text="@string/backHome"
                 android:background="@drawable/shape_blue1_bg"
                 />
 
 
             <Button
                 android:layout_marginLeft="8dp"
-                android:id="@+id/btn_scan_code_and_transfer"
+                android:id="@+id/btn_check_advertisement"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
-                android:text="扫码转币"
+                android:text="@string/checkAdvertisement"
                 android:background="@drawable/shape_blue_bg"
                 />
 
@@ -292,35 +248,5 @@
 
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_contact_merchant"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white1"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-
-        <ImageView
-            android:clickable="false"
-            android:layout_marginLeft="140dp"
-            android:id="@+id/iv_message"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/icon_cont"/>
-
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:textSize="15sp"
-            android:textColor="#e27500"
-            android:layout_toRightOf="@id/iv_message"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="联系商家"/>
-
-
-    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

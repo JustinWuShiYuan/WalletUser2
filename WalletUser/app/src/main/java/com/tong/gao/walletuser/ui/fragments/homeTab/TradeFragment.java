@@ -152,9 +152,6 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
         rvMyTrade.setLayoutManager(mLinearLayoutManager);
         rvMyTrade.setAdapter(myTradeAdapter);
 
-
-
-
         addLoadMoreListener();
 
         srlRefreshMyTrade.setColorSchemeResources(android.R.color.holo_blue_light,
@@ -186,13 +183,11 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
         //TODO  启动默认 会加载2个fragment 需要处理。
 
         if(!isInitData){
-
 //            LogUtils.d("getActivity():"+getActivity());
 
             DialogUtils.showProgressDialog(getContext(),"加载数据中...");
 
             loadData(pageNum+"",pageSize,payWay,type,price,limitMaxPrice,limitMinPrice);
-
 
             if(null == fragmentCashFastSelect ){
                 fragmentCashFastSelect = FragmentCashFastSelect.newInstance(cashList);
@@ -202,9 +197,6 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
             changeFragment(R.id.fl_cash_fragment,fragmentCashFastSelect,Fragment_Tag_Fixed);//
 
         }
-
-
-
 
     }
 

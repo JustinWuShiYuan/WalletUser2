@@ -31,6 +31,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
@@ -40,6 +42,10 @@ public abstract class ActivityBase extends AppCompatActivity {
     protected Activity mActivity;
 
     private WheelDialog mWheelDialog;
+
+    protected Intent    myIntent;
+
+    protected String[] tabTitles;
 
 
     @Override
@@ -51,6 +57,7 @@ public abstract class ActivityBase extends AppCompatActivity {
         setContentView(getLayout());
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
+        myIntent = getIntent();
         initView();
     }
 
@@ -145,7 +152,6 @@ public abstract class ActivityBase extends AppCompatActivity {
 
 
 
-    protected String[] tabTitles;
 
     public void setTabTitles(String[] tabTitles) {
         this.tabTitles = tabTitles;
@@ -203,5 +209,34 @@ public abstract class ActivityBase extends AppCompatActivity {
         }
     }
 
+
+    public class TabAdapter extends FragmentPagerAdapter {
+
+        private List<Fragment> fragments;
+
+
+        public TabAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        //设置tablayout标题
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+
+        }
+    }
 
 }

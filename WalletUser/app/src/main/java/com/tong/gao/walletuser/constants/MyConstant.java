@@ -24,7 +24,15 @@ public class MyConstant {
     public static final String queryOrderList = "/ug/ord/pbuos.do";           //查询订单列表接口
     public static final String orderAppeal = "/ug/ord/pbaos.do";           //三十一、订单申诉
     public static final String queryBtcExchangeRate = "/ug/btc/pbers.do";           //BTC汇率查询
+    public static final String btcExchangeApply = "/ug/btc/pbebs.do";           //BTC兑换申请
     public static final String queryBtcExchangeAppayList = "/ug/btc/pbels.do";           //BTC兑换申请列表
+    public static final String btcExchangeAppayDetail = "/ug/btc/pbeds.do";           //三十七、兑换BTC申请详细
+    public static final String cancelBtcExchangeApply = "/ug/btc/pbces.do";           //三十七、撤销兑换BTC申请
+    public static final String sellCoin = "/ug/mer/pbpas.do";           //三十九、商家发布广告
+    public static final String queryMoneyRange = "/ug/fac/pbacs.do";           //固定金额和限额范围
+
+
+
 
 
 
@@ -55,6 +63,13 @@ public class MyConstant {
     public static final String myOrderListKey = "myOrderListKey";
     public static final String orderItemDetailKey = "orderItemDetailKey";
     public static final String transferAccountAccordKey = "transferAccountAccordKey";
+    public static final String btcExchangeApplyDetailKey = "btcExchangeApplyDetailKey";
+    public static final String btcExchangeApplyIdKey = "btcExchangeApplyIdKey";
+    public  static final String CoinLimit ="CoinLimit";   //
+    public  static final String CoinConstant ="CoinConstant";   //
+    public static final int singleLimitTrade = 1;
+    public static final int singleTradeLimit = 0;
+    public static final int singleConstantTrade = 2;
 
 
     public static final String Status_All =0+"";
@@ -64,6 +79,10 @@ public class MyConstant {
     public static final String Status_HadCancel =4+"";    //已取消
     public static final String Status_HadClosed =5+"";   //已关闭
     public static final String Status_Appeal =6+"";      //申诉中
+
+    public static final String StatusDealing ="1";      //处理中
+    public static final String StatusRemit ="2";      //已汇出
+    public static final String StatusReject ="3";      //已驳回
 
 
 

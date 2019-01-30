@@ -173,6 +173,7 @@ public class DialogUtils {
     public static  void hideProgressDialog() {
         if (mWheelDialog != null && mWheelDialog.isShowing()) {
             mWheelDialog.dismiss();
+            mWheelDialog = null;
         }
     }
 

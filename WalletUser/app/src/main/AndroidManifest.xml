@@ -103,7 +103,12 @@
             android:launchMode="singleTask" />
         <activity android:name=".ui.activity.MyOrderListActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
-        <activity android:name=".ui.activity.exchangeBtb.ExchangeCoinActivity"></activity>
+        <activity android:name=".ui.activity.exchangeBtb.ExchangeCoinActivity" />
+        <activity
+            android:name=".ui.activity.HelpCenterActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.activity.saleCoin.SaleCoinActivity" />
+        <activity android:name=".ui.activity.saleCoin.PublishCoinActivity"></activity>
     </application>
 
 </manifest>

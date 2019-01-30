@@ -56,9 +56,9 @@
         android:layout_height="60dp"
         android:layout_below="@id/tv_input_account_name"
         android:gravity="left|center_vertical"
-        android:text="Justin1"/>
+        android:text="Link1234"/>
 
-
+    <!--Justin1-->
 
 
     <TextView
@@ -82,8 +82,10 @@
         android:gravity="left|center_vertical"
         android:layout_height="60dp"
         android:layout_below="@id/tv_input_account_pwd"
-        android:text="Justin123456"
+        android:text="iPhone123"
         android:inputType="textPassword"/>
+
+   <!-- Justin123456-->
 
 
     <RelativeLayout

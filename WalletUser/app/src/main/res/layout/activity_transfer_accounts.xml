@@ -91,7 +91,7 @@
 
 
                         <EditText
-                            android:id="@+id/et_input_coin_num"
+                            android:id="@+id/et_input_sell_coin_num"
                             style="@style/text_style_15sp_gray_6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_below="@id/et_input_coin_num"
+                            android:layout_below="@id/et_input_sell_coin_num"
                             android:layout_marginTop="2dp"
                             android:background="#E8E9ED" />
 

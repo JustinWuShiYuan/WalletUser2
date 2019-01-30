@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_base"
+    android:gravity="center_horizontal"
+    >
+
+
+    <include layout="@layout/title_bar"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"/>
+
+    <ImageView
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:src="@drawable/logo_3"
+        android:layout_marginTop="12dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我们希望帮助您充分利用所有功能，并解决遇到的问题"
+        android:textSize="13sp"
+        android:textColor="#394368"
+        android:layout_marginTop="22dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:layout_marginTop="35dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:id="@+id/ll_helper_support"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="帮助支持"
+            android:textSize="15sp"
+            android:textColor="#232630"
+            />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_right_blue"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#E6E6E6"
+        android:layout_marginLeft="12dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:id="@+id/ll_service_on_line"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="在线客服"
+            android:textSize="15sp"
+            android:textColor="#232630"
+            />
+
+        <ImageView
+            android:clickable="false"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_right_blue"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#E6E6E6"
+        android:layout_marginLeft="12dp"
+        />
+
+
+    <View
+        android:layout_width="1dp"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_bg_3_revert"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="其他联系方式"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_text1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QQ：49876304986"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_text2"
+            android:layout_below="@+id/tv_text1"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信：4985677820"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_text3"
+            android:layout_below="@+id/tv_text2"
+            android:layout_marginTop="3dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱：9834ythgko@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_text4"
+            android:layout_below="@+id/tv_text3"
+            android:layout_marginTop="3dp"
+            />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

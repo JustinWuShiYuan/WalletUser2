@@ -35,7 +35,7 @@ public class TransferAccountsActivity extends ActivityBase implements View.OnCli
     FrameLayout flBack;
     @BindView(R.id.et_input_coin_address)
     EditText etInputCoinAddress;
-    @BindView(R.id.et_input_coin_num)
+    @BindView(R.id.et_input_sell_coin_num)
     EditText etInputCoinNum;
     @BindView(R.id.et_input_transfer_remark)
     EditText etInputTransferRemark;

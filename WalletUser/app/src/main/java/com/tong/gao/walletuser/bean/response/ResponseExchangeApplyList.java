@@ -8,18 +8,17 @@ import java.util.List;
 
 public class ResponseExchangeApplyList implements Serializable {
 
-
     private String errcode;
     private String msg;
     private List<ExchangeBTCBean> exchangeBTC;
-    private PageBean pageOut;
+    private PageBean page;
 
 
-    public ResponseExchangeApplyList(String errcode, String msg, List<ExchangeBTCBean> exchangeBTC, PageBean pageOut) {
+    public ResponseExchangeApplyList(String errcode, String msg, List<ExchangeBTCBean> exchangeBTC, PageBean page) {
         this.errcode = errcode;
         this.msg = msg;
         this.exchangeBTC = exchangeBTC;
-        this.pageOut = pageOut;
+        this.page = page;
     }
 
     public String getErrcode() {
@@ -46,12 +45,12 @@ public class ResponseExchangeApplyList implements Serializable {
         this.exchangeBTC = exchangeBTC;
     }
 
-    public PageBean getPageOut() {
-        return pageOut;
+    public PageBean getPage() {
+        return page;
     }
 
-    public void setPageOut(PageBean pageOut) {
-        this.pageOut = pageOut;
+    public void setPage(PageBean page) {
+        this.page = page;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class ResponseExchangeApplyList implements Serializable {
                 "errcode='" + errcode + '\'' +
                 ", msg='" + msg + '\'' +
                 ", exchangeBTC=" + exchangeBTC +
-                ", pageOut=" + pageOut +
+                ", page=" + page +
                 '}';
     }
 }

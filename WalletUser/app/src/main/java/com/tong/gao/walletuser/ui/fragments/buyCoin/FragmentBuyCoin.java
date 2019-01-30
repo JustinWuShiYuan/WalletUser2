@@ -52,7 +52,7 @@ public class FragmentBuyCoin extends BaseFragment implements View.OnClickListene
 
     @BindView(R.id.tv_username)
     TextView tvUsername;
-    @BindView(R.id.tv_price)
+    @BindView(R.id.tv_exchange_rate)
     TextView tvPrice;
     @BindView(R.id.tv_limit_value)
     TextView tvLimitValue;

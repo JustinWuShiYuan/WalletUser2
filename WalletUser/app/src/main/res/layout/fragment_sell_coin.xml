@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_trade_root_view"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content">
+
+        <!--单笔交易限额 开始 -->
+        <RelativeLayout
+            android:id="@+id/rl_trade_limit"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            >
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_min_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="@string/minLimit"
+                android:textSize="15sp"
+                android:textColor="@color/gray_3"
+                android:layout_marginStart="70dp"/>
+
+            <EditText
+                android:layout_marginTop="8dp"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:id="@+id/et_input_min_value"
+                android:textColor="@color/gray_3"
+                android:background="@drawable/shape_gray_round_bg"
+                android:layout_below="@id/tv_min_limit"
+                android:text="10"
+                android:gravity="center"
+                android:layout_marginStart="40dp"
+                android:inputType="number"/>
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_max_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="@string/maxLimit"
+                android:textSize="15sp"
+                android:textColor="@color/gray_3"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="70dp"/>
+
+            <EditText
+                android:layout_marginTop="8dp"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:id="@+id/et_input_max_value"
+                android:textColor="@color/gray_3"
+                android:background="@drawable/shape_gray_round_bg"
+                android:layout_below="@id/tv_max_limit"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:text="100"
+                android:gravity="center"
+                android:inputType="number"/>
+
+
+            <View
+                android:layout_marginTop="65dp"
+                android:layout_width="20dp"
+                android:layout_height="1dp"
+                android:background="#394368"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+        <!--单笔交易限额 结束 -->
+
+        <!--单笔交易固额 开始 -->
+        <RelativeLayout
+            android:id="@+id/rl_trade_constant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/tv_constant_value"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="@string/fixAmount"
+                android:textSize="15sp"
+                android:textColor="@color/gray_3"
+                android:layout_centerHorizontal="true"/>
+
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_marginTop="2dp"
+                android:layout_below="@id/tv_constant_value"
+                android:id="@+id/tfl_flow_layout"
+                app:max_select="-1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+            </com.zhy.view.flowlayout.TagFlowLayout>
+
+        </RelativeLayout>
+        <!--单笔交易固额 结束 -->
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/rl_trade_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/shape_white_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="15dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:id="@+id/rl_sale_num"
+        android:paddingBottom="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_unit_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="卖出数量"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:textColor="#222222"
+            />
+
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="#394368"
+            android:textSize="15sp"
+            android:background="@color/transparent"
+            android:gravity="right"
+            android:hint="输入数量"
+            android:id="@+id/et_input_sell_coin_num"
+            android:inputType="numberDecimal"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/rl_sale_num"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_white_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:id="@+id/rl_payment_time"
+        android:paddingBottom="10dp">
+
+
+        <TextView
+            android:id="@+id/tv_payment_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="付款期限"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:textColor="#222222"
+            />
+
+
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="#394368"
+            android:textSize="15sp"
+            android:background="@color/transparent"
+            android:gravity="right"
+            android:hint="输入时间"
+            android:id="@+id/tv_payment_time_value"
+            android:inputType="numberDecimal"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
+            android:layout_marginRight="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_payment_time_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="2dp"
+            android:gravity="center_vertical"
+            android:text="@string/timeUnit"
+            android:textColor="#394368" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/rl_payment_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="3"
+        android:textSize="14sp"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
+        android:text="@string/hint_1"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

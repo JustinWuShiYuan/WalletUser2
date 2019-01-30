@@ -1,7 +1,10 @@
 package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestBtcExchangeApply;
+import com.tong.gao.walletuser.bean.request.RequestBtcExchangeDetail;
 import com.tong.gao.walletuser.bean.request.RequestBuyerHadPayMoney;
+import com.tong.gao.walletuser.bean.request.RequestCancelExchangeApply;
 import com.tong.gao.walletuser.bean.request.RequestCancelOrder;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
 import com.tong.gao.walletuser.bean.request.RequestExchangeApplyList;
@@ -12,10 +15,17 @@ import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryOrderList;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
+import com.tong.gao.walletuser.bean.request.RequestSellCoin;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
+import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeApply;
+import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeDetail;
 import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeRate;
+import com.tong.gao.walletuser.bean.response.ResponseCancelExchangeApply;
+import com.tong.gao.walletuser.bean.response.ResponseExchangeApplyList;
+import com.tong.gao.walletuser.bean.response.ResponseMoneyRange;
+import com.tong.gao.walletuser.bean.response.ResponseSellCoin;
 import com.tong.gao.walletuser.bean.response.ResponseTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ResponseBuyerHadPayMoney;
 import com.tong.gao.walletuser.bean.response.ResponseCancelOrder;
@@ -163,6 +173,11 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.orderAppeal)
         Observable<ResponseOrderAppeal> orderAppeal(@Body RequestOrderApply requestOrderApply);
 
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.btcExchangeApply)
+        Observable<ResponseBtcExchangeApply> btcExchangeApply(@Body RequestBtcExchangeApply requestBtcExchangeApply);
+
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @POST(MyConstant.queryBtcExchangeRate)
         Observable<ResponseBtcExchangeRate> queryBtcExchangeRate();
@@ -170,9 +185,26 @@ public class NetWorks extends RetrofitUtils {
 
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @POST(MyConstant.queryBtcExchangeAppayList)
-        Observable<ResponseBtcExchangeRate> queryBtcExchangeAppayList(@Body RequestExchangeApplyList requestExchangeApplyList);
+        Observable<ResponseExchangeApplyList> queryBtcExchangeApplyList(@Body RequestExchangeApplyList requestExchangeApplyList);
 
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.btcExchangeAppayDetail)
+        Observable<ResponseBtcExchangeDetail> btcExchangeApplyDetail(@Body RequestBtcExchangeDetail requestBtcExchangeDetail);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.cancelBtcExchangeApply)
+        Observable<ResponseCancelExchangeApply> cancelBtcExchangeApply(@Body RequestCancelExchangeApply requestCancelExchangeApply);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.sellCoin)
+        Observable<ResponseSellCoin> sellCoin(@Body RequestSellCoin requestSellCoin);
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryMoneyRange)
+        Observable<ResponseMoneyRange> queryMoneyRange();
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
@@ -279,8 +311,28 @@ public class NetWorks extends RetrofitUtils {
     }
 
 
-    public static void queryBtcExchangeAppayList(RequestExchangeApplyList requestExchangeApplyList,Observer<ResponseBtcExchangeRate> observer){
-        setSubscribe(service.queryBtcExchangeAppayList(requestExchangeApplyList),observer);
+    public static void queryBtcExchangeApplyList(RequestExchangeApplyList requestExchangeApplyList, Observer<ResponseExchangeApplyList> observer){
+        setSubscribe(service.queryBtcExchangeApplyList(requestExchangeApplyList),observer);
+    }
+
+    public static void btcExchangeApply(RequestBtcExchangeApply requestBtcExchangeApply, Observer<ResponseBtcExchangeApply> observer){
+        setSubscribe(service.btcExchangeApply(requestBtcExchangeApply),observer);
+    }
+
+    public static void btcExchangeApplyDetail(RequestBtcExchangeDetail requestBtcExchangeDetail,Observer<ResponseBtcExchangeDetail> observer){
+        setSubscribe(service.btcExchangeApplyDetail(requestBtcExchangeDetail),observer);
+    }
+
+    public static void cancelExchangeApply(RequestCancelExchangeApply requestCancelExchangeApply,Observer<ResponseCancelExchangeApply> observer){
+        setSubscribe(service.cancelBtcExchangeApply(requestCancelExchangeApply),observer);
+    }
+
+    public static void sellCoin(RequestSellCoin requestSellCoin,Observer<ResponseSellCoin> observer){
+        setSubscribe(service.sellCoin(requestSellCoin),observer);
+    }
+
+    public static void queryMoneyRange(Observer<ResponseMoneyRange> observer){
+        setSubscribe(service.queryMoneyRange(),observer);
     }
 
 

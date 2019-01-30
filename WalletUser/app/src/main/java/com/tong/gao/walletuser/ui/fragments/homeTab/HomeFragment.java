@@ -35,8 +35,10 @@ import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.factory.ThreadPoolFactory;
 import com.tong.gao.walletuser.interfaces.DialogCallBack;
 import com.tong.gao.walletuser.net.NetWorks;
+import com.tong.gao.walletuser.ui.activity.HelpCenterActivity;
 import com.tong.gao.walletuser.ui.activity.LoginActivity;
 import com.tong.gao.walletuser.ui.activity.MyOrderListActivity;
+import com.tong.gao.walletuser.ui.activity.saleCoin.SaleCoinActivity;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.ui.activity.TransferRecordActivity;
 import com.tong.gao.walletuser.ui.activity.exchangeBtb.ExchangeCoinActivity;
@@ -347,7 +349,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             case R.id.rl_sale_coin_root:        //中间6个条目 卖币
 
-                ToastUtils.showNomalShortToast("  卖币");
+                startActivity(new Intent(getActivity(),SaleCoinActivity.class));
 
                 break;
 
@@ -359,7 +361,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
             case R.id.rl_helper_root:        //中间6个条目 帮助中心
 
-                ToastUtils.showNomalShortToast("  帮助中心");
+                startActivity(new Intent(getActivity(),HelpCenterActivity.class));
 
                 break;
 
