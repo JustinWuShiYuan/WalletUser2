@@ -1,31 +1,22 @@
 package com.tong.gao.walletuser.ui.loading;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.tong.gao.walletuser.R;
-import com.tong.gao.walletuser.bean.event.TransferAccordEvent;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.response.ResponseMyTransferAccordBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
-import com.tong.gao.walletuser.ui.holder.MyTransferAccodHolder;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.UIUtils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +51,7 @@ public class FragmentTransferAccord extends BaseFragment {
         });
 
         View view = View.inflate(UIUtils.getContext(), R.layout.my_transfer_recycleview, null);
-        final SwipeRefreshLayout refreshLayout = view.findViewById(R.id.srl_refresh_my_order);
+        final SwipeRefreshLayout refreshLayout = view.findViewById(R.id.srl_refresh_sale_coin);
         final RecyclerView myOrderRecycleView = view.findViewById(R.id.rv_my_transfer);
 
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(UIUtils.getContext());

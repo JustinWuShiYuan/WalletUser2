@@ -420,6 +420,14 @@ public class SaleCoinActivity extends ActivityBase implements  View.OnClickListe
                     SaleCoinActivity.this.finish();
 
                 }else {
+
+                    Intent intent = new Intent();
+                    intent.putExtra(MyConstant.sellCoinSuccessKey,responseSellCoin);
+                    intent.setClass(SaleCoinActivity.this,PublishCoinActivity.class);
+                    startActivity(intent);
+
+                    SaleCoinActivity.this.finish();
+
                     ToastUtils.showNomalShortToast("发布广告失败:"+responseSellCoin.getMsg());
                 }
             }

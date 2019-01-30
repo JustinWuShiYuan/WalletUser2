@@ -100,12 +100,9 @@ public class MySaleCoinListActivity extends ActivityBase implements View.OnClick
 
         switch (v.getId()){
 
-
             case R.id.fl_back:
                 this.finish();
                 break;
-
-
 
         }
     }

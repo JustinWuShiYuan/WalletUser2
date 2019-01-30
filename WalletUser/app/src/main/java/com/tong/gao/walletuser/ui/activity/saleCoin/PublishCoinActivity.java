@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 
 public class PublishCoinActivity extends ActivityBase implements View.OnClickListener {
 
-
     @BindView(R.id.tv_title_bar_title2)
     TextView tvTitleBarTitle2;
     @BindView(R.id.fl_back)
@@ -80,15 +79,12 @@ public class PublishCoinActivity extends ActivityBase implements View.OnClickLis
     private void updateUI() {
 
         tvCoinType.setText("UG");
-
         tvToSellCoinNum.setText("sellCoin.getCoinNum"+" AB");
         tvCoinSinglePrice.setText("sellCoin.getSingle"+" CNY = 1 AB");
         tvReceiptMoneyType.setText("sellCoin.getPayment"+" CNY = 1 AB");
 
         tvTradeType.setText("单笔限额|单笔固额");
-
         tvCashTypeValue.setText("sellCoin.getValue");
-
     }
 
 
@@ -114,7 +110,7 @@ public class PublishCoinActivity extends ActivityBase implements View.OnClickLis
 
                 if(!StringUtils.isEmpty("sellCoin.getAdverId()")){
                     //到我的广告列表
-
+                    startActivity(new Intent(PublishCoinActivity.this,MySaleCoinListActivity.class));
 
                 }
 

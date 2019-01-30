@@ -59,6 +59,7 @@
         android:text="Link1234"/>
 
     <!--Justin1-->
+    <!--Link1234-->
 
 
     <TextView
@@ -86,6 +87,7 @@
         android:inputType="textPassword"/>
 
    <!-- Justin123456-->
+   <!-- iPhone123-->
 
 
     <RelativeLayout

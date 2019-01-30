@@ -73,6 +73,9 @@ public class MyConstant {
     public static final int singleTradeLimit = 0;
     public static final int singleConstantTrade = 2;
     public static final String sellCoinSuccessKey = "sellCoinSuccessKey";
+    public static final String onOffer = "1";
+    public static final String removeCoin = "2";//下架
+    public static final String soldOut = "3";//售罄
 
 
     public static final String Status_All =0+"";
