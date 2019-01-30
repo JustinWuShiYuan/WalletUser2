@@ -415,7 +415,11 @@ public class SaleCoinActivity extends ActivityBase implements  View.OnClickListe
             public void onNext(ResponseSellCoin responseSellCoin) {
                 LogUtils.d("responseSellCoin:"+responseSellCoin.toString());
                 if(null != responseSellCoin && MyConstant.resultCodeIsOK .equals(responseSellCoin.getErrcode())){
-                    startActivity(new Intent(SaleCoinActivity.this,PublishCoinActivity.class));
+                    Intent intent = new Intent();
+                    intent.putExtra(MyConstant.sellCoinSuccessKey,responseSellCoin);
+                    intent.setClass(SaleCoinActivity.this,PublishCoinActivity.class);
+                    startActivity(intent);
+
                     SaleCoinActivity.this.finish();
 
                 }else {

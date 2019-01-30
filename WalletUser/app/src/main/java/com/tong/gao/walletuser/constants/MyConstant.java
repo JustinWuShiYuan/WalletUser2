@@ -70,6 +70,7 @@ public class MyConstant {
     public static final int singleLimitTrade = 1;
     public static final int singleTradeLimit = 0;
     public static final int singleConstantTrade = 2;
+    public static final String sellCoinSuccessKey = "sellCoinSuccessKey";
 
 
     public static final String Status_All =0+"";
