@@ -31,6 +31,9 @@ public class MyConstant {
     public static final String sellCoin = "/ug/mer/pbpas.do";           //三十九、商家发布广告
     public static final String queryMoneyRange = "/ug/fac/pbacs.do";           //固定金额和限额范围
     public static final String queryMerSallCoinList = "/ug/mer/pbmas.do";           //商家广告列表
+    public static final String queryMerAssertChangeRecord = "/ug/acc/pbahs.do";           //用户资产变更查询
+    public static final String queryMyReceiptMoneyAccountList = "/ug/mer/pbpws.do";           //十七、收款方式列表
+
 
 
 
@@ -55,6 +58,8 @@ public class MyConstant {
     public static final String paymentWayWeChat = "1";       //
     public static final String paymentWayZfb = "2";       //
     public static final String paymentWayBank = "3";       //
+    public static final String paymentWayIsOpen = "1";       //1-启用 2-停用
+    public static final String paymentWayIsClosed = "2";       //1-启用 2-停用
     public static final String tradeFragmentCoinBeanKey = "tradeFragmentCoinBeanKey";       //
     public static final String buyCoinNoMoreNotify = "buyCoinNoMoreNotify";       //买币不在提醒对话框
     public static final String downOrderKey = "downOrderKey";                      //下单key
@@ -76,8 +81,14 @@ public class MyConstant {
     public static final String onOffer = "1";
     public static final String removeCoin = "2";//下架
     public static final String soldOut = "3";//售罄
-
-
+    public static final String shiftIn = "1";//转入
+    public static final String shiftOut = "2";//转出
+    public static final String buyIn = "3";//买入
+    public static final String saleOut = "4";//卖出
+    public static final String exchangeBtc = "5";//兑换BTC
+    public static final String Payment_ZFB ="2";
+    public static final String Payment_WeChat ="1";
+    public static final String Payment_Bank ="3";
     public static final String Status_All =0+"";
     public static final String Status_NotPay =1+"";      //未付款
     public static final String Status_HadPay =2+"";      //已付款
@@ -85,10 +96,10 @@ public class MyConstant {
     public static final String Status_HadCancel =4+"";    //已取消
     public static final String Status_HadClosed =5+"";   //已关闭
     public static final String Status_Appeal =6+"";      //申诉中
-
     public static final String StatusDealing ="1";      //处理中
     public static final String StatusRemit ="2";      //已汇出
     public static final String StatusReject ="3";      //已驳回
+    public static final String EditQrCodeType = "EditQrCodeType";
 
 
 

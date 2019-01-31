@@ -18,6 +18,10 @@ import com.tong.gao.walletuser.bean.response.ResponsePersonalBean;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.ui.activity.LoginActivity;
+import com.tong.gao.walletuser.ui.activity.MyOrderListActivity;
+import com.tong.gao.walletuser.ui.activity.MyReceiptAccountListActivity;
+import com.tong.gao.walletuser.ui.activity.saleCoin.MySaleCoinListActivity;
+import com.tong.gao.walletuser.ui.activity.saleCoin.PublishCoinActivity;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.UIUtils;
@@ -219,7 +223,7 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
             case R.id.rl_my_account:   //
 
                 if(hadLogin()){
-
+                    startActivity(new Intent(getActivity(), MyReceiptAccountListActivity.class));
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
@@ -230,7 +234,7 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
             case R.id.rl_my_orders:   //
 
                 if(hadLogin()){
-
+                    startActivity(new Intent(getActivity(),MyOrderListActivity.class));
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
@@ -241,6 +245,7 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
             case R.id.rl_my_advertising:   //
 
                 if(hadLogin()){
+                    startActivity(new Intent(getActivity(),MySaleCoinListActivity.class));
 
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));

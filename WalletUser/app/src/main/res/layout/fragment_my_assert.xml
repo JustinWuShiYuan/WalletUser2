@@ -159,11 +159,24 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineColor"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="20dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_trade_list"/>
+        android:id="@+id/srl_refresh_assert_change_record">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_assert_change_record"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -109,7 +109,9 @@
             android:launchMode="singleTask" />
         <activity android:name=".ui.activity.saleCoin.SaleCoinActivity" />
         <activity android:name=".ui.activity.saleCoin.PublishCoinActivity" />
-        <activity android:name=".ui.activity.saleCoin.MySaleCoinListActivity"></activity>
+        <activity android:name=".ui.activity.saleCoin.MySaleCoinListActivity" />
+        <activity android:name=".ui.activity.MyReceiptAccountListActivity" />
+        <activity android:name=".ui.activity.EditZfbOrWeChatCodeActivity"></activity>
     </application>
 
 </manifest>

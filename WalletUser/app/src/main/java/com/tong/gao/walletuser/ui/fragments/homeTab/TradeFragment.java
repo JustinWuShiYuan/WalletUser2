@@ -162,6 +162,9 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
             public void onRefresh() {
                 srlRefreshMyTrade.setRefreshing(false);
                 //TODO 刷新数据
+                pageNum = 0;
+                mCurrentCounter = 0;
+                TOTAL_COUNTER = 0;
                 sellList.clear();
 
                 loadData(pageNum+"",pageSize,payWay,type,price,limitMaxPrice,limitMinPrice);
@@ -490,7 +493,8 @@ public class TradeFragment extends BaseFragment implements View.OnClickListener 
 
                 mCurrentCounter = sellList.size();
 
-                myTradeAdapter.notifyDataSetChanged();
+//                myTradeAdapter.notifyDataSetChanged();
+                myTradeAdapter.setNewData(advert);
             }
         });
     }

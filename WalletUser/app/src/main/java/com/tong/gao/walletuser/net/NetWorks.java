@@ -13,6 +13,7 @@ import com.tong.gao.walletuser.bean.request.RequestMerSaleCoinList;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
 import com.tong.gao.walletuser.bean.request.RequestOrderApply;
 import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
+import com.tong.gao.walletuser.bean.request.RequestQueryAssertChangeRecord;
 import com.tong.gao.walletuser.bean.request.RequestQueryBuyCoinBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryOrderList;
 import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
@@ -27,6 +28,8 @@ import com.tong.gao.walletuser.bean.response.ResponseCancelExchangeApply;
 import com.tong.gao.walletuser.bean.response.ResponseExchangeApplyList;
 import com.tong.gao.walletuser.bean.response.ResponseMerSaleCoinList;
 import com.tong.gao.walletuser.bean.response.ResponseMoneyRange;
+import com.tong.gao.walletuser.bean.response.ResponseQueryAssertChangeRecord;
+import com.tong.gao.walletuser.bean.response.ResponseQueryMyReceiptMoneyAccountList;
 import com.tong.gao.walletuser.bean.response.ResponseSellCoin;
 import com.tong.gao.walletuser.bean.response.ResponseTransferAccountBean;
 import com.tong.gao.walletuser.bean.response.ResponseBuyerHadPayMoney;
@@ -212,6 +215,16 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.queryMerSallCoinList)
         Observable<ResponseMerSaleCoinList> queryMerSaleCoinList(@Body RequestMerSaleCoinList requestMerSaleCoinList);
 
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryMerAssertChangeRecord)
+        Observable<ResponseQueryAssertChangeRecord> queryAssertChangeRecord(@Body RequestQueryAssertChangeRecord requestQueryAssertChangeRecord);
+
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.queryMyReceiptMoneyAccountList)
+        Observable<ResponseQueryMyReceiptMoneyAccountList> queryMyReceiptMoneyAccountList();
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -346,6 +359,16 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(service.queryMerSaleCoinList(requestMerSaleCoinList),observer);
     }
 
+
+    public static void queryAssertChangeRecord(RequestQueryAssertChangeRecord requestQueryAssertChangeRecord,Observer<ResponseQueryAssertChangeRecord> observer){
+        setSubscribe(service.queryAssertChangeRecord(requestQueryAssertChangeRecord),observer);
+    }
+
+
+
+    public static void queryMyReceiptAccountList(Observer<ResponseQueryMyReceiptMoneyAccountList> observer){
+        setSubscribe(service.queryMyReceiptMoneyAccountList(),observer);
+    }
 
 
 //    public static void login(RequestLoginInfoBean requestLoginInfoBean, Observer<ResponseLoginInfo> observer){

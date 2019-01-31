@@ -27,6 +27,7 @@ import com.tong.gao.walletuser.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -40,7 +41,7 @@ public class FragmentMyOrderList extends BaseFragment {
     private int pageno =1;
     private String pagesize ="12";
     private boolean isLoadMoreSuccess = true;
-    private List<UserOrderBean> userOrderBeanList;
+    private List<UserOrderBean> userOrderBeanList = new ArrayList<>();
     private PageBean pageOut;
 
     private MyOrderListAdapter myOrderListAdapter;
@@ -69,9 +70,13 @@ public class FragmentMyOrderList extends BaseFragment {
             public void onRefresh() {
                 Toast.makeText(UIUtils.getContext(),"2",Toast.LENGTH_LONG).show();
 
+                pageno = 0;
+                mCurrentCounter = 0;
+                TOTAL_COUNTER = 0;
+                userOrderBeanList.clear();
                 refreshLayout.setRefreshing(false);
 
-                //TODO 刷新数据
+                onLoadData();
             }
         });
 
@@ -191,7 +196,7 @@ public class FragmentMyOrderList extends BaseFragment {
                     if(null != pageOut ){
                         TOTAL_COUNTER =Integer.parseInt(pageOut.getSum()) ;
                     }
-                    updateUI();
+                    updateUI(userOrderBeanList);
                 }else{
                     getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
                 }
@@ -213,7 +218,7 @@ public class FragmentMyOrderList extends BaseFragment {
         return LoadingPager.LoadedResult.LOADING;
     }
 
-    private void updateUI() {
+    private void updateUI(List<UserOrderBean> userOrderBeanList) {
         if(null != userOrderBeanList && userOrderBeanList.size()>0){
             getmPager().setmCurrentState(LoadingPager.LoadedResult.SUCCESS.getState());
         }else if(null == userOrderBeanList || userOrderBeanList.size() == 0){
@@ -221,6 +226,7 @@ public class FragmentMyOrderList extends BaseFragment {
         }else{
             getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
         }
+        myOrderListAdapter.setNewData(userOrderBeanList);
     }
 
     @Override

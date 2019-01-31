@@ -65,8 +65,13 @@ public class FragmentTransferAccord extends BaseFragment {
             @Override
             public void onRefresh() {
                 refreshLayout.setRefreshing(false);
-                //TODO 刷新数据
 
+                pageNum[myTransferType] = 0;
+                mCurrentCounter[myTransferType] = 0;
+                TOTAL_COUNTER[myTransferType] = 0;
+                dataList.clear();
+
+                onLoadData();
             }
         });
 
@@ -198,7 +203,7 @@ public class FragmentTransferAccord extends BaseFragment {
                     }else{
                         isLoadMoreSuccess[myTransferType] = false;
                     }
-                    updateUI();
+                    updateUI(dataList);
 
 
                 }
@@ -220,7 +225,7 @@ public class FragmentTransferAccord extends BaseFragment {
     }
 
 
-    private void updateUI() {
+    private void updateUI(List<ResponseMyTransferAccordBean.TransferInfoBean> dataList) {
         if(null != dataList && dataList.size() == 0){
             getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
         }else if(null != dataList && dataList.size() > 0){
@@ -228,20 +233,10 @@ public class FragmentTransferAccord extends BaseFragment {
         }else{
             getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
         }
+
+        myTradeListAdapter.setNewData(dataList);
     }
 
-
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onEventTransferAccord (TransferAccordEvent event){
-//
-//        if(null != dataList && dataList.size() == 0){
-//            getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
-//        }else if(null != dataList && dataList.size() > 0){
-//            getmPager().setmCurrentState(LoadingPager.LoadedResult.SUCCESS.getState());
-//        }else{
-//            getmPager().setmCurrentState(LoadingPager.LoadedResult.ERROR.getState());
-//        }
-//    }
 
 
     @Override
@@ -250,26 +245,6 @@ public class FragmentTransferAccord extends BaseFragment {
     }
 
 
-//    class MyTransferAccordAdapter extends RecyclerView.Adapter<MyTransferAccodHolder> {
-//
-//
-//        @NonNull
-//        @Override
-//        public MyTransferAccodHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//            return new MyTransferAccodHolder(
-//                    LayoutInflater.from(getActivity()).inflate(R.layout.item_transfer_accord, viewGroup, false));
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull MyTransferAccodHolder myTransferAccodHolder, int index) {
-//            myTransferAccodHolder.refreshUI(getActivity(),dataList.get(index));
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return dataList.size();
-//        }
-//    }
 
 
     class MyTransferAccordAdapter extends BaseQuickAdapter<ResponseMyTransferAccordBean.TransferInfoBean,BaseViewHolder> {
