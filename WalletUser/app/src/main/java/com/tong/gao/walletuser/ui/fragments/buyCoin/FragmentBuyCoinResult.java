@@ -23,6 +23,9 @@ import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
+import com.yzq.zxinglibrary.android.CaptureActivity;
+import com.yzq.zxinglibrary.bean.ZxingConfig;
+import com.yzq.zxinglibrary.common.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 
