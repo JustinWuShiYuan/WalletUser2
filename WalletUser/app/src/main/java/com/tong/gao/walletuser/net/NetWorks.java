@@ -22,6 +22,7 @@ import com.tong.gao.walletuser.bean.request.RequestRegisterBean;
 import com.tong.gao.walletuser.bean.request.RequestSellCoin;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
+import com.tong.gao.walletuser.bean.request.RequestUpdateReceiptAccount;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
 import com.tong.gao.walletuser.bean.response.ResponseBaseBean;
 import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeApply;
@@ -237,6 +238,11 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.deleteReceiptMoneyAccount)
         Observable<ResponseBaseBean> deleteReceiptMoneyAccount(@Body RequestDeleteReceiptMoneyAccount requestDeleteReceiptMoneyAccount);
 
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.updateReceiptMoneyAccount)
+        Observable<ResponseBaseBean> updateReceiptMoneyAccount(@Body RequestUpdateReceiptAccount requestUpdateReceiptAccount);
+
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -389,6 +395,11 @@ public class NetWorks extends RetrofitUtils {
 
     public static void deleteReceiptMoneyAccount(RequestDeleteReceiptMoneyAccount requestDeleteReceiptMoneyAccount,Observer<ResponseBaseBean> observer){
         setSubscribe(service.deleteReceiptMoneyAccount(requestDeleteReceiptMoneyAccount),observer);
+    }
+
+
+    public static void updateReceiptMoneyAccount(RequestUpdateReceiptAccount requestUpdateReceiptAccount,Observer<ResponseBaseBean> observer){
+        setSubscribe(service.updateReceiptMoneyAccount(requestUpdateReceiptAccount),observer);
     }
 
 

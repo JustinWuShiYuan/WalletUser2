@@ -35,6 +35,7 @@ public class MyConstant {
     public static final String queryMyReceiptMoneyAccountList = "/ug/mer/pbpws.do";           //十七、收款方式列表
     public static final String addReceiptMoneyAccount = "/ug/mer/pbapw.do";           //添加收款方式
     public static final String deleteReceiptMoneyAccount = "/ug/mer/pbdpw.do";           //十六、删除收款方式
+    public static final String updateReceiptMoneyAccount = "/ug/mer/pbupw.do";           //十五、修改收款方式
 
 
 

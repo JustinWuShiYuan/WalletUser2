@@ -27,6 +27,7 @@ import com.suke.widget.SwitchButton;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
 import com.tong.gao.walletuser.bean.request.RequestDeleteReceiptMoneyAccount;
+import com.tong.gao.walletuser.bean.request.RequestUpdateReceiptAccount;
 import com.tong.gao.walletuser.bean.response.ResponseBaseBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryMyReceiptMoneyAccountList;
 import com.tong.gao.walletuser.constants.MyConstant;
@@ -364,8 +365,15 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
             viewHolder.setData(mDataList.get(position));
+
+            viewHolder.switchButtonZfb.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                    updateAccountStatus(mDataList.get(position).getPaymentWayId(),isChecked);
+                }
+            });
         }
 
         @Override
@@ -379,12 +387,16 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
             ImageView ivPaymentIcon;
             TextView tvPaymentType;
             TextView tvAccountNum;
+
             public ViewHolder(View itemView) {
                 super(itemView);
                 switchButtonZfb = itemView.findViewById(R.id.switch_button_zfb);
                 ivPaymentIcon = itemView.findViewById(R.id.iv_payment_icon);
                 tvPaymentType = itemView.findViewById(R.id.tv_payment_type);
                 tvAccountNum = itemView.findViewById(R.id.tv_account_num);
+
+
+
             }
 
             public void setData(ResponseQueryMyReceiptMoneyAccountList.ReceiptMoneyBean accountItemBean) {
@@ -407,10 +419,41 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
                     tvAccountNum.setText(accountItemBean.getName());
                 }
 
-
-
             }
         }
+
+    }
+
+    private void updateAccountStatus(String paymentWayId, boolean isChecked) {
+        //1启用 2停用
+        LogUtils.d("isChecked:"+isChecked);
+
+        NetWorks.updateReceiptMoneyAccount(new RequestUpdateReceiptAccount(paymentWayId,isChecked?"1":"2"), new Observer<ResponseBaseBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(ResponseBaseBean responseBaseBean) {
+
+                if(null != responseBaseBean && MyConstant.resultCodeIsOK .equals(responseBaseBean.getErrcode())){
+                    ToastUtils.showNomalLongToast(""+responseBaseBean.getMsg());
+                    //todo 刷新页面
+                }else{
+                    ToastUtils.showNomalLongToast("更新：失败："+responseBaseBean.getMsg());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("更新："+e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("更新：onComplete()");
+            }
+        });
 
     }
 
@@ -508,11 +551,7 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
             public void onClick(View v) {
                 dialog.dismiss();
 
-                //TODO 执行删除 收款账号的接口
                 deleteAccount(position);
-
-//                receiptMoneyBeanList.remove(position);
-//                myAccountAdapter.notifyDataSetChanged();
             }
         });
 
