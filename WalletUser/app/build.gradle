@@ -25,11 +25,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.github.yuzhiqiang1993:zxing:2.2.5'
-
+//    implementation 'com.github.yuzhiqiang1993:zxing:2.2.5'
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
 //    implementation 'com.google.zxing:core:3.3.0'
-//    implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
-//    implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
 
 
     implementation 'com.yanzhenjie:permission:2.0.0-rc12'

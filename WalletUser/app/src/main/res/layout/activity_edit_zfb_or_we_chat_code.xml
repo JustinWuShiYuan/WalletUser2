@@ -33,13 +33,13 @@
 
             <ImageView
                 android:id="@+id/iv_display_qr_code"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/shape_gray_bg"
                 android:layout_gravity="center"
-                android:scaleType="fitXY" />
+                />
 
 
             <ImageView

@@ -56,7 +56,7 @@
         android:layout_height="60dp"
         android:layout_below="@id/tv_input_account_name"
         android:gravity="left|center_vertical"
-        android:text="Link1234"/>
+        android:text="Justin1"/>
 
     <!--Justin1-->
     <!--Link1234-->
@@ -83,7 +83,7 @@
         android:gravity="left|center_vertical"
         android:layout_height="60dp"
         android:layout_below="@id/tv_input_account_pwd"
-        android:text="iPhone123"
+        android:text="Justin123456"
         android:inputType="textPassword"/>
 
    <!-- Justin123456-->

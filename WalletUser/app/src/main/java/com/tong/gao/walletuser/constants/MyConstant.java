@@ -33,6 +33,8 @@ public class MyConstant {
     public static final String queryMerSallCoinList = "/ug/mer/pbmas.do";           //商家广告列表
     public static final String queryMerAssertChangeRecord = "/ug/acc/pbahs.do";           //用户资产变更查询
     public static final String queryMyReceiptMoneyAccountList = "/ug/mer/pbpws.do";           //十七、收款方式列表
+    public static final String addReceiptMoneyAccount = "/ug/mer/pbapw.do";           //添加收款方式
+    public static final String deleteReceiptMoneyAccount = "/ug/mer/pbdpw.do";           //十六、删除收款方式
 
 
 

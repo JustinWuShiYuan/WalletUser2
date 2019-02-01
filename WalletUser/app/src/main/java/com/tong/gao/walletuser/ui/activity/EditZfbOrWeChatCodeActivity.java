@@ -1,19 +1,18 @@
 package com.tong.gao.walletuser.ui.activity;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,16 +20,23 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
+import com.tong.gao.walletuser.bean.request.RequestAddReceiptMoneyAccount;
+import com.tong.gao.walletuser.bean.response.ResponseBaseBean;
 import com.tong.gao.walletuser.constants.MyConstant;
+import com.tong.gao.walletuser.net.NetWorks;
+import com.tong.gao.walletuser.utils.DialogUtils;
 import com.tong.gao.walletuser.utils.GetPhotoFromPhotoAlbum;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.StringUtils;
+import com.tong.gao.walletuser.utils.ToastUtils;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class EditZfbOrWeChatCodeActivity extends ActivityBase implements View.OnClickListener,EasyPermissions.PermissionCallbacks {
@@ -66,13 +72,9 @@ public class EditZfbOrWeChatCodeActivity extends ActivityBase implements View.On
     private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
-
-
-    private File cameraSavePath;//拍照照片路径
-    private Uri uri;
     private String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-    private String accountName,accountType,accountPWD;
+    private String paymentWay,accountName, accountTypeNum,parseQrCodeFromImage,accountPWD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,15 +99,15 @@ public class EditZfbOrWeChatCodeActivity extends ActivityBase implements View.On
     protected void initView() {
 
         if (null != qrCodeType) {
-
             if (qrCodeType.equals("ZFB")) {
                 tvTitleBarTitle2.setText("编辑支付宝");
                 tvAccountType.setText("支付宝账户");
+                paymentWay = MyConstant.paymentWayZfb;
             } else {
                 tvTitleBarTitle2.setText("编辑微信");
                 tvAccountType.setText("微信账户");
+                paymentWay = MyConstant.paymentWayWeChat;
             }
-
         }
 
         flAdd.setVisibility(View.GONE);
@@ -134,18 +136,23 @@ public class EditZfbOrWeChatCodeActivity extends ActivityBase implements View.On
             case R.id.tv_next_step:     //点击下一步
 
                 accountName =etInputName.getText().toString();
-                accountType =etInputAccount.getText().toString();
+                accountTypeNum =etInputAccount.getText().toString();
                 accountPWD =etInputAccountPwd.getText().toString();
 
                 if(StringUtils.isEmpty(accountName )||
-                        StringUtils.isEmpty(accountType)||
+                        StringUtils.isEmpty(accountTypeNum)||
                         StringUtils.isEmpty(accountPWD)){
                     Toast.makeText(this,"信息不能为空",Toast.LENGTH_LONG).show();
                 }else{
-                    //将+ 显示成完成 上传信息
-                    //TODO 触发上传动作
-                    Toast.makeText(this,"上传中成功 ",Toast.LENGTH_LONG).show();
-//                    tvNextStep.setVisibility(View.GONE);
+                    if(StringUtils.isEmpty(parseQrCodeFromImage)){
+                        Toast.makeText(this,"请换一张清晰的二维码图片 ",Toast.LENGTH_LONG).show();
+                        tvNextStep.setVisibility(View.VISIBLE);
+                    }else{
+                        tvNextStep.setVisibility(View.VISIBLE);
+                        DialogUtils.showProgressDialog(this,"添加账号中...");
+                        addReceiptAccount(new RequestAddReceiptMoneyAccount(paymentWay,accountName, accountTypeNum,parseQrCodeFromImage,accountPWD));
+                    }
+
                     finish();
                 }
 
@@ -153,6 +160,44 @@ public class EditZfbOrWeChatCodeActivity extends ActivityBase implements View.On
                 break;
 
         }
+
+    }
+
+    private void addReceiptAccount(RequestAddReceiptMoneyAccount addReceiptMoneyAccount) {
+
+        NetWorks.addReceiptMoneyAccount(addReceiptMoneyAccount, new Observer<ResponseBaseBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogUtils.d(""+d);
+            }
+
+            @Override
+            public void onNext(ResponseBaseBean responseBaseBean) {
+
+                LogUtils.d(""+responseBaseBean.toString());
+
+                if(null != responseBaseBean && MyConstant.resultCodeIsOK .equals(responseBaseBean.getErrcode())){
+                    DialogUtils.hideProgressDialog();
+                    ToastUtils.showNomalShortToast("添加收款方式成功");
+
+                    startActivity(new Intent(EditZfbOrWeChatCodeActivity.this,MyReceiptAccountListActivity.class));
+                    EditZfbOrWeChatCodeActivity.this.finish();
+                }else{
+                    ToastUtils.showNomalShortToast("添加失败:"+responseBaseBean.getMsg());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                ToastUtils.showNomalShortToast("添加收款方式失败"+e.toString());
+                DialogUtils.hideProgressDialog();
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("onComplete()");
+            }
+        });
 
     }
 
@@ -165,30 +210,61 @@ public class EditZfbOrWeChatCodeActivity extends ActivityBase implements View.On
     }
 
 
-    private Bitmap uploadingBitmap;
+//    private Bitmap uploadingBitmap;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String photoPath;
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                photoPath = String.valueOf(cameraSavePath);
-            } else {
-                photoPath = uri.getEncodedPath();
-            }
-            LogUtils.d("拍照返回图片路径:", photoPath);
-            ivAddQrCode.setVisibility(View.GONE);
-            Glide.with(this).load(photoPath).into(ivDisplayQrCode);
-        } else if (requestCode == 2 && resultCode == RESULT_OK) {
-            ivAddQrCode.setVisibility(View.GONE);
+        if (requestCode == 2 && resultCode == RESULT_OK) {
             photoPath = GetPhotoFromPhotoAlbum.getRealPathFromUri(this, data.getData());
-            uploadingBitmap = BitmapFactory.decodeFile(photoPath);
-            LogUtils.d("uploadingBitmap.getConfig():"+ uploadingBitmap.getConfig()+" photoPath:"+photoPath);
-            Glide.with(this).load(photoPath).into(ivDisplayQrCode);
+
+            parseQrCodeFromImage(data,photoPath);
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+
+    /**
+     * 把二维码从图片中解析出来*/
+    private void parseQrCodeFromImage(Intent data, final String photoPath) {
+
+        if (data != null) {
+            Uri uri = data.getData();
+            ContentResolver cr = getContentResolver();
+            try {
+                Bitmap mBitmap = MediaStore.Images.Media.getBitmap(cr, uri);//显得到bitmap图片
+
+                CodeUtils.analyzeBitmap(photoPath, new CodeUtils.AnalyzeCallback() {
+                    @Override
+                    public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+                        ToastUtils.showNomalLongToast("解析二维码成功");
+                        parseQrCodeFromImage = result;
+
+                        ivAddQrCode.setVisibility(View.GONE);
+                        ivDisplayQrCode.setVisibility(View.VISIBLE);
+                        Glide.with(EditZfbOrWeChatCodeActivity.this).load(photoPath).into(ivDisplayQrCode);
+                    }
+
+                    @Override
+                    public void onAnalyzeFailed() {
+                        ToastUtils.showNomalLongToast("解析二维码失败");
+
+                        ivDisplayQrCode.setVisibility(View.GONE);
+                        ivAddQrCode.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                if (mBitmap != null) {
+                    mBitmap.recycle();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 

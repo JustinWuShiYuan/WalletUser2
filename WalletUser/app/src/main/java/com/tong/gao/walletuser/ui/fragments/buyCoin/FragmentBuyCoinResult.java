@@ -21,11 +21,10 @@ import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.ui.activity.TransferAccountsActivity;
 import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
-import com.yzq.zxinglibrary.android.CaptureActivity;
-import com.yzq.zxinglibrary.bean.ZxingConfig;
-import com.yzq.zxinglibrary.common.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -234,15 +233,15 @@ public class FragmentBuyCoinResult extends BaseFragment implements View.OnClickL
                     @Override
                     public void onAction(List<String> data) {
 
-                        ZxingConfig config = new ZxingConfig();
-                        config.setPlayBeep(true);//是否播放扫描声音 默认为true
-                        config.setShake(true);//是否震动  默认为true
-                        config.setDecodeBarCode(true);//是否扫描条形码 默认为true
+//                        ZxingConfig config = new ZxingConfig();
+//                        config.setPlayBeep(true);//是否播放扫描声音 默认为true
+//                        config.setShake(true);//是否震动  默认为true
+//                        config.setDecodeBarCode(true);//是否扫描条形码 默认为true
 //                                config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
 //                                config.setFrameLineColor(R.color.colorAccent);//设置扫描框边框颜色 默认无色
 //                                config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色
-                        config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
-                        intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
+//                        config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
+//                        intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
 
 
                         startActivityForResult(intent, REQUEST_CODE_SCAN);
@@ -264,13 +263,21 @@ public class FragmentBuyCoinResult extends BaseFragment implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
         // 扫描二维码/条码回传
         if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
-            if (data != null) {
-                String content = data.getStringExtra(Constant.CODED_CONTENT);
-                Intent intent = new Intent();
-                intent.putExtra(MyConstant.transferAccountAddressKey,content);
-                intent.setClass(mActivity,TransferAccountsActivity.class);
-                startActivity(intent);
+
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Toast.makeText(mActivity, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mActivity, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
             }
+
+
         }
     }
 }

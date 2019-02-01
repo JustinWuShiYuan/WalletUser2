@@ -111,7 +111,8 @@
         <activity android:name=".ui.activity.saleCoin.PublishCoinActivity" />
         <activity android:name=".ui.activity.saleCoin.MySaleCoinListActivity" />
         <activity android:name=".ui.activity.MyReceiptAccountListActivity" />
-        <activity android:name=".ui.activity.EditZfbOrWeChatCodeActivity"></activity>
+        <activity android:name=".ui.activity.EditZfbOrWeChatCodeActivity" />
+        <activity android:name=".ui.activity.EditBankCardActivity"></activity>
     </application>
 
 </manifest>

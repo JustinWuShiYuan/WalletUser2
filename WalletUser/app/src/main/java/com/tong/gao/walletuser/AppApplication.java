@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.tong.gao.walletuser.utils.Density;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import io.rong.imkit.RongIM;
 
@@ -42,6 +43,7 @@ public class AppApplication extends Application {
         //
         mMainThreadLooper = getMainLooper();
         RongIM.init(this);
+        ZXingLibrary.initDisplayOpinion(this);
 
     }
 

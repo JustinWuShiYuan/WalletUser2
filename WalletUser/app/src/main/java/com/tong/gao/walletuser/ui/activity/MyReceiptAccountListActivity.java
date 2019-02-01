@@ -26,11 +26,14 @@ import android.widget.Toast;
 import com.suke.widget.SwitchButton;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
+import com.tong.gao.walletuser.bean.request.RequestDeleteReceiptMoneyAccount;
+import com.tong.gao.walletuser.bean.response.ResponseBaseBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryMyReceiptMoneyAccountList;
 import com.tong.gao.walletuser.constants.MyConstant;
 import com.tong.gao.walletuser.net.NetWorks;
 import com.tong.gao.walletuser.ui.adaper.BaseAdapter;
 import com.tong.gao.walletuser.utils.LogUtils;
+import com.tong.gao.walletuser.utils.ToastUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -112,7 +115,6 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
         ibBankSwitch.setOnClickListener(this);
         btnSureSafeCode.setOnClickListener(this);
 
-
         loadMyReceiptAccountList();
     }
 
@@ -127,11 +129,12 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
             @Override
             public void onNext(ResponseQueryMyReceiptMoneyAccountList responseQueryMyReceiptMoneyAccountList) {
 
-                LogUtils.d("responseQueryMyReceiptMoneyAccountList:"+responseQueryMyReceiptMoneyAccountList.toString());
+                LogUtils.d("MyReceiptAccountList:"+responseQueryMyReceiptMoneyAccountList.toString());
                 if(null != responseQueryMyReceiptMoneyAccountList && MyConstant.resultCodeIsOK.equals(responseQueryMyReceiptMoneyAccountList.getErrcode())){
-                    List<ResponseQueryMyReceiptMoneyAccountList.ReceiptMoneyBean> paymentWayList = responseQueryMyReceiptMoneyAccountList.getPaymentWay();
-                    receiptMoneyBeanList.addAll(paymentWayList);
-                    updateUI(paymentWayList);
+                    receiptMoneyBeanList.clear();
+
+                    receiptMoneyBeanList = responseQueryMyReceiptMoneyAccountList.getPaymentWay();
+                    updateUI(receiptMoneyBeanList);
                 }
 
             }
@@ -148,28 +151,29 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
         });
     }
 
+    private LinearLayoutManager mLinearLayoutManager;
     private void updateUI(List<ResponseQueryMyReceiptMoneyAccountList.ReceiptMoneyBean> paymentWayList) {
 
 
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
-        rvMyReceiptAccountList.setLayoutManager(mLinearLayoutManager);
+        if(null == mLinearLayoutManager){
+            mLinearLayoutManager = new LinearLayoutManager(this);
+            mLinearLayoutManager.setSmoothScrollbarEnabled(true);
+            rvMyReceiptAccountList.setLayoutManager(mLinearLayoutManager);
 
-        HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
-        stringIntegerHashMap.put(TOP_DECORATION, 20);//top间距
-        stringIntegerHashMap.put(LEFT_DECORATION, 10);//top间距
-        stringIntegerHashMap.put(RIGHT_DECORATION, 10);//top间距
+            HashMap<String, Integer> stringIntegerHashMap = new HashMap<>();
+            stringIntegerHashMap.put(TOP_DECORATION, 20);//top间距
+            stringIntegerHashMap.put(LEFT_DECORATION, 10);//top间距
+            stringIntegerHashMap.put(RIGHT_DECORATION, 10);//top间距
 
+            rvMyReceiptAccountList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
+            rvMyReceiptAccountList.setSwipeMenuCreator(swipeMenuCreator);
+            rvMyReceiptAccountList.setSwipeMenuItemClickListener(mMenuItemClickListener);
 
-        rvMyReceiptAccountList.addItemDecoration(new RecyclerViewSpacesItemDecoration(stringIntegerHashMap));
-        rvMyReceiptAccountList.setSwipeMenuCreator(swipeMenuCreator);
-        rvMyReceiptAccountList.setSwipeMenuItemClickListener(mMenuItemClickListener);
-
-
-        if (null == myAccountAdapter) {
-            myAccountAdapter = new MyReceiptAccountListAdapter(this);
+            if (null == myAccountAdapter) {
+                myAccountAdapter = new MyReceiptAccountListAdapter(this);
+            }
+            rvMyReceiptAccountList.setAdapter(myAccountAdapter);
         }
-        rvMyReceiptAccountList.setAdapter(myAccountAdapter);
 
         myAccountAdapter.notifyDataSetChanged(paymentWayList);
 
@@ -195,7 +199,7 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
                 int height = llAddAccountRootView.getHeight();
                 LogUtils.d("flSafeRootViewHeight:" + flSafeRootViewHeight + " height:" + height);
                 ObjectAnimator translation = ObjectAnimator.ofFloat(llAddAccountRootView, "translationY", 532, 0);
-                translation.setDuration(800);
+                translation.setDuration(500);
                 translation.start();
                 llAddAccountRootView.setVisibility(View.VISIBLE);
 
@@ -308,6 +312,9 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
                 intent.putExtra(MyConstant.EditQrCodeType,"ZFB");
                 intent.setClass(this,EditZfbOrWeChatCodeActivity.class);
                 startActivity(intent);
+
+
+                this.finish();
                 break;
 
 
@@ -318,16 +325,21 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
                 intent1.setClass(this,EditZfbOrWeChatCodeActivity.class);
                 startActivity(intent1);
 
+
+                this.finish();
+
                 break;
 
 
             case R.id.ib_bank_switch:
-//                startActivity(new Intent(this,EditBankCardActivity.class));
+                startActivity(new Intent(this,EditBankCardActivity.class));
+                this.finish();
 
                 break;
         }
 
     }
+
 
 
     class MyReceiptAccountListAdapter extends BaseAdapter<ResponseQueryMyReceiptMoneyAccountList.ReceiptMoneyBean,MyReceiptAccountListAdapter.ViewHolder> {
@@ -497,9 +509,42 @@ public class MyReceiptAccountListActivity extends ActivityBase implements View.O
                 dialog.dismiss();
 
                 //TODO 执行删除 收款账号的接口
+                deleteAccount(position);
 
 //                receiptMoneyBeanList.remove(position);
 //                myAccountAdapter.notifyDataSetChanged();
+            }
+        });
+
+    }
+
+    private void deleteAccount(int position) {
+
+        String paymentWay = receiptMoneyBeanList.get(position).getPaymentWayId();
+
+        NetWorks.deleteReceiptMoneyAccount(new RequestDeleteReceiptMoneyAccount(paymentWay), new Observer<ResponseBaseBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(ResponseBaseBean responseBaseBean) {
+
+                if(null != responseBaseBean && MyConstant.resultCodeIsOK .equals(responseBaseBean.getErrcode())){
+                    ToastUtils.showNomalLongToast("删除失败:"+responseBaseBean.getMsg());
+                    loadMyReceiptAccountList();
+                }else{
+                    ToastUtils.showNomalLongToast("删除失败:"+responseBaseBean.getMsg());
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("e:"+e.toString());
+            }
+
+            @Override
+            public void onComplete() {
             }
         });
 

@@ -1,12 +1,14 @@
 package com.tong.gao.walletuser.net;
 
 import com.tong.gao.walletuser.bean.QueryFireCoinInfoBean;
+import com.tong.gao.walletuser.bean.request.RequestAddReceiptMoneyAccount;
 import com.tong.gao.walletuser.bean.request.RequestBtcExchangeApply;
 import com.tong.gao.walletuser.bean.request.RequestBtcExchangeDetail;
 import com.tong.gao.walletuser.bean.request.RequestBuyerHadPayMoney;
 import com.tong.gao.walletuser.bean.request.RequestCancelExchangeApply;
 import com.tong.gao.walletuser.bean.request.RequestCancelOrder;
 import com.tong.gao.walletuser.bean.request.RequestChangeNickNameBean;
+import com.tong.gao.walletuser.bean.request.RequestDeleteReceiptMoneyAccount;
 import com.tong.gao.walletuser.bean.request.RequestExchangeApplyList;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMerSaleCoinList;
@@ -21,6 +23,7 @@ import com.tong.gao.walletuser.bean.request.RequestSellCoin;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccordBean;
 import com.tong.gao.walletuser.bean.request.RequestTransferAccountBean;
 import com.tong.gao.walletuser.bean.request.RequestVerifyGoogleCodeBean;
+import com.tong.gao.walletuser.bean.response.ResponseBaseBean;
 import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeApply;
 import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeDetail;
 import com.tong.gao.walletuser.bean.response.ResponseBtcExchangeRate;
@@ -225,6 +228,15 @@ public class NetWorks extends RetrofitUtils {
         @POST(MyConstant.queryMyReceiptMoneyAccountList)
         Observable<ResponseQueryMyReceiptMoneyAccountList> queryMyReceiptMoneyAccountList();
 
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.addReceiptMoneyAccount)
+        Observable<ResponseBaseBean> addReceiptMoneyAccount(@Body RequestAddReceiptMoneyAccount requestAddReceiptMoneyAccount);
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.deleteReceiptMoneyAccount)
+        Observable<ResponseBaseBean> deleteReceiptMoneyAccount(@Body RequestDeleteReceiptMoneyAccount requestDeleteReceiptMoneyAccount);
+
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
 //        @POST(MyConstant.verify_google_code)
 //        Observable<ResponseVerifyGoogleBean> verifyGoogleCode(@Body RequestVerifyGoogleCodeBean requestVerifyGoogleCodeBean);
@@ -368,6 +380,15 @@ public class NetWorks extends RetrofitUtils {
 
     public static void queryMyReceiptAccountList(Observer<ResponseQueryMyReceiptMoneyAccountList> observer){
         setSubscribe(service.queryMyReceiptMoneyAccountList(),observer);
+    }
+
+
+    public static void addReceiptMoneyAccount(RequestAddReceiptMoneyAccount requestAddReceiptMoneyAccount,Observer<ResponseBaseBean> observer){
+        setSubscribe(service.addReceiptMoneyAccount(requestAddReceiptMoneyAccount),observer);
+    }
+
+    public static void deleteReceiptMoneyAccount(RequestDeleteReceiptMoneyAccount requestDeleteReceiptMoneyAccount,Observer<ResponseBaseBean> observer){
+        setSubscribe(service.deleteReceiptMoneyAccount(requestDeleteReceiptMoneyAccount),observer);
     }
 
 
