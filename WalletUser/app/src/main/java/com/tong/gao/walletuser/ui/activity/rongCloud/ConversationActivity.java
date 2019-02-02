@@ -67,20 +67,23 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             tvTradeMoney.setText(orderCoinBean.getTradeMoney());
 
 
-            String[] times = orderCoinBean.getRemainTime().split(":");
-            String minute = times[0];
-            if(minute.substring(0,1) .equals("0")){
-                minute = minute.substring(1,minute.length());
-            }
-            long minuteL = Long.parseLong(minute);
+            LogUtils.d("orderCoinBean.getRemainTime():"+orderCoinBean.getRemainTime());
 
-            String second = times[1];
-            if(second.substring(0,1) .equals("0")){
-                second = second.substring(1,second.length());
-            }
-            long secondL = Long.parseLong(second);
-
-            startCountDown(minuteL*60*1000+secondL*1000);
+//            String[] times = orderCoinBean.getRemainTime().split(":");
+//            String minute = times[0];
+//            if(minute.substring(0,1) .equals("0")){
+//                minute = minute.substring(1,minute.length());
+//            }
+//            long minuteL = Long.parseLong(minute);
+//
+//            String second = times[1];
+//            if(second.substring(0,1) .equals("0")){
+//                second = second.substring(1,second.length());
+//            }
+//            long secondL = Long.parseLong(second);
+//
+//            startCountDown(minuteL*60*1000+secondL*1000);
+            startCountDown(Long.parseLong(orderCoinBean.getRemainTime()));
 
             tvOrderRemainTime.setText(orderCoinBean.getRemainTime());
             tvOrderTime.setText(orderCoinBean.getOrderCreateTime());

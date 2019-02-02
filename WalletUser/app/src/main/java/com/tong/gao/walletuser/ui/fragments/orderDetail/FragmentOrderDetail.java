@@ -164,9 +164,9 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
             tvOrderDetailStatusDes.setText("未付款");
 
             rlHaveNotPay.setVisibility(View.VISIBLE);
-//            tvOrderRemainTimeWaiting.setText(userOrderBean.getCreatedTime());
 
-            UIUtils.startCountDown(Long.parseLong(userOrderBean.getCreatedTime()), tvOrderRemainTimeWaiting, new CountDownCallBack() {
+
+            UIUtils.startCountDown(Long.parseLong(userOrderBean.getRestTime()), tvOrderRemainTimeWaiting, new CountDownCallBack() {
                 @Override
                 public void countDownFinish() {
                     //TODO 倒计时结束要做的事
@@ -176,17 +176,23 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
             tvHadPay.setOnClickListener(this);
             tvCancelOrder.setOnClickListener(this);
 
+            rlContactBuyer.setOnClickListener(this);
+
 
         } else if (userOrderStatus.equals(OrderStatus.HadPay.getState())) {//已付款
 
+            rlHaveNotPay.setVisibility(View.GONE);
+            rlHadPay.setVisibility(View.VISIBLE);
+
             long remainTime = Long.parseLong(userOrderBean.getRestTime());
+            LogUtils.d("remainTime","remainTime:"+remainTime);
             if(remainTime > 0){
                 ivOrderStatusIcon.setImageResource(R.drawable.icon_complete);
                 tvOrderDetailStatusDes.setText("已付款，等待对方放行");
-                tvWillAppeal.setBackground(getActivity().getDrawable(R.drawable.shape_gray_bg_999999));
+                tvWillAppeal.setBackground(getActivity().getDrawable(R.drawable.shape_gray3_round_bg));
                 tvWillAppeal.setClickable(false);
 
-                UIUtils.startCountDown(Long.parseLong(userOrderBean.getCreatedTime())*1000, tvOrderRemainTime, new CountDownCallBack() {
+                UIUtils.startCountDown(remainTime, tvOrderRemainTime, new CountDownCallBack() {
                     @Override
                     public void countDownFinish() {
                         hadPayNotLetGo();
@@ -197,6 +203,7 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
                 hadPayNotLetGo();
             }
 
+            rlContactBuyer.setOnClickListener(this);
 
         } else if (userOrderStatus.equals(OrderStatus.Complete.getState())) {//已完成
 
@@ -207,6 +214,7 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
             tvTradeNo.setText(userOrderBean.getOrderNo());
             tvBlockNum.setText(userOrderBean.getOrderNo());
 
+            rlContactBuyer.setOnClickListener(this);
 
         } else if (userOrderStatus.equals(OrderStatus.Cancel_HadCancel.getState())) {//已取消
 
@@ -236,7 +244,7 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
         tvOrderDetailMoney.setText(userOrderBean.getConvertRmb());
         tvOrderDetailSinglePrice.setText(userOrderBean.getPrice() +" CNY = 1 AB");
         tvOrderNum.setText(userOrderBean.getNumber() +"  AB");
-        tvOrderDetailTime.setText(userOrderBean.getCreatedTime() +"  AB");
+        tvOrderDetailTime.setText(userOrderBean.getRestTime() +"  AB");
 
 
     }
@@ -257,7 +265,7 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
     private void hadPayNotLetGo() {
         ivOrderStatusIcon.setImageResource(R.drawable.icon_closed);
         tvOrderDetailStatusDes.setText("已付款，对方未放行");
-        tvWillAppeal.setBackground(getActivity().getDrawable(R.drawable.shape_gray_bg_999999));
+        tvWillAppeal.setBackground(getActivity().getDrawable(R.drawable.shape_gray6_round_bg));
         tvWillAppeal.setClickable(true);
         tvWillAppeal.setOnClickListener(this);
 
@@ -265,6 +273,8 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
         rlContactBuyer.setBackgroundColor(Color.parseColor("#ffffff"));
         ivContactBuyerIcon.setImageResource(R.drawable.icon_cont_3);
         tvContactBuyer.setTextColor(Color.parseColor("#ff9238"));
+
+
     }
 
 
@@ -378,7 +388,7 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
 
                 String tradeCoinType = "AB";
                 String tradeMoney = userOrderBean.getOrderAmount();
-                String remainTime = userOrderBean.getCreatedTime();//获取此时的剩下时间
+                String remainTime = userOrderBean.getRestTime();//获取此时的剩下时间
                 String orderCreatTime = userOrderBean.getCreatedTime();
                 String orderStatus = "您还未下单";
 
@@ -419,14 +429,17 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
 
                 @Override
                 public void onNext(ResponseBuyerHadPayMoney responseBuyerHadPayMoney) {
+                    LogUtils.d("responseBuyerHadPayMoney："+responseBuyerHadPayMoney.toString());
 
                     if(null != responseBuyerHadPayMoney && MyConstant.resultCodeIsOK .equals(responseBuyerHadPayMoney.getErrcode())){
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(MyConstant.hadPayMoneyOrderKey,responseBuyerHadPayMoney);
+                        ToastUtils.showNomalLongToast("已完成付款成功");
 
-                        ToastUtils.showNomalShortToast("已完成付款成功");
+                       FragmentOrderDetail.this.getActivity().finish();
+
                     }else{
-                        ToastUtils.showNomalShortToast(responseBuyerHadPayMoney.getMsg());
+                        ToastUtils.showNomalShortToast(""+responseBuyerHadPayMoney.getMsg());
                     }
 
                 }

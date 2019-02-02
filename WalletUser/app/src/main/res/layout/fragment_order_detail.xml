@@ -39,9 +39,9 @@
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:id="@+id/rl_not_willGreenLight">
+            android:id="@+id/rl_not_willGreenLight"
+            android:layout_gravity="center"
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/iv_order_status_icon"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textColor="@color/gray_3"
                 android:text="已完成"
                 android:id="@+id/tv_order_detail_status_des"
@@ -355,24 +355,24 @@
 
 
             <TextView
-                android:layout_marginLeft="75dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/tv_go_to_pay_hint"
-                android:layout_width="100dp"
+                android:layout_width="190dp"
                 android:layout_height="40dp"
                 android:text="已完成付款"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/tv_had_pay"
                 style="@style/text_style_16sp_white_1"
                 android:background="@drawable/shape_blue_bg"/>
 
 
             <TextView
+                android:layout_centerHorizontal="true"
                 android:id="@+id/tv_cancel_order"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/tv_go_to_pay_hint"
-                android:layout_toRightOf="@id/tv_had_pay"
-                android:layout_width="100dp"
+                android:layout_below="@id/tv_had_pay"
+                android:layout_width="190dp"
                 android:layout_height="40dp"
                 style="@style/text_style_16sp_blue"
                 android:text="取消订单"
@@ -391,6 +391,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rl_had_pay"
+            android:visibility="gone"
             >
 
             <TextView
@@ -426,9 +427,8 @@
                 android:layout_height="40dp"
                 style="@style/text_style_16sp_white_1"
                 android:text="我要申诉"
-                android:background="@drawable/shape_gray_bg_999999"
+                android:background="@drawable/shape_gray_round_bg"
                 android:gravity="center"
-                android:textColor="#f7f9fa"
                 />
 
         </RelativeLayout>
