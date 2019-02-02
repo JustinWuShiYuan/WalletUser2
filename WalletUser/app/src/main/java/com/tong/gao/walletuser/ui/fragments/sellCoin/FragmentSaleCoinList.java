@@ -206,9 +206,14 @@ public class FragmentSaleCoinList extends BaseFragment {
                             TOTAL_COUNTER =Integer.parseInt(responseMerSaleCoinList.getPage().getSum()) ;
                         }
 
-                        merchantAdvert.addAll(responseMerSaleCoinList.getMerchantAdvert());
-                        mCurrentCounter = merchantAdvert.size();
-                        updateUI(responseMerSaleCoinList);
+                        if(null != responseMerSaleCoinList.getMerchantAdvert()){
+                            merchantAdvert.addAll(responseMerSaleCoinList.getMerchantAdvert());
+                            mCurrentCounter = merchantAdvert.size();
+                            updateUI(responseMerSaleCoinList);
+                        }else{
+                            getmPager().setmCurrentState(LoadingPager.LoadedResult.EMPTY.getState());
+                        }
+
 
                     }
                 }

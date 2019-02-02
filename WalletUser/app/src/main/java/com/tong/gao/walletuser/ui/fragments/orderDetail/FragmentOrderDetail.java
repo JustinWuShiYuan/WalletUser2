@@ -185,7 +185,6 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
             rlHadPay.setVisibility(View.VISIBLE);
 
             long remainTime = Long.parseLong(userOrderBean.getRestTime());
-            LogUtils.d("remainTime","remainTime:"+remainTime);
             if(remainTime > 0){
                 ivOrderStatusIcon.setImageResource(R.drawable.icon_complete);
                 tvOrderDetailStatusDes.setText("已付款，等待对方放行");
@@ -273,7 +272,6 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
         rlContactBuyer.setBackgroundColor(Color.parseColor("#ffffff"));
         ivContactBuyerIcon.setImageResource(R.drawable.icon_cont_3);
         tvContactBuyer.setTextColor(Color.parseColor("#ff9238"));
-
 
     }
 
@@ -436,7 +434,7 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
                         bundle.putSerializable(MyConstant.hadPayMoneyOrderKey,responseBuyerHadPayMoney);
                         ToastUtils.showNomalLongToast("已完成付款成功");
 
-                       FragmentOrderDetail.this.getActivity().finish();
+                        FragmentOrderDetail.this.getActivity().finish();
 
                     }else{
                         ToastUtils.showNomalShortToast(""+responseBuyerHadPayMoney.getMsg());
@@ -455,6 +453,8 @@ public class FragmentOrderDetail extends Fragment implements View.OnClickListene
                 }
             });
 
+        }else{
+            ToastUtils.showNomalLongToast("请至少勾选一种付款的方式");
         }
 
 
