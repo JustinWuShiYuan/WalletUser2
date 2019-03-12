@@ -40,6 +40,7 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 public abstract class ActivityBase extends AppCompatActivity {
 
     protected Activity mActivity;
+    protected Context  contextActivity;
 
     private WheelDialog mWheelDialog;
 
@@ -52,6 +53,7 @@ public abstract class ActivityBase extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = this;
+        contextActivity = this;
         AppActivityManager.getInstance().pushActivity(this);
         setOrientation();
         setContentView(getLayout());

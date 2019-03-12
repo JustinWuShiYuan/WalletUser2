@@ -2,11 +2,16 @@ package com.tong.gao.walletuser.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.netease.nis.captcha.Captcha;
+import com.netease.nis.captcha.CaptchaConfiguration;
+import com.netease.nis.captcha.CaptchaListener;
+import com.tong.gao.walletuser.AppApplication;
 import com.tong.gao.walletuser.R;
 import com.tong.gao.walletuser.base.ActivityBase;
 import com.tong.gao.walletuser.bean.event.StartLoadDataEvent;
@@ -50,6 +55,8 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     TextView tvHaveNoAccount;
 
     private String loginName, loginPwd;
+    private CaptchaListener captchaListener;
+    private String noSenseCaptchaId = "af45977d53044827af6ee8968a3d550e";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +128,52 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
         }
     }
 
-    private void goToLogin(RequestLoginInfoBean requestLoginInfoBean) {
+    private void goToLogin(final RequestLoginInfoBean requestLoginInfoBean) {
+
+        //易盾验证码 验证
+        captchaListener = new CaptchaListener() {
+            @Override
+            public void onReady() {
+
+            }
+
+            @Override
+            public void onValidate(String result, String validate, String msg) {
+                if (!TextUtils.isEmpty(validate)) {
+                    ToastUtils.showNomalLongToast("验证成功");
+                    //TODO 开始登录
+                    startLogin(requestLoginInfoBean);
+                } else {
+                    ToastUtils.showNomalLongToast("验证失败");
+                }
+            }
+
+            @Override
+            public void onError(String msg) {
+                ToastUtils.showNomalLongToast("验证出错");
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        };
+
+
+        // 创建构建验证码的配置类，可配置详细选项请参看上面SDK接口 验证码属性配置类：CaptchaConfiguration
+        final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
+                .captchaId(noSenseCaptchaId)// 验证码业务id
+                .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)  // 验证码类型，默认为常规验证码（滑块拼图、图中点选、短信上行），如果要使用智能无感知请设置该类型，否则无需设置
+                .listener(captchaListener) //设置验证码回调监听器
+                .build(contextActivity); // Context，请使用Activity实例的Context
+// 初始化验证码
+        final Captcha captcha = Captcha.getInstance().init(configuration);
+        captcha.validate();
+
+    }
+
+    /**开始登录*/
+    private void startLogin(RequestLoginInfoBean requestLoginInfoBean) {
 
         showProgressDialog("");
 
