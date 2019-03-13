@@ -13,6 +13,7 @@ import com.tong.gao.walletuser.bean.request.RequestExchangeApplyList;
 import com.tong.gao.walletuser.bean.request.RequestLoginInfoBean;
 import com.tong.gao.walletuser.bean.request.RequestMerSaleCoinList;
 import com.tong.gao.walletuser.bean.request.RequestMessageInformBean;
+import com.tong.gao.walletuser.bean.request.RequestOcrIdcard;
 import com.tong.gao.walletuser.bean.request.RequestOrderApply;
 import com.tong.gao.walletuser.bean.request.RequestOrdersBean;
 import com.tong.gao.walletuser.bean.request.RequestQueryAssertChangeRecord;
@@ -32,6 +33,7 @@ import com.tong.gao.walletuser.bean.response.ResponseCancelExchangeApply;
 import com.tong.gao.walletuser.bean.response.ResponseExchangeApplyList;
 import com.tong.gao.walletuser.bean.response.ResponseMerSaleCoinList;
 import com.tong.gao.walletuser.bean.response.ResponseMoneyRange;
+import com.tong.gao.walletuser.bean.response.ResponseOcrBean;
 import com.tong.gao.walletuser.bean.response.ResponseQueryAssertChangeRecord;
 import com.tong.gao.walletuser.bean.response.ResponseQueryMyReceiptMoneyAccountList;
 import com.tong.gao.walletuser.bean.response.ResponseSellCoin;
@@ -67,6 +69,7 @@ public class NetWorks extends RetrofitUtils {
 
     //创建实现接口调用
     protected static final NetService service = getRetrofit().create(NetService.class);
+    protected static final NetService faceService = getRetrofitFace().create(NetService.class);
 
     //设缓存有效期为1天
     protected static final long CACHE_STALE_SEC = 60 * 60 * 24 * 1;
@@ -241,6 +244,10 @@ public class NetWorks extends RetrofitUtils {
         @Headers({"Content-type:application/json;charset=UTF-8"})
         @POST(MyConstant.updateReceiptMoneyAccount)
         Observable<ResponseBaseBean> updateReceiptMoneyAccount(@Body RequestUpdateReceiptAccount requestUpdateReceiptAccount);
+
+        @Headers({"Content-type:application/json;charset=UTF-8"})
+        @POST(MyConstant.postOcr)
+        Observable<ResponseOcrBean> postOcrIdcard(@Body RequestOcrIdcard requestOcrIdcard);
 
 
 //        @Headers({"Content-type:application/json;charset=UTF-8"})
@@ -438,6 +445,10 @@ public class NetWorks extends RetrofitUtils {
 //    public static void Getcache( Observer<MenuBean> observer) {
 //        setSubscribe(service.getMainMenu(),observer);
 //    }
+
+    public static void postOcrIdcard(RequestOcrIdcard requestOcrIdcard,Observer<ResponseOcrBean> observer) {
+        setSubscribe(faceService.postOcrIdcard(requestOcrIdcard), observer);
+    }
 
     public static <T> void setSubscribe(Observable<T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.newThread())//子线程访问网络

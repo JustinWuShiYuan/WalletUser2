@@ -12,6 +12,7 @@ import retrofit2.converter.fastjson.FastJsonConverterFactory;
 public abstract class RetrofitUtils {
 
     private static Retrofit mRetrofit;
+    private static Retrofit mRetrofitFace;
     private static OkHttpClient mOkHttpClient;
 
     protected static Retrofit getRetrofit() {
@@ -32,5 +33,23 @@ public abstract class RetrofitUtils {
         }
 
         return mRetrofit;
+    }
+    protected static Retrofit getRetrofitFace() {
+
+        if (null == mRetrofitFace) {
+
+            if (null == mOkHttpClient) {
+                mOkHttpClient = OkHttp3Utils.getOkHttpClient();
+            }
+            mRetrofitFace = new Retrofit.Builder()
+                    .baseUrl(MyConstant.baseUrlFace)
+                    .addConverterFactory(CustomGsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(mOkHttpClient)
+                    .build();
+
+        }
+
+        return mRetrofitFace;
     }
 }

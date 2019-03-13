@@ -2,8 +2,10 @@ package com.tong.gao.walletuser.constants;
 
 public class MyConstant {
 
-//    public static String baseUrl = "http://47.52.45.85:8010/";//?
     public static String baseUrl = "http://192.168.15.157:8010/";//测试地址
+//    public static String baseUrl = "http://192.168.23.201:8000/";//测试地址
+    public static String baseUrlFace = "https://api-cn.faceplusplus.com/";//faceId地址
+
 
     public static final String queryFireCoinInfo = "ug/mar/pbmts.do";           //查看火币行情信息 (首页)
     public static final String transferAccount = "ug/acc/pbats.do";    //扫码转账
@@ -39,8 +41,7 @@ public class MyConstant {
 
 
 
-
-
+    public static final String postOcr = "cardpp/v1/ocridcard";//ocr地址
 
 
     public static final String mySecretKeyGoogle = "THKRP5JCTPIU5CEE";  //谷歌验证 关闭
@@ -115,4 +116,9 @@ public class MyConstant {
     public static String AppSecret = "Pmy22oXFVtadI3";  //
     public static String tokenRongCloud ="cUsy5OLX7D9Pe6s0LNL/WrHvXxomzE45U9p/IHrQnICeMap1CaftA/sOi5/RNlqrLm1LSbULXCPaC7A8X1D0fv/x/uMf3v1W";//Justin1
 //    public static String tokenRongCloud="oR6+G+drtptcC5CiuHIUk5435OHQjFqnb+q/H09tIVcAgHSdMTrjSNGkY/yqg7/8PZRmpbY80Z1J6lVImKYMzA==";//Justin2
+
+
+    //face相关变量---------------------------------------------
+    public static String face_AppKey = "QIRxfenV1UqRWLOru_hbYaij7iMt5_7F";  //
+    public static String face_AppSecret = "8inAb9gFj2VU991NVWbgA6BbmH8IoxvE";  //
 }

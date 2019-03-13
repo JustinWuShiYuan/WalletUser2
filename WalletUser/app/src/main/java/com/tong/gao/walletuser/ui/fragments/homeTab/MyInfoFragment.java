@@ -253,10 +253,10 @@ public class MyInfoFragment extends BaseFragment implements View.OnClickListener
 
                 break;
 
-            case R.id.rl_identification_info:   //
+            case R.id.rl_identification_info:   //信息认证
 
                 if(hadLogin()){
-
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                 }else{
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
