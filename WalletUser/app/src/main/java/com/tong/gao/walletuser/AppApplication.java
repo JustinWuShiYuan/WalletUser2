@@ -9,6 +9,7 @@ import android.os.Looper;
 import com.tong.gao.walletuser.utils.Density;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
+import cn.jpush.android.api.JPushInterface;
 import io.rong.imkit.RongIM;
 
 public class AppApplication extends Application {
@@ -44,6 +45,9 @@ public class AppApplication extends Application {
         mMainThreadLooper = getMainLooper();
         RongIM.init(this);
         ZXingLibrary.initDisplayOpinion(this);
+
+        JPushInterface.setDebugMode(true); //正式环境时去掉此行代码
+        JPushInterface.init(this);
 
     }
 

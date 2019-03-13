@@ -2,8 +2,8 @@ package com.tong.gao.walletuser.constants;
 
 public class MyConstant {
 
-    public static String baseUrl = "http://47.52.45.85:8010/";//测试地址
-//    public static String baseUrl = "http://192.168.23.201:8000/";//测试地址
+//    public static String baseUrl = "http://47.52.45.85:8010/";//?
+    public static String baseUrl = "http://192.168.15.157:8010/";//测试地址
 
     public static final String queryFireCoinInfo = "ug/mar/pbmts.do";           //查看火币行情信息 (首页)
     public static final String transferAccount = "ug/acc/pbats.do";    //扫码转账
@@ -105,6 +105,9 @@ public class MyConstant {
     public static final String EditQrCodeType = "EditQrCodeType";
 
 
+
+    //极光推送相关---------------------------------------------
+    public static final String auroraPushKey ="50da3938830450bb899a616f";//极光推送key
 
 
     //融云相关变量---------------------------------------------

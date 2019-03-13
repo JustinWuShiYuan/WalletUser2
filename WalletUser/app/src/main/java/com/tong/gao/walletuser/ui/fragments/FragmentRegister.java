@@ -102,9 +102,7 @@ public class FragmentRegister extends Fragment implements View.OnClickListener {
 
                 }else if(accountPwd.equals(accountPwdAgain)){
 
-                    //TODO 去注册
                     toRegister(new RequestRegisterBean(accountName,accountPwd,accountPwdAgain));
-
 
                 }
 
@@ -120,6 +118,8 @@ public class FragmentRegister extends Fragment implements View.OnClickListener {
     }
 
     private void toRegister(RequestRegisterBean requestRegisterBean) {
+
+
 
         NetWorks.register(requestRegisterBean, new Observer<ResponseRegisterBean>() {
             @Override

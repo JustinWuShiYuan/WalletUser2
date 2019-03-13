@@ -23,6 +23,7 @@ import com.tong.gao.walletuser.utils.LogUtils;
 import com.tong.gao.walletuser.utils.PreferenceHelper;
 import com.tong.gao.walletuser.utils.StringUtils;
 import com.tong.gao.walletuser.utils.ToastUtils;
+import com.tong.gao.walletuser.utils.UIUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,6 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+
+import static com.tong.gao.walletuser.constants.MyConstant.auroraPushKey;
 
 public class LoginActivity extends ActivityBase implements View.OnClickListener {
 
@@ -111,7 +114,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                     ToastUtils.showNomalLongToast("账号和密码不能为空");
 
                 } else {
-                    goToLogin(new RequestLoginInfoBean(loginName, loginPwd));
+                    goToLogin(new RequestLoginInfoBean(loginName, loginPwd,auroraPushKey));
                 }
 
 
@@ -141,7 +144,6 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
             public void onValidate(String result, String validate, String msg) {
                 if (!TextUtils.isEmpty(validate)) {
                     ToastUtils.showNomalLongToast("验证成功");
-                    //TODO 开始登录
                     startLogin(requestLoginInfoBean);
                 } else {
                     ToastUtils.showNomalLongToast("验证失败");
@@ -166,7 +168,7 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                 .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)  // 验证码类型，默认为常规验证码（滑块拼图、图中点选、短信上行），如果要使用智能无感知请设置该类型，否则无需设置
                 .listener(captchaListener) //设置验证码回调监听器
                 .build(contextActivity); // Context，请使用Activity实例的Context
-// 初始化验证码
+        // 初始化验证码
         final Captcha captcha = Captcha.getInstance().init(configuration);
         captcha.validate();
 
@@ -175,7 +177,13 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
     /**开始登录*/
     private void startLogin(RequestLoginInfoBean requestLoginInfoBean) {
 
-        showProgressDialog("");
+        UIUtils.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showProgressDialog("");
+            }
+        });
+
 
         NetWorks.login(requestLoginInfoBean, new Observer<ResponseLoginInfo>() {
             @Override
@@ -202,6 +210,8 @@ public class LoginActivity extends ActivityBase implements View.OnClickListener 
                     }
                     EventBus.getDefault().post(new StartLoadDataEvent());
 
+                }else{
+                    LogUtils.d("responseLoginInfo:1111111111111111111111111" );
                 }
 
 

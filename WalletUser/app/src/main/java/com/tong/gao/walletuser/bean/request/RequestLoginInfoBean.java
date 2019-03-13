@@ -6,10 +6,26 @@ public class RequestLoginInfoBean implements Serializable {
 
     private String loginname;
     private String pwd;
+    private String registrationId;//极光推送id
 
     public RequestLoginInfoBean(String loginname, String pwd) {
         this.loginname = loginname;
         this.pwd = pwd;
+    }
+
+    public RequestLoginInfoBean(String loginname, String pwd, String registrationId) {
+        this.loginname = loginname;
+        this.pwd = pwd;
+        this.registrationId = registrationId;
+    }
+
+
+    public String getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(String registrationId) {
+        this.registrationId = registrationId;
     }
 
     public String getLoginname() {
